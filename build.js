@@ -15,6 +15,7 @@ const routes=[
  ['services','services/',"Remapping & Tuning Services | We Remap Any Car","Stage 1 and 2 remaps, economy tuning, speed limiters, DPF, EGR and AdBlue diagnostics, gearbox tuning and ECU repair. Mobile across the North West."],
  ['areas','areas/',"Areas We Cover | Mobile Remapping Within 20 Miles of Blackburn",`Mobile remapping and tuning in ${T.length} towns across Lancashire and Greater Manchester, including Preston, Burnley, Bolton, Chorley, Bury and Clitheroe.`],
  ['insight','how-remapping-works/',"How Remapping Works, Explained Simply | We Remap Any Car","What an ECU remap changes, what happens on the day, and the kit we bring. Plain-English guide from a mobile remapping specialist."],
+ ['check','check-your-vehicle/',"Check Your Vehicle: Remap Power Gains by Registration | We Remap Any Car","Enter your registration to see your vehicle's standard power and torque and the gains from a Stage 1 or Stage 2 remap."],
  ['contact','contact/',"Get a Remap Quote | We Remap Any Car","Send your registration and town for a fixed-price remap quote. Mobile within 20 miles of Blackburn."],
  ...S.map(s=>['service-'+s.id,'services/'+s.id+'/',`${s.name} | Mobile in Lancashire | We Remap Any Car`,s.short+' Mobile service within 20 miles of Blackburn.']),
  ...T.map(x=>['area-'+x.slug,'areas/'+x.slug+'/',`Car & Van Remapping in ${x.name} | We Remap Any Car`,`Mobile ECU remapping, tuning, speed limiters and DPF diagnostics in ${x.name}. We come to your home or work, ${x.mi?'about '+x.mi+' miles from':'based in'} Blackburn.`])

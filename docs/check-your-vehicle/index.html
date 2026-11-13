@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Check Your Vehicle: Remap Power Gains by Registration | We Remap Any Car</title>
+<meta name="description" content="Enter your registration to see your vehicle's standard power and torque and the gains from a Stage 1 or Stage 2 remap.">
+<meta property="og:title" content="Check Your Vehicle: Remap Power Gains by Registration | We Remap Any Car">
+<meta property="og:description" content="Enter your registration to see your vehicle's standard power and torque and the gains from a Stage 1 or Stage 2 remap.">
+<meta property="og:type" content="website">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: light and airy, big rounded photo panels, one dark band for contrast. Lime matches the workshop photos. */
+:root{
+  --bg:#F3F5F1;        /* page, faint green-grey */
+  --card:#FFFFFF;
+  --ink:#0E1511;
+  --mute:#5A665F;
+  --line:#DCE2DA;
+  --lime:#A8E03A;      /* accent fill */
+  --lime-ink:#3D6B00;  /* accent as text on light */
+  --night:#0F1713;     /* dark band */
+  --night-2:#18231D;
+  --f-head:'Archivo', 'Arial Narrow', Arial, sans-serif;
+  --f-body:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --r:20px;
+  color-scheme:light;
+}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+img{max-width:100%;display:block;height:auto}
+a{color:var(--lime-ink)}
+:focus-visible{outline:3px solid var(--lime);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-head);margin:0;text-wrap:balance;letter-spacing:-.02em}
+h1{font-size:clamp(42px,6.4vw,80px);font-weight:900;line-height:.98}
+h2{font-size:clamp(32px,4.2vw,52px);font-weight:800;line-height:1.02}
+h3{font-size:21px;font-weight:700;line-height:1.2;letter-spacing:-.01em}
+p{margin:0}
+.lead{font-size:clamp(18px,1.7vw,21px);color:var(--mute);max-width:56ch}
+.kicker{display:inline-flex;align-items:center;gap:8px;font:600 13px/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--lime-ink)}
+.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lime)}
+.mute{color:var(--mute)}
+
+/* header */
+.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.site-head .wrap{display:flex;align-items:center;gap:18px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-right:auto}
+.brand-mark{width:38px;height:38px;border-radius:11px;background:var(--ink);display:grid;place-items:center;flex:none}
+.brand b{font:800 19px/1 var(--f-head);letter-spacing:-.02em}
+.nav{display:flex;gap:2px;align-items:center}
+.nav a{color:var(--ink);text-decoration:none;font:600 15px/1 var(--f-body);padding:11px 14px;border-radius:999px}
+.nav a:hover{background:var(--card)}
+.nav a.on{background:var(--card);box-shadow:0 0 0 1px var(--line)}
+.head-phone{font:700 15px/1 var(--f-body);color:var(--ink);text-decoration:none;white-space:nowrap}
+.menu-btn{display:none;background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:10px 16px;font:600 14px var(--f-body);cursor:pointer}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--lime);color:var(--ink);font:700 16px/1 var(--f-body);padding:16px 24px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;transition:transform .15s, box-shadow .15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(80,120,0,.6)}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.ghost{background:var(--card);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.btn.sm{padding:11px 18px;font-size:15px}
+.btn svg{width:18px;height:18px}
+
+/* sections */
+.sec{padding-block:clamp(56px,8vw,110px)}
+.sec.tight{padding-block:clamp(40px,5vw,64px)}
+.sec-head{display:grid;gap:14px;margin-bottom:clamp(28px,4vw,48px);max-width:720px}
+.sec-head.center{margin-inline:auto;text-align:center;justify-items:center}
+.dark{background:var(--night);color:#EEF3EC}
+.dark .lead,.dark .mute{color:#A8B5AC}
+.dark .kicker{color:var(--lime)}
+
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(28px,5vw,64px);align-items:center;padding-block:clamp(24px,4vw,56px) clamp(48px,6vw,88px)}
+.hero-copy{display:grid;gap:24px;min-width:0}
+.hero h1 span{background:linear-gradient(transparent 62%,var(--lime) 62%,var(--lime) 92%,transparent 92%)}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.ticks-row{display:flex;flex-wrap:wrap;gap:10px 22px;font:600 15px/1.3 var(--f-body)}
+.ticks-row span{display:inline-flex;align-items:center;gap:8px}
+.ticks-row svg{width:20px;height:20px;flex:none}
+.hero-pic{position:relative;min-width:0}
+.hero-pic img{width:100%;aspect-ratio:4/3.4;object-fit:cover;border-radius:28px}
+.float{position:absolute;background:var(--card);border-radius:18px;padding:14px 18px;box-shadow:0 20px 40px -18px rgba(14,21,17,.35);display:grid;gap:2px}
+.float b{font:900 30px/1 var(--f-head);letter-spacing:-.02em}
+.float span{font:500 13px/1.3 var(--f-body);color:var(--mute)}
+.float.f1{left:-18px;bottom:28px}
+.float.f2{right:18px;top:18px;background:var(--lime)}
+.float.f2 span{color:var(--ink)}
+
+/* explainer */
+.explain{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ex{background:var(--card);border-radius:var(--r);padding:28px;display:grid;gap:12px;align-content:start}
+.ex .n{font:800 15px/1 var(--f-head);width:40px;height:40px;border-radius:12px;background:var(--bg);display:grid;place-items:center}
+.ex p{color:var(--mute);font-size:16px}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(24px,4vw,56px);align-items:center}
+.calc-box{background:var(--night-2);border-radius:28px;padding:clamp(22px,3vw,36px);display:grid;gap:22px;min-width:0}
+label.f{display:grid;gap:8px;font:600 14px/1.2 var(--f-body)}
+select,input,textarea{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font:16px/1.3 var(--f-body);width:100%;box-sizing:border-box}
+.dark select{background:#0B110E;color:#EEF3EC;border-color:#2C3A31}
+select:focus,input:focus,textarea:focus{border-color:var(--lime-ink);outline:none;box-shadow:0 0 0 3px rgba(168,224,58,.35)}
+.pills{display:inline-flex;background:#0B110E;border-radius:999px;padding:4px;gap:4px}
+.pills button{background:none;border:0;color:#A8B5AC;font:600 14px/1 var(--f-body);padding:10px 16px;border-radius:999px;cursor:pointer}
+.pills button.on{background:var(--lime);color:var(--ink)}
+.bars{display:grid;gap:18px}
+.bar-row{display:grid;gap:8px}
+.bar-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font:600 15px var(--f-body)}
+.bar-top b{font:900 28px/1 var(--f-head);color:var(--lime)}
+.bar-top small{color:#A8B5AC;font-weight:500}
+.bar{height:14px;border-radius:999px;background:#0B110E;position:relative;overflow:hidden}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.bar i.before{background:#4A5A50}
+.bar i.after{background:var(--lime)}
+.bar-key{display:flex;gap:18px;font:500 13px var(--f-body);color:#A8B5AC}
+.bar-key span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:#4A5A50}
+.bar-key span.a::before{background:var(--lime)}
+.small-note{font:400 13px/1.5 var(--f-body);color:#A8B5AC}
+
+/* reg checker */
+.chk{display:grid;gap:18px;min-width:0}
+.chk-test{font:500 14px/1.6 var(--f-body);color:#A8B5AC}
+.chk-test button{background:#1E2B24;border:0;color:#EEF3EC;font:700 13px var(--f-body);border-radius:999px;padding:5px 10px;margin:2px 2px;cursor:pointer}
+.plate-row{display:flex;gap:12px;flex-wrap:wrap}
+.plate{flex:1 1 280px;display:flex;align-items:stretch;background:#F7C600;border-radius:12px;overflow:hidden;box-shadow:inset 0 0 0 3px #0E1511;min-width:0}
+.plate-band{background:#0E4B9C;color:#fff;font:800 14px/1 var(--f-head);display:grid;place-items:end center;padding:8px 10px 10px;width:34px;flex:none}
+.plate input{flex:1;min-width:0;background:transparent;border:0;box-shadow:none;color:#0E1511;font:900 clamp(28px,4vw,40px)/1 var(--f-head);letter-spacing:.06em;text-transform:uppercase;padding:12px 14px;text-align:center;border-radius:0}
+.plate input::placeholder{color:rgba(14,21,17,.38)}
+.plate input:focus{box-shadow:none}
+.plate:focus-within{box-shadow:inset 0 0 0 3px #0E1511,0 0 0 4px rgba(168,224,58,.6)}
+.chk-msg{font:500 15px/1.5 var(--f-body);color:#C9D3CC}
+.chk-msg.warn{color:#FFD36B}
+.chk-found{display:flex;gap:12px;align-items:center;background:#18231D;border-radius:14px;padding:14px 16px;font:500 15px/1.4 var(--f-body);color:#DDE6DF}
+.chk-found b{color:#fff}
+.chk-found .dot{width:10px;height:10px;border-radius:50%;background:var(--lime);flex:none;box-shadow:0 0 0 4px rgba(168,224,58,.2)}
+.chk-q{font:700 17px var(--f-head);color:#fff;margin-top:16px}
+.eng-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:10px}
+.eng{background:#18231D;border:1px solid #2C3A31;color:#EEF3EC;text-align:left;border-radius:14px;padding:14px 16px;display:grid;gap:4px;cursor:pointer;font:inherit}
+.eng b{font:700 16px/1.3 var(--f-body)}
+.eng span{font:500 13px var(--f-body);color:#A8B5AC}
+.eng:hover,.eng:focus-visible{border-color:var(--lime)}
+.chk-res{display:grid;gap:18px;background:#18231D;border-radius:20px;padding:clamp(18px,3vw,26px)}
+.chk-res-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.chk-res h3{color:#fff;font-size:24px;margin-top:6px}
+.fact-dark{font:700 13px var(--f-body);background:#0B110E;color:var(--lime);border-radius:999px;padding:9px 14px}
+.chk-buy{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;border-top:1px solid #2C3A31;padding-top:16px}
+.chk-buy small{display:block;font:600 12px var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:#A8B5AC}
+.chk-buy b{font:900 32px/1 var(--f-head);color:#fff}
+.chk-manual,.linkish{background:none;border:0;color:var(--lime);font:600 15px var(--f-body);cursor:pointer;padding:0;justify-self:start;text-decoration:underline;text-underline-offset:3px}
+.chk-manual-box select{max-width:360px}
+.dark .chk-manual-box label{color:#EEF3EC}
+
+/* service cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border-radius:var(--r);overflow:hidden;text-decoration:none;color:var(--ink);display:grid;grid-template-rows:auto 1fr;transition:transform .2s, box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(14,21,17,.45)}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.card-body{padding:22px 24px 24px;display:grid;gap:10px;align-content:start}
+.card-body p{color:var(--mute);font-size:16px}
+.card .tag{font:600 12px/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--lime-ink)}
+.card .more{font:700 15px var(--f-body);margin-top:4px}
+.card.plain{background:var(--ink);color:#fff;align-content:center}
+.card.plain p{color:#A8B5AC}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{background:var(--card);border-radius:var(--r);padding:28px;display:grid;gap:10px;align-content:start}
+.steps li::before{counter-increment:s;content:counter(s);font:900 44px/1 var(--f-head);color:var(--lime-ink)}
+.steps p{color:var(--mute);font-size:16px}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:240px 240px;gap:14px}
+.gallery figure{margin:0;position:relative;border-radius:var(--r);overflow:hidden;min-height:0}
+.gallery figure:first-child{grid-row:span 2}
+.gallery img{width:100%;height:100%;object-fit:cover}
+.gallery figcaption{position:absolute;left:12px;bottom:12px;background:rgba(15,23,19,.78);color:#fff;font:600 13px/1.3 var(--f-body);padding:8px 12px;border-radius:999px;backdrop-filter:blur(6px)}
+
+/* split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
+.split > *{min-width:0}
+.split img.pic{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:28px}
+.list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.list li{display:flex;gap:12px;align-items:flex-start}
+.list li::before{content:"";flex:none;width:22px;height:22px;margin-top:2px;border-radius:50%;background:var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E1511' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E") center/14px no-repeat}
+.stack{display:grid;gap:20px}
+
+/* areas */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:600 15px/1 var(--f-body);color:var(--ink);text-decoration:none;background:var(--card);border-radius:999px;padding:11px 16px;box-shadow:inset 0 0 0 1px var(--line);white-space:nowrap}
+.chip:hover{box-shadow:inset 0 0 0 2px var(--lime-ink)}
+.chip small{color:var(--mute);font-weight:500;margin-left:4px}
+.area-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.group{background:var(--card);border-radius:var(--r);padding:22px 24px}
+.group h3{font-size:18px;margin-bottom:10px}
+.group ul{list-style:none;margin:0;padding:0}
+.group a{display:flex;justify-content:space-between;gap:10px;padding:9px 0;color:var(--ink);text-decoration:none;border-top:1px solid var(--line);font-size:16px}
+.group li:first-child a{border-top:0}
+.group a:hover{color:var(--lime-ink)}
+.group a span{color:var(--mute);font-size:14px;font-variant-numeric:tabular-nums}
+.find{max-width:520px}
+
+/* page head */
+.page-head .wrap{padding-block:clamp(20px,3vw,40px) clamp(32px,4vw,56px)}
+.page-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,56px);align-items:center}
+.page-hero > *{min-width:0}
+.page-hero img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:28px}
+.crumbs{font:500 14px/1 var(--f-body);color:var(--mute);display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.crumbs a{color:var(--mute);text-decoration:none}
+.crumbs a:hover{color:var(--ink)}
+.facts{display:flex;flex-wrap:wrap;gap:8px}
+.fact{background:var(--card);border-radius:999px;padding:9px 14px;font:600 14px/1 var(--f-body);box-shadow:inset 0 0 0 1px var(--line)}
+
+/* article */
+.article{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:clamp(28px,4vw,56px);align-items:start}
+.prose{display:grid;gap:18px;max-width:66ch}
+.prose h2{font-size:clamp(28px,3vw,36px);margin-top:18px}
+.prose p{color:#2E3832}
+.aside{display:grid;gap:16px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 90px)}
+.box{background:var(--card);border-radius:var(--r);padding:24px;display:grid;gap:12px}
+.box.lime{background:var(--lime)}
+.price small{display:block;font:600 13px/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.price b{font:900 48px/1 var(--f-head);letter-spacing:-.03em}
+.law{background:#FFF7DA;border-radius:16px;padding:18px 20px;display:grid;gap:6px}
+.law b{font:700 14px/1 var(--f-body);color:#7A5A00}
+.law p{color:#4F4415;font-size:16px}
+
+/* faq */
+.faq{display:grid;gap:10px;max-width:820px}
+.faq details{background:var(--card);border-radius:16px;padding:0 22px}
+.faq summary{cursor:pointer;list-style:none;padding:20px 32px 20px 0;font:600 17px/1.35 var(--f-body);position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:0;top:22px;width:22px;height:22px;border-radius:50%;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E1511' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/14px no-repeat;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--mute);padding-bottom:20px;font-size:16px}
+
+/* contact */
+.quote{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,4vw,56px);align-items:start}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:var(--card);border-radius:28px;padding:clamp(20px,3vw,32px)}
+.form .full{grid-column:1/-1}
+.form-msg{grid-column:1/-1;border-radius:14px;padding:14px 16px;font:500 15px/1.5 var(--f-body);background:#EEF8DA;color:#2C4A00}
+.form-msg.warn{background:#FFF3D6;color:#6B4D00}
+.contact-card{display:grid;gap:4px}
+.contact-card .k{font:600 13px/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.contact-card .v{font:800 30px/1.1 var(--f-head);letter-spacing:-.02em;word-break:break-word}
+.copy{background:var(--bg);border:0;color:var(--ink);font:600 13px var(--f-body);border-radius:999px;padding:7px 12px;cursor:pointer;justify-self:start;margin-top:6px}
+
+/* cta band */
+.cta{background:var(--lime);border-radius:32px;padding:clamp(28px,5vw,56px);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.cta h2{font-size:clamp(30px,4vw,48px)}
+.cta p{font-size:18px;margin-top:8px;color:#2C3A12}
+
+/* footer */
+.site-foot{background:var(--night);color:#C9D3CC;margin-top:clamp(56px,8vw,100px)}
+.site-foot .wrap{padding-block:56px 32px;display:grid;gap:36px}
+.foot-grid{display:grid;grid-template-columns:1.2fr 1fr 2fr;gap:36px}
+.foot-grid .stack{align-content:start}
+.foot-grid h4{font:700 16px var(--f-head);color:#fff;margin:0 0 14px}
+.foot-grid ul{list-style:none;margin:0;padding:0}
+.foot-grid li{margin-bottom:7px}
+.foot-grid a{color:#A8B5AC;text-decoration:none;font-size:15px}
+.foot-grid a:hover{color:var(--lime)}
+.foot-grid .brand{color:#fff}
+.foot-grid .brand-mark{background:var(--lime)}
+.foot-grid .brand-mark svg path{stroke:var(--ink)}
+ul.foot-towns{columns:3;column-gap:18px}
+.fine{font:400 13px/1.6 var(--f-body);color:#8C9A90;border-top:1px solid #26332B;padding-top:22px}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (max-width:980px){
+  .hero .wrap,.calc,.split,.page-hero,.quote,.article{grid-template-columns:1fr}
+  .cards,.area-groups{grid-template-columns:1fr 1fr}
+  .aside{position:static}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .foot-grid > :last-child{grid-column:1/-1}
+  .float.f1{left:12px}
+}
+@media (max-width:820px){
+  .menu-btn{display:block}
+  .head-phone,.head-cta{display:none}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);flex-direction:column;align-items:stretch;padding:8px max(18px,env(safe-area-inset-right,0px)) 18px max(18px,env(safe-area-inset-left,0px));box-shadow:0 20px 30px -20px rgba(0,0,0,.3)}
+  .nav.open{display:flex}
+  .nav a{padding:16px 12px;font-size:17px}
+  .explain,.steps{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:200px 160px 160px}
+  .gallery figure:first-child{grid-column:span 2;grid-row:auto}
+}
+@media (max-width:620px){
+  .cards,.area-groups,.form{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  ul.foot-towns{columns:2}
+  .float{padding:10px 14px}.float b{font-size:22px}
+}
+</style>
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="We Remap Any Car home">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><path d="M4 16a8 8 0 1 1 16 0" stroke="#A8E03A" stroke-width="2.6" stroke-linecap="round"/><path d="M12 16l5-6" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+      <b>We Remap Any Car</b>
+    </a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#services" data-nav="service">Services</a>
+      <a href="#check" data-nav="check">Check my vehicle</a>
+      <a href="#insight" data-nav="insight">How it works</a>
+      <a href="#areas" data-nav="area">Areas</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+    <span class="head-phone" data-c="phone"></span>
+    <a class="btn sm head-cta" href="#contact">Get a price</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+  </div>
+</header>
+
+<main id="app" data-route="check" data-root="../"><section class="page-head"><div class="wrap"><div class="crumbs"><a href="../">Home</a> / Check my vehicle</div>
+    <div class="sec-head" style="margin-bottom:0"><span class="kicker">Check my vehicle</span><h1>What will a remap give you?</h1><p class="lead">Enter your reg. We'll find your vehicle, ask which engine it has if needed, and show your power and torque before and after.</p></div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="dark" style="border-radius:32px;padding:clamp(20px,4vw,44px)"><div class="chk" id="chk">
+    <div class="chk-test">Test mode: sample vehicles and figures. Try <button type="button" data-demo="WR19MAP">WR19 MAP</button> <button type="button" data-demo="BM20XFV">BM20 XFV</button> <button type="button" data-demo="VW17TDI">VW17 TDI</button></div>
+    <form class="plate-row" id="chkForm" autocomplete="off">
+      <label class="plate" for="chkReg"><span class="plate-band">UK</span><input id="chkReg" maxlength="9" placeholder="ENTER REG" aria-label="Vehicle registration" spellcheck="false" autocapitalize="characters"></label>
+      <button class="btn" type="submit" id="chkGo">Check my vehicle <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+    </form>
+    <div id="chkOut" aria-live="polite"></div>
+    <button type="button" class="chk-manual" id="chkManual">Don't know your reg? Choose your vehicle instead</button>
+  </div></div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="sec-head"><span class="kicker">What happens next</span><h2>Three simple steps</h2></div><ol class="steps"><li><h3>Send your reg</h3><p>Text, call or fill in the form. We tell you what your vehicle can gain and give you a fixed price.</p></li><li><h3>We come to you</h3><p>We arrive at your home or work with everything we need. A health check comes first, then your original settings are saved.</p></li><li><h3>Drive away</h3><p>The remap takes one to two hours. We test drive it with you, and you can go back to standard any time.</p></li></ol></div></section><section class="sec tight"><div class="wrap"><div class="cta"><div><h2>Ready for more power?</h2><p>Send your reg and we'll come back with a fixed price.</p></div><div class="cta-row"><a class="btn dark" href="../contact/">Get a price <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a><span class="btn ghost" data-c="phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>07540 173263</span></div></div></div></section></main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="stack" style="gap:16px">
+        <a class="brand" href="../"><span class="brand-mark"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><path d="M4 16a8 8 0 1 1 16 0" stroke-width="2.6" stroke-linecap="round"></path><path d="M12 16l5-6" stroke-width="2.6" stroke-linecap="round"></path></svg></span><b>We Remap Any Car</b></a>
+        <p style="font-size:15px">Mobile remapping and tuning. We come to your home or work anywhere within 20 miles of Blackburn.</p>
+        <p style="font-size:15px" data-c="footcontact">Call 07540 173263<br>sales@weremapanycar.com</p>
+      </div>
+      <div><h4>Services</h4><ul id="footSvc"><li><a href="../services/stage-1-remap/">Stage 1 Remap</a></li><li><a href="../services/economy-remap/">Economy Remap</a></li><li><a href="../services/stage-2-tuning/">Stage 2 &amp; Custom Tuning</a></li><li><a href="../services/speed-limiters/">Speed Limiters</a></li><li><a href="../services/dpf-egr-adblue/">DPF, EGR &amp; AdBlue Faults</a></li><li><a href="../services/gearbox-tuning/">Gearbox (TCU) Tuning</a></li><li><a href="../services/ecu-repair-cloning/">ECU Repair &amp; Cloning</a></li><li><a href="../services/commercial-and-agricultural/">Vans, Trucks &amp; Agricultural</a></li><li><a href="../services/features-and-options/">Features &amp; Options</a></li><li><a href="../services/diagnostics/">Diagnostics &amp; Health Checks</a></li></ul></div>
+      <div><h4>Areas we cover</h4><ul class="foot-towns" id="footTowns"><li><a href="../areas/accrington/">Accrington</a></li><li><a href="../areas/adlington/">Adlington</a></li><li><a href="../areas/bacup/">Bacup</a></li><li><a href="../areas/bamber-bridge/">Bamber Bridge</a></li><li><a href="../areas/barnoldswick/">Barnoldswick</a></li><li><a href="../areas/belthorn/">Belthorn</a></li><li><a href="../areas/blackburn/">Blackburn</a></li><li><a href="../areas/bolton/">Bolton</a></li><li><a href="../areas/brierfield/">Brierfield</a></li><li><a href="../areas/burnley/">Burnley</a></li><li><a href="../areas/bury/">Bury</a></li><li><a href="../areas/chorley/">Chorley</a></li><li><a href="../areas/church/">Church</a></li><li><a href="../areas/clayton-le-moors/">Clayton-le-Moors</a></li><li><a href="../areas/clayton-le-woods/">Clayton-le-Woods</a></li><li><a href="../areas/clitheroe/">Clitheroe</a></li><li><a href="../areas/colne/">Colne</a></li><li><a href="../areas/coppull/">Coppull</a></li><li><a href="../areas/croston/">Croston</a></li><li><a href="../areas/darwen/">Darwen</a></li><li><a href="../areas/earby/">Earby</a></li><li><a href="../areas/edgworth-and-turton/">Edgworth &amp; Turton</a></li><li><a href="../areas/euxton/">Euxton</a></li><li><a href="../areas/farnworth/">Farnworth</a></li><li><a href="../areas/fulwood/">Fulwood</a></li><li><a href="../areas/garstang/">Garstang</a></li><li><a href="../areas/great-harwood/">Great Harwood</a></li><li><a href="../areas/haslingden/">Haslingden</a></li><li><a href="../areas/heywood/">Heywood</a></li><li><a href="../areas/hoghton/">Hoghton</a></li><li><a href="../areas/horwich/">Horwich</a></li><li><a href="../areas/kirkham/">Kirkham</a></li><li><a href="../areas/langho/">Langho</a></li><li><a href="../areas/leyland/">Leyland</a></li><li><a href="../areas/longridge/">Longridge</a></li><li><a href="../areas/longton/">Longton</a></li><li><a href="../areas/lostock-hall/">Lostock Hall</a></li><li><a href="../areas/mellor/">Mellor</a></li><li><a href="../areas/nelson/">Nelson</a></li><li><a href="../areas/oswaldtwistle/">Oswaldtwistle</a></li><li><a href="../areas/padiham/">Padiham</a></li><li><a href="../areas/penwortham/">Penwortham</a></li><li><a href="../areas/preston/">Preston</a></li><li><a href="../areas/prestwich/">Prestwich</a></li><li><a href="../areas/radcliffe/">Radcliffe</a></li><li><a href="../areas/ramsbottom/">Ramsbottom</a></li><li><a href="../areas/rawtenstall/">Rawtenstall</a></li><li><a href="../areas/ribchester/">Ribchester</a></li><li><a href="../areas/rishton/">Rishton</a></li><li><a href="../areas/rochdale/">Rochdale</a></li><li><a href="../areas/skelmersdale/">Skelmersdale</a></li><li><a href="../areas/standish/">Standish</a></li><li><a href="../areas/tarleton/">Tarleton</a></li><li><a href="../areas/todmorden/">Todmorden</a></li><li><a href="../areas/tottington/">Tottington</a></li><li><a href="../areas/walton-le-dale/">Walton-le-Dale</a></li><li><a href="../areas/westhoughton/">Westhoughton</a></li><li><a href="../areas/whalley/">Whalley</a></li><li><a href="../areas/whitefield/">Whitefield</a></li><li><a href="../areas/whittle-le-woods/">Whittle-le-Woods</a></li><li><a href="../areas/whitworth/">Whitworth</a></li><li><a href="../areas/wigan/">Wigan</a></li><li><a href="../areas/wilpshire/">Wilpshire</a></li><li><a href="../areas/withnell-and-brinscall/">Withnell &amp; Brinscall</a></li></ul></div>
+    </div>
+    <p class="fine">DPF, EGR and AdBlue software is for off-road, motorsport and export vehicles only. Removing emissions equipment from a UK road vehicle is illegal and fails the MOT. Please tell your insurer about any remap. © <span id="yr">2026</span> We Remap Any Car.</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- site settings ---------- */
+const CONFIG={phone:'07540 173263',email:'sales@weremapanycar.com',
+  api:'' /* leave empty for test mode; set to the Cloudflare Worker address, e.g. 'https://api.weremapanycar.com/api', to go live */};
+const STATIC=document.getElementById('app').dataset.route||'';
+const ROOT=document.getElementById('app').dataset.root||'';
+const IMG=n=>ROOT+'img/'+n+'.webp';
+const $=(s,el=document)=>el.querySelector(s), $$=(s,el=document)=>[...el.querySelectorAll(s)];
+const slug=s=>s.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const hashStr=s=>[...s].reduce((h,c)=>(h*31+c.charCodeAt(0))|0,7);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- services ---------- */
+const SERVICES=[
+ {id:'stage-1-remap',name:'Stage 1 Remap',tag:'Power',price:'£249',time:'1 to 2 hours',spec:'Diesel +25–35% power · +30–40% torque',
+  short:'More power and torque from the standard hardware. No parts changed, original file kept.',
+  body:['A Stage 1 remap rewrites the calibration inside your engine control unit (ECU). We adjust boost pressure, fuel quantity, injection timing and the factory torque limiters, staying inside the safe limits of the standard turbo, injectors and clutch.',
+        'Manufacturers sell one engine in several power outputs and detune it for every market and fuel quality in the world. A remap tunes it for your vehicle, on UK fuel, and gives back the performance that was left on the table. Most turbo diesels gain 25 to 35% power and 30 to 40% torque. Turbo petrols usually gain 15 to 25%.',
+        'Before anything is written, we scan for faults and check live data. If something is already wrong, such as a boost leak or a tired injector, we tell you first rather than tune on top of it.'],
+  inc:['Pre-tune health check and fault scan','Original file read and saved for life','Custom calibration for your engine','Checksum corrected and verified','Road test with datalog','Free return to standard if you sell']},
+ {id:'economy-remap',name:'Economy Remap',tag:'Fuel',price:'£229',time:'1 to 2 hours',spec:'Typically 5–12% better mpg',
+  short:'A file built for fuel saving. Ideal for fleets, high-mileage drivers and loaded vans.',
+  body:['An economy remap uses the same tools with a different goal. We raise low and mid-range torque so the engine pulls a higher gear at lower revs, sits at a more efficient load point and needs less throttle to do the same work.',
+        'Vans that run loaded, motorhomes, towing cars and high-mileage reps see the biggest difference. Savings depend on how and where you drive, but 5 to 12% is typical. For fleets we can combine it with a speed limiter so the savings are locked in whoever is driving.'],
+  inc:['Torque raised low in the rev range','Smoother throttle response','Optional speed limiter at the same visit','Original file saved','Fleet pricing on 3 or more vehicles']},
+ {id:'stage-2-tuning',name:'Stage 2 & Custom Tuning',tag:'Performance',price:'£349',time:'2 to 4 hours',spec:'For upgraded intake, intercooler, exhaust or turbo',
+  short:'Calibration built around your upgraded hardware, checked with datalogs.',
+  body:['Stage 2 is for vehicles with supporting modifications: a bigger intercooler, uprated intake, downpipe, hybrid turbo or uprated fuelling. The calibration is written around that hardware, then refined with datalogs of boost, air mass, rail pressure and exhaust gas temperature.',
+        'We will be honest about where the limits are. If your clutch or gearbox will not hold the torque, we tell you before we tune, not after.'],
+  inc:['Hardware check before tuning','Logged runs before and after','Revisions included for 30 days','Gearbox torque limits matched']},
+ {id:'speed-limiters',name:'Speed Limiters',tag:'Vans & Fleets',price:'£99',time:'Under 1 hour',spec:'Fit, adjust or raise · set in km/h or mph',
+  short:'Limiters fitted, adjusted or raised in the ECU. No extra box, no wiring.',
+  body:['Most modern vans and cars have a speed limit function built into the ECU. We can switch it on, set it to any speed, or raise a limiter an ex-fleet van was supplied with.',
+        'Fleet operators use limiters to cut fuel bills, tyre wear and insurance costs. It is all done through the diagnostic port, so there is nothing to see under the dash.'],
+  inc:['Set to any speed','Fleet-wide settings to match','Combines with an economy remap','Certificate of setting on request'],
+  law:'Goods vehicles over 3.5 tonnes, and most minibuses, must keep a working limiter by law. We set these to the legal speed. We do not remove them.'},
+ {id:'dpf-egr-adblue',name:'DPF, EGR & AdBlue Faults',tag:'Emissions',price:'£120',time:'1 to 3 hours',spec:'Diagnose · forced regen · clean · repair',
+  short:'Most emissions faults can be fixed without removing anything. We find the cause first.',
+  body:['A blocked diesel particulate filter is usually a symptom. Common causes are short journeys that never let it regenerate, a failed pressure sensor, a sticking EGR valve or a leaking injector. We diagnose the cause, run a forced regeneration, and clean or repair where needed.',
+        'For AdBlue (SCR) systems we test NOx sensors, the pump, the heater and dosing, and clear the countdown-to-no-start once the fault is fixed.',
+        'Software that turns off DPF, EGR or AdBlue functions is available for vehicles used off-road, in motorsport or for export only.'],
+  inc:['Full emissions fault diagnosis','Forced DPF regeneration','EGR valve and cooler checks','NOx sensor and AdBlue pump testing','Advice on driving to keep the DPF clean'],
+  law:'Removing or disabling a DPF, EGR or AdBlue system on a road vehicle in the UK is illegal, fails the MOT and can void your insurance. Deletes are for off-road, motorsport and export vehicles only.'},
+ {id:'gearbox-tuning',name:'Gearbox (TCU) Tuning',tag:'Drivetrain',price:'£199',time:'1 to 2 hours',spec:'DSG, ZF 8HP, Aisin and more',
+  short:'Raised torque limits, quicker shifts and better launch to match your remap.',
+  body:['Automatic and dual-clutch gearboxes have their own control unit with torque limits and shift maps. After an engine remap, a matched TCU file stops the gearbox capping the extra torque, firms up clamping pressure and sharpens shift points.',
+        'We can also adjust kick-down behaviour, launch rpm and how the box behaves in Sport mode.'],
+  inc:['Torque limits matched to engine file','Faster, firmer shifts','Launch and kick-down tuning','Original TCU file saved']},
+ {id:'ecu-repair-cloning',name:'ECU Repair & Cloning',tag:'Bench work',price:'£180',time:'Same day to 3 days',spec:'Bench · boot mode · BDM · soldering',
+  short:'Locked, bricked or damaged ECUs read on the bench and repaired at board level.',
+  body:['When an ECU will not talk through the diagnostic port because it is locked, damaged by water, or bricked by a failed flash, it comes onto the bench. We open the unit and connect directly to the processor in boot or BDM mode to read the full flash and EEPROM.',
+        'From there we can repair or clone the unit. Board-level repairs include re-soldering cracked joints, replacing failed driver chips and repairing corroded tracks under a microscope. Cloning copies everything, including immobiliser data, to a replacement unit so it works without re-coding keys.'],
+  inc:['Full flash and EEPROM backup','Board-level fault finding','Microscope soldering repairs','Cloning to a replacement ECU','Immobiliser data transferred']},
+ {id:'commercial-and-agricultural',name:'Vans, Trucks & Agricultural',tag:'Heavy duty',price:'£299',time:'1 to 3 hours',spec:'Pickups · HGV · tractors · plant',
+  short:'Torque for towing and loaded hills, economy files for fleets, done on site.',
+  body:['We tune Transits, Sprinters, Transporters, Ducatos, pickups, 7.5-tonners, tractors and plant. Working vehicles benefit most: more torque low down means fewer gear changes on a loaded hill and less strain dragging a trailer.',
+        'Because we are mobile, we come to the farm, yard or depot. Fleet days are welcome. We can do several vehicles in one visit.'],
+  inc:['On-site at farm, yard or depot','Towing and payload-focused files','Fleet days, several vehicles per visit','Economy and limiter options']},
+ {id:'features-and-options',name:'Features & Options',tag:'Extras',price:'£75',time:'Added to any remap',spec:'Start-stop · launch · pops · cold start',
+  short:'Start-stop default off, launch control, overrun crackle and more, coded at the ECU.',
+  body:['Small changes that make daily driving better. Popular options include start-stop set to off by default, launch control, a softer or firmer throttle map, cold-start noise reduction, and overrun crackle on turbo petrols.',
+        'Every option is stored with your file, so it can be removed again later.'],
+  inc:['Start-stop off by default','Launch control (selected ECUs)','Overrun crackle on petrols','Throttle response mapping','Cold-start idle tweaks']},
+ {id:'diagnostics',name:'Diagnostics & Health Checks',tag:'Diagnostics',price:'£60',time:'Under 1 hour',spec:'All-system scan · live data · smoke test',
+  short:'Find the fault before you spend money on parts. Free with every remap.',
+  body:['A full-system scan, live data review and, where needed, a smoke test for boost and vacuum leaks. We check injector corrections, turbo response, rail pressure and DPF soot loading.',
+        'You get a plain-English summary of what we found and what it would cost to put right.'],
+  inc:['All modules scanned','Live data and injector corrections','Smoke test for boost leaks','Written summary']}
+];
+
+/* ---------- towns: name, miles from Blackburn (approx, straight line), bearing°, district, local note, roads, major ---------- */
+const TOWNS_RAW=[
+['Blackburn',0,0,'Blackburn with Darwen','Our home base. From the terraces round Ewood Park to the newer estates at Feniscowles and Beardwood, Blackburn jobs can usually be booked within a day or two.','M65 junctions 4 to 6 and the A666',1],
+['Wilpshire',3,355,'Ribble Valley','A leafy village on the A666 just north of Blackburn, on the road out to Whalley and Clitheroe.','A666 and A59'],
+['Rishton',3,70,'Hyndburn','A canal-side village between Blackburn and Accrington, right on M65 junction 6.','M65 junction 6 and A678'],
+['Darwen',4,180,'Blackburn with Darwen','A mill town under Darwen Tower, with the India Mill chimney still on the skyline. Plenty of vans and pickups work out of the estates along the A666.','A666 and M65 junction 4',1],
+['Mellor',4,300,'Ribble Valley','A hilltop village west of Blackburn with views over the Ribble. Lots of 4x4s and estate cars on the lanes round Mellor Brook.','A59 and A677'],
+['Belthorn',4,135,'Blackburn with Darwen','A moorland village above Guide, a few minutes from M65 junction 5.','B6232 and M65 junction 5'],
+['Oswaldtwistle',4,100,'Hyndburn','Best known for Oswaldtwistle Mills. We cover the whole town, from Knuzden to Stanhill and the business parks off the A679.','A679 and M65 junction 7'],
+['Church',4,95,'Hyndburn','A small canal town where the Leeds and Liverpool Canal meets Accrington.','A679 and A680'],
+['Accrington',5,88,'Hyndburn','Home of the famous Accrington brick and Accrington Stanley. Plenty of trade vans round the Whitebirk, Altham and Petre Road estates.','M65 junction 7 and the A680',1],
+['Clayton-le-Moors',5,74,'Hyndburn','Sits on M65 junction 7 next to Altham business park, so a lot of our fleet work here is for local firms.','M65 junction 7 and A678'],
+['Great Harwood',5,55,'Hyndburn','A market town with a distinctive clock tower in the square, between Blackburn and the Ribble Valley.','A680 and A666'],
+['Langho',5,25,'Ribble Valley','A village on the A59 near Whalley, with Brockhall Village just down the road.','A59 and A666'],
+['Hoghton',5,255,'Chorley','A rural village below Hoghton Tower, on the old road between Blackburn and Preston.','A675 and M65 junction 3'],
+['Withnell & Brinscall',6,220,'Chorley','Twin villages on the edge of the West Pennine Moors, with good roads for a test drive after a remap.','A674 and A675'],
+['Whalley',7,40,'Ribble Valley','A historic village with abbey ruins and a viaduct over the Calder. We look after a lot of 4x4s and farm pickups round here.','A59 and A671'],
+['Ribchester',7,330,'Ribble Valley','A riverside village on the site of a Roman fort, surrounded by Ribble Valley farms.','B6245 and B6243'],
+['Haslingden',7,125,'Rossendale','A hillside town at the top of Rossendale, where the A56 and A680 meet.','A56 and A680'],
+['Edgworth & Turton',7,170,'Greater Manchester','Moorland villages round the Wayoh and Turton reservoirs, between Darwen and Bolton.','B6391 and A666'],
+['Bamber Bridge',7,262,'Preston & South Ribble','Right where the M6, M61 and M65 meet, which makes it one of the quickest towns for us to reach.','M6 junction 29 and M65 junction 1'],
+['Whittle-le-Woods',8,235,'Chorley','A village between Chorley and the M61/M65 junction.','A6 and M61 junction 8'],
+['Padiham',8,65,'Burnley & Pendle','A small town on the River Calder by Gawthorpe Hall, just off the M65.','A6068 and M65 junction 8'],
+['Walton-le-Dale',8,270,'Preston & South Ribble','On the A6 just south of the Ribble crossing into Preston.','A6 and A675'],
+['Lostock Hall',8,258,'Preston & South Ribble','A residential area south of Preston on the A582.','A582 and A6'],
+['Clayton-le-Woods',9,240,'Chorley','A growing village between Chorley and Leyland with lots of family and company cars.','A6 and M61 junction 8'],
+['Rawtenstall',9,125,'Rossendale','Rossendale\'s main town, home to the East Lancashire Railway and Britain\'s last original temperance bar.','A682 and A56'],
+['Preston',9,280,'Preston & South Ribble','Lancashire\'s city, with the M6, M55 and M61 on its doorstep. We cover all of it, from Ashton and Ribbleton to the docks.','M6 junctions 31 and 32, and the A6',1],
+['Longridge',9,320,'Ribble Valley','A market town at the foot of Longridge Fell on the edge of the Ribble Valley.','B6243 and B6245'],
+['Clitheroe',10,30,'Ribble Valley','The castle town at the heart of the Ribble Valley. Lots of pickups, Land Rovers and farm machinery round here.','A59 and A671',1],
+['Ramsbottom',10,155,'Greater Manchester','A market town under Holcombe Hill and Peel Tower, with steam trains on the East Lancashire Railway.','M66 junction 1 and A56'],
+['Burnley',10,75,'Burnley & Pendle','Home of Turf Moor and the Weavers\' Triangle. We cover all of Burnley, from Padiham Road to the business parks off the M65.','M65 junctions 9 to 11',1],
+['Fulwood',10,290,'Preston & South Ribble','North Preston, close to M55 junction 1 and Fulwood Barracks.','M55 junction 1 and A6'],
+['Penwortham',10,265,'Preston & South Ribble','Across the Ribble from Preston city centre, on the road out to the coast.','A59 and A582'],
+['Leyland',10,245,'Preston & South Ribble','Home of Leyland Trucks and the British Commercial Vehicle Museum, which makes it a natural fit for our van and truck work.','M6 junction 28 and A49',1],
+['Chorley',10,225,'Chorley','A market town with Astley Hall and the famous Chorley cakes, a few minutes from the M61.','M61 junction 8 and A6',1],
+['Tottington',11,165,'Greater Manchester','A village between Bury and Ramsbottom on the B6213.','B6213 and A676'],
+['Euxton',11,237,'Chorley','A village by M6 junction 28 and Buckshaw Village, with plenty of commuter cars.','A49 and M6 junction 28'],
+['Brierfield',12,68,'Burnley & Pendle','Between Burnley and Nelson, with the restored Brierfield Mill beside the canal.','M65 junction 12 and A682'],
+['Adlington',12,210,'Chorley','A village on the A6 close to Rivington and Anglezarke.','A6 and B5239'],
+['Horwich',12,200,'Greater Manchester','Next to Middlebrook and Bolton Wanderers\' stadium, under Rivington Pike.','M61 junction 6 and A673'],
+['Bolton',12,180,'Greater Manchester','A big town with plenty of business fleets and family cars. We cover Bolton from Astley Bridge to Little Lever.','M61 and the A666',1],
+['Nelson',13,65,'Burnley & Pendle','A Pendle town near the end of the M65, below Pendle Hill.','M65 junctions 12 and 13'],
+['Bacup',13,115,'Rossendale','Rossendale\'s highest town and home of the Britannia Coconut Dancers.','A671 and A681'],
+['Bury',13,160,'Greater Manchester','Famous for its market and black pudding, with the M66 and M60 close by.','M66 junction 2 and A56',1],
+['Longton',13,260,'Preston & South Ribble','A village west of Preston on the A59 towards Southport.','A59'],
+['Coppull',14,215,'Chorley','A village south of Chorley on the A49, close to M6 junction 27.','A49 and M6 junction 27'],
+['Croston',14,240,'Chorley','A rural village on the River Yarrow surrounded by farmland, so tractors and pickups are regular work here.','A581 and B5247'],
+['Whitworth',14,130,'Rossendale','A valley town between Rochdale and Bacup on the A671.','A671'],
+['Colne',15,62,'Burnley & Pendle','At the far end of the M65 and home of the Great British R&B Festival.','M65 junction 14 and A56',1],
+['Radcliffe',15,168,'Greater Manchester','A town on the River Irwell between Bury and Bolton.','A665 and A58'],
+['Standish',15,215,'Greater Manchester','Just north of Wigan on the A49, by M6 junction 27.','A49 and M6 junction 27'],
+['Westhoughton',15,200,'Greater Manchester','A town between Bolton and Wigan, a couple of minutes from M61 junction 5.','M61 junction 5 and A58'],
+['Farnworth',15,175,'Greater Manchester','South of Bolton, where the A666 meets the M61.','A666 and M61 junction 3'],
+['Todmorden',15,105,'Calderdale','A border town in the Calder Valley, on the old line between Lancashire and Yorkshire.','A646 and A6033'],
+['Heywood',16,150,'Greater Manchester','A big distribution hub on the M62, so we see a lot of van fleets.','M62 junction 19 and M66'],
+['Whitefield',16,165,'Greater Manchester','South of Bury, right on the M60.','M60 junction 17 and A56'],
+['Garstang',16,320,'Fylde & Wyre','A market town on the A6 and the Lancaster Canal, surrounded by farming country.','A6 and B6430'],
+['Tarleton',16,252,'West Lancashire','A village known for market gardening, so plenty of trucks, tractors and pickups.','A59 and A565'],
+['Kirkham',17,290,'Fylde & Wyre','An old Fylde market town between Preston and Blackpool.','M55 junction 3 and A583'],
+['Rochdale',17,140,'Greater Manchester','A large town with a grand Victorian town hall and the M62 on its doorstep.','M62 junction 20 and A627(M)',1],
+['Prestwich',18,170,'Greater Manchester','Next to Heaton Park, on the southern edge of our 20-mile area.','M60 junction 17 and A56'],
+['Barnoldswick',18,50,'Burnley & Pendle','A Pendle town with a long history of making Rolls-Royce jet engine parts.','B6252 and A56'],
+['Wigan',18,210,'Greater Manchester','A large town with Wigan Pier on the canal and the M6 running alongside.','M6 junctions 25 to 27',1],
+['Earby',19,52,'Burnley & Pendle','A village on the A56 near the Yorkshire border, at the northern edge of our area.','A56'],
+['Skelmersdale',19,230,'West Lancashire','A new town with big industrial estates either side of the M58.','M58 junctions 3 and 4']
+];
+const TOWNS=TOWNS_RAW.map(([name,mi,brg,district,note,roads,major])=>{
+  const a=brg*Math.PI/180; return {name,mi,brg,district,note,roads,major:!!major,slug:slug(name),x:Math.sin(a)*mi,y:-Math.cos(a)*mi};
+});
+const DISTRICTS=['Blackburn with Darwen','Hyndburn','Ribble Valley','Burnley & Pendle','Rossendale','Preston & South Ribble','Chorley','West Lancashire','Fylde & Wyre','Greater Manchester','Calderdale'];
+const nearby=(t,n=5)=>TOWNS.filter(o=>o!==t).map(o=>({o,d:Math.hypot(o.x-t.x,o.y-t.y)})).sort((a,b)=>a.d-b.d).slice(0,n).map(r=>r.o);
+
+/* ---------- vehicles for the gains calculator (typical stage 1 figures) ---------- */
+const VEH=[
+ {n:'Ford Transit 2.0 EcoBlue 130',g:'Vans & pickups',f:'d',ps:[130,170],nm:[385,440]},
+ {n:'Ford Transit Custom 2.0 EcoBlue 170',g:'Vans & pickups',f:'d',ps:[170,205],nm:[405,470]},
+ {n:'VW Transporter T6.1 2.0 TDI 150',g:'Vans & pickups',f:'d',ps:[150,185],nm:[340,420]},
+ {n:'Mercedes Sprinter 316 CDI 163',g:'Vans & pickups',f:'d',ps:[163,195],nm:[360,430]},
+ {n:'Fiat Ducato 2.3 MultiJet 140',g:'Vans & pickups',f:'d',ps:[140,175],nm:[350,420]},
+ {n:'Ford Ranger 2.0 EcoBlue 213',g:'Vans & pickups',f:'d',ps:[213,245],nm:[500,560]},
+ {n:'Toyota Hilux 2.4 D-4D 150',g:'Vans & pickups',f:'d',ps:[150,180],nm:[400,460]},
+ {n:'Nissan Navara 2.3 dCi 190',g:'Vans & pickups',f:'d',ps:[190,225],nm:[450,520]},
+ {n:'VW Golf 2.0 TDI 150',g:'Cars & 4x4s',f:'d',ps:[150,190],nm:[340,410]},
+ {n:'VW Golf GTI 2.0 TSI 245',g:'Cars & 4x4s',f:'p',ps:[245,300],nm:[370,450]},
+ {n:'BMW 320d 190',g:'Cars & 4x4s',f:'d',ps:[190,230],nm:[400,470]},
+ {n:'Audi A4 2.0 TDI 190',g:'Cars & 4x4s',f:'d',ps:[190,230],nm:[400,460]},
+ {n:'Land Rover Discovery Sport 2.0 TD4 180',g:'Cars & 4x4s',f:'d',ps:[180,215],nm:[430,500]},
+ {n:'Vauxhall Astra 1.6 CDTi 136',g:'Cars & 4x4s',f:'d',ps:[136,165],nm:[320,380]},
+ {n:'Kia Sportage 1.6 CRDi 136',g:'Cars & 4x4s',f:'d',ps:[136,165],nm:[320,390]},
+ {n:'Ford Focus 1.0 EcoBoost 125',g:'Cars & 4x4s',f:'p',ps:[125,150],nm:[170,230]}
+];
+
+
+
+/* photos */
+const PICS=['obd-in-car','board-soldering','dpf-bench','obd-tablet','soldering-close','dpf-close','dash-cluster'];
+const PIC_ALT={'obd-in-car':'Technician plugging a diagnostic tablet into a car','board-soldering':'Soldering a circuit board on the bench','dpf-bench':'Diesel particulate filter being inspected','obd-tablet':'Diagnostic lead plugged into the port under the dashboard','soldering-close':'Close-up of soldering an electronic board','dpf-close':'DPF on the workbench','dash-cluster':'Instrument cluster on the bench'};
+const SVC_PIC={'stage-1-remap':'obd-in-car','economy-remap':'obd-tablet','stage-2-tuning':'board-soldering','speed-limiters':'obd-tablet','dpf-egr-adblue':'dpf-bench','gearbox-tuning':'obd-in-car','ecu-repair-cloning':'soldering-close','commercial-and-agricultural':'dpf-close','features-and-options':'dash-cluster','diagnostics':'obd-tablet'};
+const pic=(n,cls='',lazy=true)=>`<img class="${cls}" src="${IMG(n)}" alt="${esc(PIC_ALT[n]||'')}" ${lazy?'loading="lazy"':''} width="1400" height="788">`;
+const ICON={
+ check:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#A8E03A"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#0E1511" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',
+ arrow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+};
+
+/* ---------- calculator ---------- */
+function vals(v,mode){
+  if(mode==='e')return {ps:Math.round(v.ps[0]+(v.ps[1]-v.ps[0])*.45),nm:Math.round(v.nm[0]+(v.nm[1]-v.nm[0])*.65)};
+  return {ps:v.ps[1],nm:v.nm[1]};
+}
+function calcHTML(){
+  const groups=[...new Set(VEH.map(v=>v.g))];
+  return `<div class="calc-box">
+    <label class="f" for="vehSel">Choose a vehicle
+      <select id="vehSel">${groups.map(g=>`<optgroup label="${g}">${VEH.map((v,i)=>v.g===g?`<option value="${i}">${esc(v.n)}</option>`:'').join('')}</optgroup>`).join('')}</select></label>
+    <div class="pills" id="modeSeg" role="group" aria-label="Type of remap"><button data-m="t" class="on">More power</button><button data-m="e">Better MPG</button></div>
+    <div class="bars" id="bars"></div>
+    <div class="bar-key"><span>Standard</span><span class="a">After remap</span></div>
+    <p class="small-note">Typical figures for a healthy, standard vehicle. We confirm yours on the day. Not listed? We remap almost anything with an engine computer.</p>
+  </div>`;
+}
+let calcMode='t';
+function updCalc(){
+  const sel=$('#vehSel');if(!sel)return;const v=VEH[+sel.value],t=vals(v,calcMode);
+  const row=(label,unit,a,b)=>{const max=b*1.08;return `<div class="bar-row"><div class="bar-top"><span>${label}<br><small>${a} → ${b} ${unit}</small></span><b>+${Math.round((b-a)/a*100)}%</b></div><div class="bar"><i class="after" style="width:${b/max*100}%"></i><i class="before" style="width:${a/max*100}%"></i></div></div>`};
+  $('#bars').innerHTML=row('Power','bhp',v.ps[0],t.ps)+row('Torque (pulling power)','Nm',v.nm[0],t.nm)+(calcMode==='e'?`<div class="bar-row"><div class="bar-top"><span>Fuel economy<br><small>typical saving, depends on your driving</small></span><b>5–12%</b></div></div>`:'');
+}
+
+/* ---------- reg checker ----------
+   TEST MODE while CONFIG.api is empty: sample engines and a pretend DVLA lookup.
+   LIVE MODE when CONFIG.api is set to the Cloudflare Worker address:
+     POST {api}/reg {reg}  -> DVLA details {make,fuelType,engineCapacity,yearOfManufacture,colour}
+     GET  {api}/engines?make&fuel&cc&year -> [{id,model,engine,fuel,cc,from,to,bhp:[stock,s1,s2],nm:[stock,s1,s2]}]
+*/
+const SAMPLE_ENGINES=[
+ ['FORD','Transit 2.0 EcoBlue 130','DIESEL',1995,2016,2024,[128,168,185],[385,440,470]],
+ ['FORD','Transit Custom 2.0 EcoBlue 170','DIESEL',1995,2018,2023,[168,203,220],[405,470,500]],
+ ['FORD','Ranger 2.0 EcoBlue 213','DIESEL',1996,2019,2022,[210,240,null],[500,560,null]],
+ ['FORD','Focus 1.0 EcoBoost 125','PETROL',999,2018,2024,[123,148,null],[170,230,null]],
+ ['VOLKSWAGEN','Golf 2.0 TDI 150','DIESEL',1968,2013,2020,[148,187,200],[340,410,440]],
+ ['VOLKSWAGEN','Transporter T6 2.0 TDI 150','DIESEL',1968,2015,2024,[148,182,195],[340,420,440]],
+ ['VOLKSWAGEN','Golf GTI 2.0 TSI 245','PETROL',1984,2017,2020,[242,296,320],[370,450,480]],
+ ['AUDI','A4 2.0 TDI 190','DIESEL',1968,2015,2023,[187,227,240],[400,460,490]],
+ ['BMW','320d 190 (G20)','DIESEL',1995,2019,2024,[187,227,240],[400,470,500]],
+ ['BMW','520d 190 (G30)','DIESEL',1995,2017,2023,[187,227,240],[400,470,500]],
+ ['BMW','X5 30d 265 (G05)','DIESEL',2993,2018,2023,[261,310,330],[620,700,740]],
+ ['BMW','X5 M50d 400 (G05)','DIESEL',2993,2018,2020,[395,436,null],[760,840,null]],
+ ['MERCEDES-BENZ','Sprinter 316 CDI 163','DIESEL',2143,2014,2018,[161,192,null],[360,430,null]],
+ ['TOYOTA','Hilux 2.4 D-4D 150','DIESEL',2393,2016,2024,[148,178,null],[400,460,null]],
+ ['NISSAN','Navara 2.3 dCi 190','DIESEL',2298,2015,2021,[187,222,null],[450,520,null]],
+ ['FIAT','Ducato 2.3 MultiJet 140','DIESEL',2287,2014,2021,[138,172,null],[350,420,null]],
+ ['VAUXHALL','Astra 1.6 CDTi 136','DIESEL',1598,2015,2019,[134,163,null],[320,380,null]],
+ ['LAND ROVER','Discovery Sport 2.0 TD4 180','DIESEL',1999,2015,2019,[178,212,null],[430,500,null]],
+ ['KIA','Sportage 1.6 CRDi 136','DIESEL',1598,2018,2021,[134,163,null],[320,390,null]]
+].map(([make,model,fuel,cc,from,to,bhp,nm],i)=>({id:'s'+i,make,model,fuel,cc,from,to,bhp,nm}));
+const DEMO_REGS={'WR19MAP':{make:'FORD',fuelType:'DIESEL',engineCapacity:1995,yearOfManufacture:2019,colour:'BLUE'},
+ 'BM20XFV':{make:'BMW',fuelType:'DIESEL',engineCapacity:2993,yearOfManufacture:2019,colour:'BLACK'},
+ 'VW17TDI':{make:'VOLKSWAGEN',fuelType:'DIESEL',engineCapacity:1968,yearOfManufacture:2017,colour:'GREY'},
+ 'TY18HLX':{make:'TOYOTA',fuelType:'DIESEL',engineCapacity:2393,yearOfManufacture:2018,colour:'WHITE'}};
+const cleanReg=r=>String(r||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+const prettyReg=r=>{const c=cleanReg(r);return /^[A-Z]{2}[0-9]{2}[A-Z]{3}$/.test(c)?c.slice(0,4)+' '+c.slice(4):c};
+const title=s=>String(s).toLowerCase().replace(/\b[a-z]/g,c=>c.toUpperCase()).replace('Bmw','BMW');
+let CHK={dvla:null,list:[],engine:null,stage:1};
+
+async function lookupReg(reg){
+  if(CONFIG.api){const r=await fetch(CONFIG.api+'/reg',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({reg})});
+    if(r.status===404)throw new Error('notfound');if(!r.ok)throw new Error('down');return r.json();}
+  await new Promise(r=>setTimeout(r,450));
+  if(DEMO_REGS[reg])return DEMO_REGS[reg];
+  const keys=Object.keys(DEMO_REGS);return DEMO_REGS[keys[Math.abs(hashStr(reg))%keys.length]];
+}
+async function findEngines(d){
+  if(CONFIG.api){const q=new URLSearchParams({make:d.make,fuel:d.fuelType||'',cc:d.engineCapacity||'',year:d.yearOfManufacture||''});const r=await fetch(CONFIG.api+'/engines?'+q);if(!r.ok)throw new Error('down');return r.json();}
+  const y=+d.yearOfManufacture||0,cc=+d.engineCapacity||0;
+  return SAMPLE_ENGINES.filter(e=>e.make===d.make&&(!d.fuelType||e.fuel===d.fuelType)&&(!cc||Math.abs(e.cc-cc)<=40)&&(!y||(y>=e.from-1&&y<=e.to+1)));
+}
+function checkerHTML(){
+  return `<div class="chk" id="chk">
+    ${CONFIG.api?'':`<div class="chk-test">Test mode: sample vehicles and figures. Try <button type="button" data-demo="WR19MAP">WR19 MAP</button> <button type="button" data-demo="BM20XFV">BM20 XFV</button> <button type="button" data-demo="VW17TDI">VW17 TDI</button></div>`}
+    <form class="plate-row" id="chkForm" autocomplete="off">
+      <label class="plate" for="chkReg"><span class="plate-band">UK</span><input id="chkReg" maxlength="9" placeholder="ENTER REG" aria-label="Vehicle registration" spellcheck="false" autocapitalize="characters"></label>
+      <button class="btn" type="submit" id="chkGo">Check my vehicle ${ICON.arrow}</button>
+    </form>
+    <div id="chkOut" aria-live="polite"></div>
+    <button type="button" class="chk-manual" id="chkManual">Don't know your reg? Choose your vehicle instead</button>
+  </div>`;
+}
+function chkMsg(t,warn){$('#chkOut').innerHTML=`<p class="chk-msg${warn?' warn':''}">${t}</p>`}
+function showEngines(d,list){
+  CHK.dvla=d;CHK.list=list;
+  const head=d?`<div class="chk-found"><span class="dot"></span><div><b>${title(d.make)}</b> · ${title(d.fuelType||'')} · ${d.engineCapacity?(+d.engineCapacity).toLocaleString('en-GB')+'cc':''} · ${d.yearOfManufacture||''}${d.colour?' · '+title(d.colour):''}</div></div>`:'';
+  if(!list.length){$('#chkOut').innerHTML=head+`<p class="chk-msg">We couldn't match the exact engine automatically. <button type="button" class="linkish" id="chkPick">Choose it from the list</button>, or <a href="#contact">send us your reg</a> and we'll check it for you.</p>`;fixLinks();$('#chkPick').onclick=manual;return}
+  if(list.length===1){CHK.engine=list[0];return showResult()}
+  $('#chkOut').innerHTML=head+`<p class="chk-q">Which engine is it?</p><div class="eng-list">${list.map((e,i)=>`<button type="button" class="eng" data-i="${i}"><b>${esc(e.model)}</b><span>${e.bhp[0]} bhp · ${e.from}–${e.to}</span></button>`).join('')}</div>`;
+  $$('.eng').forEach(b=>b.onclick=()=>{CHK.engine=CHK.list[+b.dataset.i];showResult()});
+}
+function showResult(){
+  const e=CHK.engine,has2=e.bhp[2]!=null;if(!has2)CHK.stage=1;const s=CHK.stage;
+  const row=(label,unit,a,b)=>{const max=Math.max(b,a)*1.08;return `<div class="bar-row"><div class="bar-top"><span>${label}<br><small>${a} → ${b} ${unit}</small></span><b>+${b-a} ${unit}</b></div><div class="bar"><i class="after" style="width:${b/max*100}%"></i><i class="before" style="width:${a/max*100}%"></i></div></div>`};
+  const veh=`${title(e.make)} ${e.model}`;
+  $('#chkOut').innerHTML=`<div class="chk-res">
+    <div class="chk-res-top"><div><span class="kicker">Your vehicle</span><h3>${esc(veh)}</h3></div>
+      ${has2?`<div class="pills" role="group" aria-label="Stage"><button type="button" data-s="1" class="${s===1?'on':''}">Stage 1</button><button type="button" data-s="2" class="${s===2?'on':''}">Stage 2</button></div>`:'<span class="fact-dark">Stage 1</span>'}</div>
+    <div class="bars">${row('Power','bhp',e.bhp[0],e.bhp[s])}${row('Torque','Nm',e.nm[0],e.nm[s])}</div>
+    <div class="bar-key"><span>Standard</span><span class="a">After remap</span></div>
+    <div class="chk-buy"><div><small>Stage ${s} remap</small><b>From £199</b></div><a class="btn" href="#contact" data-book="1">Book this remap ${ICON.arrow}</a></div>
+    <button type="button" class="chk-manual" id="chkAgain">Not your vehicle? Start again</button>
+    ${s===2?'<p class="small-note">Stage 2 needs supporting upgrades such as an intercooler or exhaust. We check your hardware first.</p>':''}
+    ${CONFIG.api?'':'<p class="small-note">Sample figures for testing. Your real figures appear once the vehicle database is connected.</p>'}
+  </div>`;
+  $$('.chk-res .pills button').forEach(b=>b.onclick=()=>{CHK.stage=+b.dataset.s;showResult()});
+  $('[data-book]').onclick=()=>{PENDING.reg=$('#chkReg').value?prettyReg($('#chkReg').value):'';PENDING.veh=veh;PENDING.svc=s===2?'Stage 2 & Custom Tuning':'Stage 1 Remap'};
+  $('#chkAgain').onclick=()=>{$('#chkOut').innerHTML='';$('#chkReg').value='';$('#chkReg').focus()};
+  fixLinks();
+  const bk=$('[data-book]');if(STATIC){const q=new URLSearchParams();if($('#chkReg').value)q.set('reg',prettyReg($('#chkReg').value));q.set('veh',veh);q.set('svc',s===2?'Stage 2 & Custom Tuning':'Stage 1 Remap');bk.setAttribute('href',ROOT+'contact/?'+q)}
+}
+function manual(){
+  const makes=[...new Set(SAMPLE_ENGINES.map(e=>e.make))].sort();
+  $('#chkOut').innerHTML=`<div class="chk-manual-box"><label class="f" for="mMake">Make<select id="mMake"><option value="">Choose make</option>${makes.map(m=>`<option>${m}</option>`).join('')}</select></label></div><div id="mList"></div>`;
+  $('#mMake').onchange=e=>{const list=SAMPLE_ENGINES.filter(x=>x.make===e.target.value);CHK.list=list;$('#mList').innerHTML=list.length?`<p class="chk-q">Which engine is it?</p><div class="eng-list">${list.map((x,i)=>`<button type="button" class="eng" data-i="${i}"><b>${esc(x.model)}</b><span>${x.bhp[0]} bhp · ${x.from}–${x.to}</span></button>`).join('')}</div>`:'';$$('#mList .eng').forEach(b=>b.onclick=()=>{CHK.engine=CHK.list[+b.dataset.i];showResult()})};
+}
+function mountChecker(){
+  const f=$('#chkForm');if(!f)return;
+  const go=async()=>{const reg=cleanReg($('#chkReg').value);
+    if(reg.length<2||reg.length>8){chkMsg('Please enter a valid UK registration, for example AB12 CDE.',1);return}
+    $('#chkReg').value=prettyReg(reg);chkMsg('Looking up your vehicle…');
+    try{const d=await lookupReg(reg);showEngines(d,await findEngines(d))}
+    catch(err){chkMsg(err.message==='notfound'?'We couldn\'t find that registration. Check it and try again, or choose your vehicle instead.':'The lookup isn\'t working right now. Please choose your vehicle instead, or call us.',1)}};
+  f.onsubmit=e=>{e.preventDefault();go()};
+  $$('[data-demo]').forEach(b=>b.onclick=()=>{$('#chkReg').value=prettyReg(b.dataset.demo);go()});
+  $('#chkManual').onclick=manual;
+}
+const PENDING={};
+
+/* ---------- shared blocks ---------- */
+const card=s=>`<a class="card" href="#service-${s.id}">${pic(SVC_PIC[s.id]||'obd-in-car')}<div class="card-body"><span class="tag">${s.tag}</span><h3>${s.name}</h3><p>${s.short}</p><span class="more">Find out more →</span></div></a>`;
+const STEPS=[
+ ['Send your reg','Text, call or fill in the form. We tell you what your vehicle can gain and give you a fixed price.'],
+ ['We come to you','We arrive at your home or work with everything we need. A health check comes first, then your original settings are saved.'],
+ ['Drive away','The remap takes one to two hours. We test drive it with you, and you can go back to standard any time.']
+];
+const stepsHTML=()=>`<ol class="steps">${STEPS.map(([h,p])=>`<li><h3>${h}</h3><p>${p}</p></li>`).join('')}</ol>`;
+const FAQ=[
+ ['Is remapping safe for my engine?','Yes, when it\'s done properly. We stay within the safe limits of your standard turbo, injectors and clutch, and we check the vehicle is healthy before we start.'],
+ ['Do I need to tell my insurer?','Yes. A remap is a modification, so let your insurer know. Many cover it for little or no extra cost.'],
+ ['Can it be put back to standard?','Yes. We keep a copy of your original settings, and putting them back is free if you sell the vehicle.'],
+ ['Do I need to bring it to a garage?','No. We\'re fully mobile. All we need is a safe place to park, like your drive or the car park at work.'],
+ ['Is DPF removal legal?','Not on a road vehicle. We diagnose and fix DPF, EGR and AdBlue problems. Removal software is only for off-road, motorsport and export vehicles.'],
+ ['Will it still pass the MOT?','Yes. A proper remap keeps smoke levels in check, and we don\'t touch emissions equipment on road vehicles.']
+];
+const faqHTML=(n=FAQ.length)=>`<div class="faq">${FAQ.slice(0,n).map(([q,a],i)=>`<details${i===0?' open':''}><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>`;
+const ctaHTML=(t='Ready for more power?',town='')=>`<section class="sec tight"><div class="wrap"><div class="cta"><div><h2>${t}</h2><p>Send your reg${town?` and postcode in ${town}`:''} and we'll come back with a fixed price.</p></div><div class="cta-row"><a class="btn dark" href="#contact"${town?` data-town="${esc(town)}"`:''}>Get a price ${ICON.arrow}</a><span class="btn ghost" data-c="phone"></span></div></div></div></section>`;
+const crumbs=c=>`<div class="crumbs">${c}</div>`;
+
+/* ---------- pages ---------- */
+function home(){
+  const majors=TOWNS.filter(t=>t.major);
+  return `
+  <section class="hero"><div class="wrap">
+    <div class="hero-copy">
+      <span class="kicker">Mobile remapping · North West</span>
+      <h1>More power. Better MPG. <span>Done on your drive.</span></h1>
+      <p class="lead">We remap cars, vans, pickups and tractors at your home or work, anywhere within 20 miles of Blackburn.</p>
+      <div class="cta-row"><a class="btn" href="#contact">Get a price ${ICON.arrow}</a><a class="btn ghost" href="#insight">How it works</a></div>
+      <div class="ticks-row"><span>${ICON.check}Remaps from £199</span><span>${ICON.check}We come to you</span><span>${ICON.check}Back to standard any time</span></div>
+    </div>
+    <div class="hero-pic">${pic('obd-in-car','',false)}
+      <div class="float f2"><b>1–2 hrs</b><span>for most remaps</span></div>
+      <div class="float f1"><b>+30%</b><span>typical diesel power gain</span></div>
+    </div>
+  </div></section>
+
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="sec-head"><span class="kicker">Remapping in plain English</span><h2>What actually is a remap?</h2></div>
+    <div class="explain">
+      <div class="ex"><span class="n">1</span><h3>Your engine has a computer</h3><p>It's called the ECU. It decides how much fuel and boost the engine gets. Factories set it cautiously so one engine suits every country.</p></div>
+      <div class="ex"><span class="n">2</span><h3>We fine-tune its settings</h3><p>We plug into the diagnostic port under your dashboard, save your original settings, then adjust them for your vehicle and UK fuel.</p></div>
+      <div class="ex"><span class="n">3</span><h3>You feel the difference</h3><p>Stronger pull, easier overtaking and towing, and often better fuel economy. Nothing is bolted on, and nothing looks different.</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec dark"><div class="wrap calc">
+    <div class="stack"><span class="kicker">Check your vehicle</span><h2>What could your vehicle gain?</h2><p class="lead">Enter your registration to see your standard power and torque, and what you'd get after a remap.</p></div>
+    ${checkerHTML()}
+  </div></section>
+
+  <section class="sec"><div class="wrap">
+    <div class="sec-head"><span class="kicker">Services</span><h2>What we do</h2></div>
+    <div class="cards">${SERVICES.filter(s=>['stage-1-remap','economy-remap','speed-limiters','dpf-egr-adblue','commercial-and-agricultural','ecu-repair-cloning'].includes(s.id)).map(card).join('')}</div>
+    <div style="margin-top:24px"><a class="btn ghost" href="#services">All services ${ICON.arrow}</a></div>
+  </div></section>
+
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="sec-head"><span class="kicker">How it works</span><h2>Three simple steps</h2></div>
+    ${stepsHTML()}
+  </div></section>
+
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="sec-head"><span class="kicker">Behind the scenes</span><h2>Proper kit, proper work</h2><p class="lead">From a quick plug-in remap to board-level repairs under the microscope.</p></div>
+    <div class="gallery">
+      <figure>${pic('board-soldering')}<figcaption>Repairing an ECU board</figcaption></figure>
+      <figure>${pic('obd-tablet')}<figcaption>Reading through the OBD port</figcaption></figure>
+      <figure>${pic('dpf-close')}<figcaption>DPF diagnosis</figcaption></figure>
+      <figure>${pic('dash-cluster')}<figcaption>Dash and cluster work</figcaption></figure>
+      <figure>${pic('soldering-close')}<figcaption>Microscope soldering</figcaption></figure>
+    </div>
+  </div></section>
+
+  <section class="sec" style="padding-top:0"><div class="wrap split">
+    <div class="stack"><span class="kicker">Where we work</span><h2>We come to you</h2><p class="lead">Based in Blackburn, covering ${TOWNS.length} towns within 20 miles, from Preston and Chorley to Burnley, Bolton and Bury.</p>
+      <div class="chips">${majors.map(t=>`<a class="chip" href="#area-${t.slug}">${t.name}</a>`).join('')}</div>
+      <a class="btn ghost" href="#areas" style="justify-self:start">Find your town ${ICON.arrow}</a></div>
+    <div class="stack"><span class="kicker">Questions</span>${faqHTML(4)}</div>
+  </div></section>
+  ${ctaHTML()}`;
+}
+
+function services(){
+  return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / Services`)}
+    <div class="sec-head" style="margin-bottom:0"><span class="kicker">Services</span><h1>Everything remapping, all mobile</h1><p class="lead">Every job starts with a health check, and we keep a copy of your original settings for good.</p></div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="cards">${SERVICES.map(card).join('')}<a class="card plain" href="#contact"><div class="card-body"><span class="tag" style="color:var(--lime)">Not listed?</span><h3>Just ask</h3><p>If it has an engine computer, we can probably help. Send your reg and tell us what you're after.</p><span class="more" style="color:var(--lime)">Get in touch →</span></div></a></div></div></section>
+  <section class="sec dark"><div class="wrap calc"><div class="stack"><span class="kicker">Check your vehicle</span><h2>What could your vehicle gain?</h2><p class="lead">Enter your reg for your power and torque, before and after.</p></div>${checkerHTML()}</div></section>${ctaHTML()}`;
+}
+
+function service(id){
+  const s=SERVICES.find(x=>x.id===id);if(!s)return notFound();
+  const rel=SERVICES.filter(x=>x!==s&&(x.tag!==s.tag)).slice(hashStr(id)&3).slice(0,3);
+  return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / <a href="#services">Services</a> / ${s.name}`)}
+    <div class="page-hero"><div class="stack"><span class="kicker">${s.tag}</span><h1>${s.name}</h1><p class="lead">${s.short}</p>
+      <div class="facts"><span class="fact">⏱ ${s.time}</span><span class="fact">📍 We come to you</span><span class="fact">From £199</span></div>
+      <div class="cta-row"><a class="btn" href="#contact">Get a price ${ICON.arrow}</a></div></div>
+    ${pic(SVC_PIC[s.id]||'obd-in-car','',false)}</div></div></section>
+  <section class="sec" style="padding-top:clamp(20px,3vw,40px)"><div class="wrap article">
+    <div class="prose">
+      ${s.body.map(p=>`<p>${p}</p>`).join('')}
+      ${s.law?`<div class="law"><b>The law</b><p>${s.law}</p></div>`:''}
+      <h2>What's included</h2>
+      <ul class="list">${s.inc.map(i=>`<li>${i}</li>`).join('')}</ul>
+      ${['stage-1-remap','economy-remap','commercial-and-agricultural','stage-2-tuning'].includes(id)?`<h2>Check your vehicle</h2><div class="dark" style="border-radius:28px;padding:clamp(18px,3vw,28px)">${checkerHTML()}</div>`:''}
+      <h2>How it works</h2>${stepsHTML()}
+      <h2>Questions</h2>${faqHTML(4)}
+    </div>
+    <aside class="aside">
+      <div class="box lime"><div class="price"><small>Starting from</small><b>£199</b></div><p style="font-size:15px">Fixed price from your reg, before we set off. No call-out charge in our area.</p><a class="btn dark" href="#contact">Get a price</a></div>
+      <div class="box"><h3>Related</h3>${rel.map(r=>`<a href="#service-${r.id}" style="text-decoration:none;font-weight:600">${r.name} →</a>`).join('')}</div>
+    </aside>
+  </div></section>${ctaHTML()}`;
+}
+
+function areas(){
+  return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / Areas`)}
+    <div class="page-hero"><div class="stack"><span class="kicker">Areas we cover</span><h1>We come to you</h1><p class="lead">Based in Blackburn and covering ${TOWNS.length} towns and villages within 20 miles. Find yours below.</p>
+      <label class="f find" for="townFind">Search your town<input id="townFind" type="search" placeholder="e.g. Clitheroe" autocomplete="off"></label><p class="mute" id="findMsg" style="font-size:15px">Just outside the area? Ask anyway.</p></div>
+    ${pic('obd-tablet','',false)}</div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="area-groups" id="groups">${DISTRICTS.map(d=>{const ts=TOWNS.filter(t=>t.district===d).sort((a,b)=>a.mi-b.mi);return ts.length?`<div class="group"><h3>${d}</h3><ul>${ts.map(t=>`<li data-n="${esc(t.name.toLowerCase())}"><a href="#area-${t.slug}">${t.name}<span>${t.mi===0?'base':t.mi+' miles'}</span></a></li>`).join('')}</ul></div>`:''}).join('')}</div></div></section>${ctaHTML('Not sure if we cover you?')}`;
+}
+
+function town(sl){
+  const t=TOWNS.find(x=>x.slug===sl);if(!t)return notFound();
+  const rural=['Ribble Valley','Fylde & Wyre','West Lancashire'].includes(t.district)||/farm|tractor|pickup/i.test(t.note);
+  const fleet=/van|fleet|truck|distribution|industrial|business|trade/i.test(t.note);
+  const pick=rural?['commercial-and-agricultural','stage-1-remap','dpf-egr-adblue']:fleet?['economy-remap','speed-limiters','dpf-egr-adblue']:['stage-1-remap','dpf-egr-adblue','gearbox-tuning'];
+  const near=nearby(t,6),img=PICS[Math.abs(hashStr(t.slug))%PICS.length];
+  return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / <a href="#areas">Areas</a> / ${t.name}`)}
+    <div class="page-hero"><div class="stack"><span class="kicker">${t.district}</span><h1>Remapping in ${t.name}</h1><p class="lead">Mobile remapping, speed limiters and DPF fault-finding at your home or work in ${t.name}.</p>
+      <div class="facts"><span class="fact">${t.mi===0?'Our home base':`${t.mi} miles from Blackburn`}</span><span class="fact">No call-out charge</span><span class="fact">From £199</span></div>
+      <div class="cta-row"><a class="btn" href="#contact" data-town="${esc(t.name)}">Get a price in ${esc(t.name)} ${ICON.arrow}</a></div></div>
+    ${pic(img,'',false)}</div></div></section>
+  <section class="sec" style="padding-top:clamp(20px,3vw,40px)"><div class="wrap article">
+    <div class="prose">
+      <h2 style="margin-top:0">About ${t.name}</h2>
+      <p>${t.note}</p>
+      <p>${t.name} is ${t.mi===0?'where we are based':`about ${t.mi} miles from our Blackburn base`}, and we usually get there via the ${t.roads}. We do everything at the roadside, on your drive or in the car park at work, so you don't need to take time off or find a garage.</p>
+      <h2>Popular in ${t.name}</h2>
+      <div class="cards" style="grid-template-columns:1fr">${pick.map(id=>card(SERVICES.find(s=>s.id===id))).join('')}</div>
+      <h2>How it works</h2>${stepsHTML()}
+      <h2>Questions</h2>${faqHTML(4)}
+    </div>
+    <aside class="aside">
+      <div class="box"><h3>Nearby towns we cover</h3><div class="chips">${near.map(n=>`<a class="chip" href="#area-${n.slug}">${n.name}</a>`).join('')}</div></div>
+      <div class="box lime"><h3>Book in ${t.name}</h3><p style="font-size:15px">Send your reg and postcode. We'll confirm a price and a day.</p><a class="btn dark" href="#contact" data-town="${esc(t.name)}">Get a price</a></div>
+    </aside>
+  </div></section>${ctaHTML('Book a remap in '+t.name,t.name)}`;
+}
+
+function insight(){
+  return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / How it works`)}
+    <div class="page-hero"><div class="stack"><span class="kicker">How it works</span><h1>Remapping, explained simply</h1><p class="lead">What a remap changes, what happens on the day, and the kit we bring. No jargon.</p></div>${pic('obd-tablet','',false)}</div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="explain">
+      <div class="ex"><span class="n">1</span><h3>Your engine has a computer</h3><p>The ECU controls fuel, boost and timing. Factories set it cautiously so the same engine works in every country, on every fuel.</p></div>
+      <div class="ex"><span class="n">2</span><h3>We adjust its settings</h3><p>We save your original settings first, then tune them for your vehicle, UK fuel and the way you drive or tow.</p></div>
+      <div class="ex"><span class="n">3</span><h3>You get the benefit</h3><p>More pulling power, smoother overtaking and often better mpg. Nothing is bolted on, and nothing looks different.</p></div>
+    </div>
+  </div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap split">
+    ${pic('obd-in-car','pic')}
+    <div class="stack"><span class="kicker">Most vehicles</span><h2>Through the diagnostic port</h2><p class="lead">A lead goes into the socket under your dashboard. Nothing comes apart, and most remaps are done in one to two hours.</p></div>
+  </div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap split">
+    <div class="stack"><span class="kicker">Locked or damaged ECUs</span><h2>On the bench</h2><p class="lead">Some engine computers are locked or damaged. We take them out, open them up and connect directly to the chip. We can also repair faults on the board itself under a microscope.</p>
+      <ul class="list"><li>Full backup of the original data</li><li>Soldering repairs to cracked joints and failed parts</li><li>Cloning to a replacement unit</li></ul></div>
+    ${pic('board-soldering','pic')}
+  </div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap split">
+    ${pic('dpf-bench','pic')}
+    <div class="stack"><span class="kicker">In the van</span><h2>The kit we bring</h2>
+      <ul class="list"><li>Professional tuning tools for every type of read</li><li>Battery support to keep the voltage steady</li><li>Diagnostic tablet for all major makes</li><li>Smoke machine for finding boost leaks</li><li>Soldering station and microscope</li></ul></div>
+  </div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="sec-head"><span class="kicker">On the day</span><h2>Three simple steps</h2></div>${stepsHTML()}</div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="sec-head"><span class="kicker">Questions</span><h2>Frequently asked</h2></div>${faqHTML()}</div></section>${ctaHTML()}`;
+}
+
+function contact(){
+  const sorted=[...TOWNS].sort((a,b)=>a.name.localeCompare(b.name));
+  return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / Contact`)}
+    <div class="sec-head" style="margin-bottom:0"><span class="kicker">Get a price</span><h1>Book a remap</h1><p class="lead">Send your reg and where you are. We'll tell you what's possible and give you a fixed price before we travel.</p></div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap quote">
+    <div class="stack" style="gap:24px">
+      <div class="box contact-card"><span class="k">Call or WhatsApp</span><span class="v" id="phoneTxt" data-c="phone"></span><button class="copy" data-copy="phoneTxt">Copy number</button></div>
+      <div class="box contact-card"><span class="k">Email</span><span class="v" style="font-size:22px" id="mailTxt" data-c="email"></span><button class="copy" data-copy="mailTxt">Copy email</button></div>
+      <div class="box contact-card"><span class="k">Hours</span><span>Monday to Saturday, 8am to 7pm. Evenings by arrangement.</span></div>
+    </div>
+    <form class="form" id="quoteForm" novalidate>
+      <label class="f" for="qName">Your name<input id="qName" required autocomplete="name"></label>
+      <label class="f" for="qPhone">Phone<input id="qPhone" type="tel" required autocomplete="tel"></label>
+      <label class="f" for="qReg">Registration<input id="qReg" required placeholder="e.g. PN19 ABC" style="text-transform:uppercase"></label>
+      <label class="f" for="qVeh">Make and model<input id="qVeh" placeholder="e.g. Ford Transit Custom"></label>
+      <label class="f" for="qTown">Town<select id="qTown"><option value="">Choose your town</option>${sorted.map(t=>`<option>${esc(t.name)}</option>`).join('')}<option>Somewhere else</option></select></label>
+      <label class="f" for="qSvc">What do you need?<select id="qSvc">${SERVICES.map(s=>`<option>${s.name}</option>`).join('')}<option>Not sure</option></select></label>
+      <label class="f full" for="qMsg">Anything else?<textarea id="qMsg" rows="4" placeholder="Warning lights, modifications, towing, what you use it for"></textarea></label>
+      <div class="full"><button class="btn" type="submit">Send enquiry ${ICON.arrow}</button></div>
+      <div id="formMsg" hidden></div>
+    </form>
+  </div></section>`;
+}
+function checkPage(){
+  return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / Check my vehicle`)}
+    <div class="sec-head" style="margin-bottom:0"><span class="kicker">Check my vehicle</span><h1>What will a remap give you?</h1><p class="lead">Enter your reg. We'll find your vehicle, ask which engine it has if needed, and show your power and torque before and after.</p></div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="dark" style="border-radius:32px;padding:clamp(20px,4vw,44px)">${checkerHTML()}</div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="sec-head"><span class="kicker">What happens next</span><h2>Three simple steps</h2></div>${stepsHTML()}</div></section>${ctaHTML()}`;
+}
+function notFound(){return `<section class="sec"><div class="wrap"><h1>Page not found</h1><p class="lead" style="margin-top:16px">Try our <a href="#services">services</a> or <a href="#areas">areas</a>.</p></div></section>`;}
+
+/* ---------- router ---------- */
+let pendingTown='';
+function route(){
+  const h=STATIC||(location.hash||'#home').slice(1);let html,key=h;
+  if(h.startsWith('service-')){html=service(h.slice(8));key='service'}
+  else if(h.startsWith('area-')){html=town(h.slice(5));key='area'}
+  else if(h==='services'){html=services();key='service'}
+  else if(h==='areas'){html=areas();key='area'}
+  else if(h==='insight')html=insight();
+  else if(h==='check')html=checkPage();
+  else if(h==='contact')html=contact();
+  else {html=home();key='home'}
+  $('#app').innerHTML=html;
+  $$('.nav a').forEach(a=>a.classList.toggle('on',a.dataset.nav===key));
+  $('#nav').classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');
+  if(!STATIC)window.scrollTo(0,0);
+  mount();fillContact();fixLinks();
+}
+function routePath(h){if(h==='home')return '';if(h==='services')return 'services/';if(h.startsWith('service-'))return 'services/'+h.slice(8)+'/';if(h==='areas')return 'areas/';if(h.startsWith('area-'))return 'areas/'+h.slice(5)+'/';if(h==='insight')return 'how-remapping-works/';if(h==='check')return 'check-your-vehicle/';if(h==='contact')return 'contact/';return '';}
+function fixLinks(){if(!STATIC)return;$$('a[href^="#"]').forEach(a=>{const h=a.getAttribute('href').slice(1);if(!h)return;let u=ROOT+routePath(h);if(a.dataset.town)u+='?town='+encodeURIComponent(a.dataset.town);a.setAttribute('href',u||'./')})}
+function fillContact(){const ph=CONFIG.phone,em=CONFIG.email;
+  $$('[data-c="phone"]').forEach(el=>{if(ph){el.innerHTML=(el.classList.contains('btn')?ICON.phone:'')+esc(ph)}else el.hidden=true});
+  $$('[data-c="email"]').forEach(el=>{el.textContent=em||'Coming soon'});
+  $$('[data-c="footcontact"]').forEach(el=>{el.innerHTML=[ph&&'Call '+esc(ph),em&&esc(em)].filter(Boolean).join('<br>')});}
+function mount(){
+  mountChecker();
+  if($('#vehSel')){
+    $$('#vehSel').forEach(s=>s.onchange=updCalc);
+    $$('#modeSeg button').forEach(b=>b.onclick=()=>{calcMode=b.dataset.m;$$('#modeSeg button').forEach(x=>x.classList.toggle('on',x===b));updCalc()});
+    calcMode='t';updCalc();
+  }
+  const f=$('#townFind');
+  if(f)f.oninput=()=>{const q=f.value.trim().toLowerCase();let n=0;$$('#groups li').forEach(li=>{const ok=!q||li.dataset.n.includes(q);li.hidden=!ok;if(ok)n++});$$('#groups .group').forEach(g=>g.hidden=!$$('li',g).some(li=>!li.hidden));$('#findMsg').textContent=q?(n?`${n} match${n>1?'es':''}`:`We couldn't find "${f.value}". If it's within about 20 miles of Blackburn, get in touch anyway.`):'Just outside the area? Ask anyway.'};
+  const form=$('#quoteForm');
+  if(form){
+    const sp=new URLSearchParams(location.search);const qt=sp.get('town')||pendingTown;if(qt){$('#qTown').value=qt;pendingTown=''}
+    const pr=sp.get('reg')||PENDING.reg,pv=sp.get('veh')||PENDING.veh,ps=sp.get('svc')||PENDING.svc;if(pr)$('#qReg').value=pr;if(pv)$('#qVeh').value=pv;if(ps)$('#qSvc').value=ps;delete PENDING.reg;delete PENDING.veh;delete PENDING.svc;
+    form.onsubmit=e=>{e.preventDefault();const m=$('#formMsg'),v=id=>$('#'+id).value.trim();m.hidden=false;
+      const miss=['qName','qPhone','qReg'].filter(id=>!v(id));
+      if(miss.length){m.className='form-msg warn';m.textContent='Please add your name, phone number and registration so we can price the job.';$('#'+miss[0]).focus();return}
+      m.className='form-msg';
+      const body=`Name: ${v('qName')}\nPhone: ${v('qPhone')}\nReg: ${v('qReg').toUpperCase()}\nVehicle: ${v('qVeh')}\nTown: ${v('qTown')}\nService: ${v('qSvc')}\n\n${v('qMsg')}`;
+      location.href=`mailto:${CONFIG.email}?subject=${encodeURIComponent('Quote request: '+v('qReg').toUpperCase())}&body=${encodeURIComponent(body)}`;
+      m.textContent=`Thanks ${v('qName').split(' ')[0]}. Your email app should open with the enquiry filled in, ready to send. If it doesn't, email ${CONFIG.email} or call ${CONFIG.phone}.`};
+    $$('.copy').forEach(b=>b.onclick=()=>{const t=$('#'+b.dataset.copy).textContent;const sel=()=>{const r=document.createRange();r.selectNodeContents($('#'+b.dataset.copy));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'};try{navigator.clipboard.writeText(t).then(()=>{b.textContent='Copied'},sel)}catch(e){sel()}});
+  }
+}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-town]');if(a)pendingTown=a.dataset.town});
+$('#menuBtn').onclick=()=>{const o=$('#nav').classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',o)};
+$('#footSvc').innerHTML=SERVICES.map(s=>`<li><a href="#service-${s.id}">${s.name}</a></li>`).join('');
+$('#footTowns').innerHTML=[...TOWNS].sort((a,b)=>a.name.localeCompare(b.name)).map(t=>`<li><a href="#area-${t.slug}">${t.name}</a></li>`).join('');
+$('#yr').textContent=new Date().getFullYear();
+if(!STATIC)addEventListener('hashchange',route);
+route();
+</script>
+
+</body>
+</html>

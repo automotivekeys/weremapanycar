@@ -122,6 +122,39 @@ select:focus,input:focus,textarea:focus{border-color:var(--lime-ink);outline:non
 .bar-key span.a::before{background:var(--lime)}
 .small-note{font:400 13px/1.5 var(--f-body);color:#A8B5AC}
 
+/* reg checker */
+.chk{display:grid;gap:18px;min-width:0}
+.chk-test{font:500 14px/1.6 var(--f-body);color:#A8B5AC}
+.chk-test button{background:#1E2B24;border:0;color:#EEF3EC;font:700 13px var(--f-body);border-radius:999px;padding:5px 10px;margin:2px 2px;cursor:pointer}
+.plate-row{display:flex;gap:12px;flex-wrap:wrap}
+.plate{flex:1 1 280px;display:flex;align-items:stretch;background:#F7C600;border-radius:12px;overflow:hidden;box-shadow:inset 0 0 0 3px #0E1511;min-width:0}
+.plate-band{background:#0E4B9C;color:#fff;font:800 14px/1 var(--f-head);display:grid;place-items:end center;padding:8px 10px 10px;width:34px;flex:none}
+.plate input{flex:1;min-width:0;background:transparent;border:0;box-shadow:none;color:#0E1511;font:900 clamp(28px,4vw,40px)/1 var(--f-head);letter-spacing:.06em;text-transform:uppercase;padding:12px 14px;text-align:center;border-radius:0}
+.plate input::placeholder{color:rgba(14,21,17,.38)}
+.plate input:focus{box-shadow:none}
+.plate:focus-within{box-shadow:inset 0 0 0 3px #0E1511,0 0 0 4px rgba(168,224,58,.6)}
+.chk-msg{font:500 15px/1.5 var(--f-body);color:#C9D3CC}
+.chk-msg.warn{color:#FFD36B}
+.chk-found{display:flex;gap:12px;align-items:center;background:#18231D;border-radius:14px;padding:14px 16px;font:500 15px/1.4 var(--f-body);color:#DDE6DF}
+.chk-found b{color:#fff}
+.chk-found .dot{width:10px;height:10px;border-radius:50%;background:var(--lime);flex:none;box-shadow:0 0 0 4px rgba(168,224,58,.2)}
+.chk-q{font:700 17px var(--f-head);color:#fff;margin-top:16px}
+.eng-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:10px}
+.eng{background:#18231D;border:1px solid #2C3A31;color:#EEF3EC;text-align:left;border-radius:14px;padding:14px 16px;display:grid;gap:4px;cursor:pointer;font:inherit}
+.eng b{font:700 16px/1.3 var(--f-body)}
+.eng span{font:500 13px var(--f-body);color:#A8B5AC}
+.eng:hover,.eng:focus-visible{border-color:var(--lime)}
+.chk-res{display:grid;gap:18px;background:#18231D;border-radius:20px;padding:clamp(18px,3vw,26px)}
+.chk-res-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.chk-res h3{color:#fff;font-size:24px;margin-top:6px}
+.fact-dark{font:700 13px var(--f-body);background:#0B110E;color:var(--lime);border-radius:999px;padding:9px 14px}
+.chk-buy{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;border-top:1px solid #2C3A31;padding-top:16px}
+.chk-buy small{display:block;font:600 12px var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:#A8B5AC}
+.chk-buy b{font:900 32px/1 var(--f-head);color:#fff}
+.chk-manual,.linkish{background:none;border:0;color:var(--lime);font:600 15px var(--f-body);cursor:pointer;padding:0;justify-self:start;text-decoration:underline;text-underline-offset:3px}
+.chk-manual-box select{max-width:360px}
+.dark .chk-manual-box label{color:#EEF3EC}
+
 /* service cards */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .card{background:var(--card);border-radius:var(--r);overflow:hidden;text-decoration:none;color:var(--ink);display:grid;grid-template-rows:auto 1fr;transition:transform .2s, box-shadow .2s}
@@ -276,6 +309,7 @@ ul.foot-towns{columns:3;column-gap:18px}
     </a>
     <nav class="nav" id="nav" aria-label="Main">
       <a href="#services" data-nav="service">Services</a>
+      <a href="#check" data-nav="check">Check my vehicle</a>
       <a href="#insight" data-nav="insight">How it works</a>
       <a href="#areas" data-nav="area">Areas</a>
       <a href="#contact" data-nav="contact">Contact</a>
@@ -297,13 +331,14 @@ ul.foot-towns{columns:3;column-gap:18px}
       
       <h2>What's included</h2>
       <ul class="list"><li>Hardware check before tuning</li><li>Logged runs before and after</li><li>Revisions included for 30 days</li><li>Gearbox torque limits matched</li></ul>
-      <h2>Typical gains</h2><div class="dark" style="border-radius:28px"><div class="calc-box">
-    <label class="f" for="vehSel">Choose a vehicle
-      <select id="vehSel"><optgroup label="Vans &amp; pickups"><option value="0">Ford Transit 2.0 EcoBlue 130</option><option value="1">Ford Transit Custom 2.0 EcoBlue 170</option><option value="2">VW Transporter T6.1 2.0 TDI 150</option><option value="3">Mercedes Sprinter 316 CDI 163</option><option value="4">Fiat Ducato 2.3 MultiJet 140</option><option value="5">Ford Ranger 2.0 EcoBlue 213</option><option value="6">Toyota Hilux 2.4 D-4D 150</option><option value="7">Nissan Navara 2.3 dCi 190</option></optgroup><optgroup label="Cars &amp; 4x4s"><option value="8">VW Golf 2.0 TDI 150</option><option value="9">VW Golf GTI 2.0 TSI 245</option><option value="10">BMW 320d 190</option><option value="11">Audi A4 2.0 TDI 190</option><option value="12">Land Rover Discovery Sport 2.0 TD4 180</option><option value="13">Vauxhall Astra 1.6 CDTi 136</option><option value="14">Kia Sportage 1.6 CRDi 136</option><option value="15">Ford Focus 1.0 EcoBoost 125</option></optgroup></select></label>
-    <div class="pills" id="modeSeg" role="group" aria-label="Type of remap"><button data-m="t" class="on">More power</button><button data-m="e">Better MPG</button></div>
-    <div class="bars" id="bars"><div class="bar-row"><div class="bar-top"><span>Power<br><small>130 → 170 bhp</small></span><b>+31%</b></div><div class="bar"><i class="after" style="width:92.59259259259258%"></i><i class="before" style="width:70.80610021786492%"></i></div></div><div class="bar-row"><div class="bar-top"><span>Torque (pulling power)<br><small>385 → 440 Nm</small></span><b>+14%</b></div><div class="bar"><i class="after" style="width:92.59259259259258%"></i><i class="before" style="width:81.0185185185185%"></i></div></div></div>
-    <div class="bar-key"><span>Standard</span><span class="a">After remap</span></div>
-    <p class="small-note">Typical figures for a healthy, standard vehicle. We confirm yours on the day. Not listed? We remap almost anything with an engine computer.</p>
+      <h2>Check your vehicle</h2><div class="dark" style="border-radius:28px;padding:clamp(18px,3vw,28px)"><div class="chk" id="chk">
+    <div class="chk-test">Test mode: sample vehicles and figures. Try <button type="button" data-demo="WR19MAP">WR19 MAP</button> <button type="button" data-demo="BM20XFV">BM20 XFV</button> <button type="button" data-demo="VW17TDI">VW17 TDI</button></div>
+    <form class="plate-row" id="chkForm" autocomplete="off">
+      <label class="plate" for="chkReg"><span class="plate-band">UK</span><input id="chkReg" maxlength="9" placeholder="ENTER REG" aria-label="Vehicle registration" spellcheck="false" autocapitalize="characters"></label>
+      <button class="btn" type="submit" id="chkGo">Check my vehicle <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+    </form>
+    <div id="chkOut" aria-live="polite"></div>
+    <button type="button" class="chk-manual" id="chkManual">Don't know your reg? Choose your vehicle instead</button>
   </div></div>
       <h2>How it works</h2><ol class="steps"><li><h3>Send your reg</h3><p>Text, call or fill in the form. We tell you what your vehicle can gain and give you a fixed price.</p></li><li><h3>We come to you</h3><p>We arrive at your home or work with everything we need. A health check comes first, then your original settings are saved.</p></li><li><h3>Drive away</h3><p>The remap takes one to two hours. We test drive it with you, and you can go back to standard any time.</p></li></ol>
       <h2>Questions</h2><div class="faq"><details open=""><summary>Is remapping safe for my engine?</summary><p>Yes, when it's done properly. We stay within the safe limits of your standard turbo, injectors and clutch, and we check the vehicle is healthy before we start.</p></details><details><summary>Do I need to tell my insurer?</summary><p>Yes. A remap is a modification, so let your insurer know. Many cover it for little or no extra cost.</p></details><details><summary>Can it be put back to standard?</summary><p>Yes. We keep a copy of your original settings, and putting them back is free if you sell the vehicle.</p></details><details><summary>Do I need to bring it to a garage?</summary><p>No. We're fully mobile. All we need is a safe place to park, like your drive or the car park at work.</p></details></div>
@@ -331,7 +366,8 @@ ul.foot-towns{columns:3;column-gap:18px}
 
 <script>
 /* ---------- site settings ---------- */
-const CONFIG={phone:'07540 173263',email:'sales@weremapanycar.com'};
+const CONFIG={phone:'07540 173263',email:'sales@weremapanycar.com',
+  api:'' /* leave empty for test mode; set to the Cloudflare Worker address, e.g. 'https://api.weremapanycar.com/api', to go live */};
 const STATIC=document.getElementById('app').dataset.route||'';
 const ROOT=document.getElementById('app').dataset.root||'';
 const IMG=n=>ROOT+'img/'+n+'.webp';
@@ -527,6 +563,112 @@ function updCalc(){
   $('#bars').innerHTML=row('Power','bhp',v.ps[0],t.ps)+row('Torque (pulling power)','Nm',v.nm[0],t.nm)+(calcMode==='e'?`<div class="bar-row"><div class="bar-top"><span>Fuel economy<br><small>typical saving, depends on your driving</small></span><b>5–12%</b></div></div>`:'');
 }
 
+/* ---------- reg checker ----------
+   TEST MODE while CONFIG.api is empty: sample engines and a pretend DVLA lookup.
+   LIVE MODE when CONFIG.api is set to the Cloudflare Worker address:
+     POST {api}/reg {reg}  -> DVLA details {make,fuelType,engineCapacity,yearOfManufacture,colour}
+     GET  {api}/engines?make&fuel&cc&year -> [{id,model,engine,fuel,cc,from,to,bhp:[stock,s1,s2],nm:[stock,s1,s2]}]
+*/
+const SAMPLE_ENGINES=[
+ ['FORD','Transit 2.0 EcoBlue 130','DIESEL',1995,2016,2024,[128,168,185],[385,440,470]],
+ ['FORD','Transit Custom 2.0 EcoBlue 170','DIESEL',1995,2018,2023,[168,203,220],[405,470,500]],
+ ['FORD','Ranger 2.0 EcoBlue 213','DIESEL',1996,2019,2022,[210,240,null],[500,560,null]],
+ ['FORD','Focus 1.0 EcoBoost 125','PETROL',999,2018,2024,[123,148,null],[170,230,null]],
+ ['VOLKSWAGEN','Golf 2.0 TDI 150','DIESEL',1968,2013,2020,[148,187,200],[340,410,440]],
+ ['VOLKSWAGEN','Transporter T6 2.0 TDI 150','DIESEL',1968,2015,2024,[148,182,195],[340,420,440]],
+ ['VOLKSWAGEN','Golf GTI 2.0 TSI 245','PETROL',1984,2017,2020,[242,296,320],[370,450,480]],
+ ['AUDI','A4 2.0 TDI 190','DIESEL',1968,2015,2023,[187,227,240],[400,460,490]],
+ ['BMW','320d 190 (G20)','DIESEL',1995,2019,2024,[187,227,240],[400,470,500]],
+ ['BMW','520d 190 (G30)','DIESEL',1995,2017,2023,[187,227,240],[400,470,500]],
+ ['BMW','X5 30d 265 (G05)','DIESEL',2993,2018,2023,[261,310,330],[620,700,740]],
+ ['BMW','X5 M50d 400 (G05)','DIESEL',2993,2018,2020,[395,436,null],[760,840,null]],
+ ['MERCEDES-BENZ','Sprinter 316 CDI 163','DIESEL',2143,2014,2018,[161,192,null],[360,430,null]],
+ ['TOYOTA','Hilux 2.4 D-4D 150','DIESEL',2393,2016,2024,[148,178,null],[400,460,null]],
+ ['NISSAN','Navara 2.3 dCi 190','DIESEL',2298,2015,2021,[187,222,null],[450,520,null]],
+ ['FIAT','Ducato 2.3 MultiJet 140','DIESEL',2287,2014,2021,[138,172,null],[350,420,null]],
+ ['VAUXHALL','Astra 1.6 CDTi 136','DIESEL',1598,2015,2019,[134,163,null],[320,380,null]],
+ ['LAND ROVER','Discovery Sport 2.0 TD4 180','DIESEL',1999,2015,2019,[178,212,null],[430,500,null]],
+ ['KIA','Sportage 1.6 CRDi 136','DIESEL',1598,2018,2021,[134,163,null],[320,390,null]]
+].map(([make,model,fuel,cc,from,to,bhp,nm],i)=>({id:'s'+i,make,model,fuel,cc,from,to,bhp,nm}));
+const DEMO_REGS={'WR19MAP':{make:'FORD',fuelType:'DIESEL',engineCapacity:1995,yearOfManufacture:2019,colour:'BLUE'},
+ 'BM20XFV':{make:'BMW',fuelType:'DIESEL',engineCapacity:2993,yearOfManufacture:2019,colour:'BLACK'},
+ 'VW17TDI':{make:'VOLKSWAGEN',fuelType:'DIESEL',engineCapacity:1968,yearOfManufacture:2017,colour:'GREY'},
+ 'TY18HLX':{make:'TOYOTA',fuelType:'DIESEL',engineCapacity:2393,yearOfManufacture:2018,colour:'WHITE'}};
+const cleanReg=r=>String(r||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+const prettyReg=r=>{const c=cleanReg(r);return /^[A-Z]{2}[0-9]{2}[A-Z]{3}$/.test(c)?c.slice(0,4)+' '+c.slice(4):c};
+const title=s=>String(s).toLowerCase().replace(/\b[a-z]/g,c=>c.toUpperCase()).replace('Bmw','BMW');
+let CHK={dvla:null,list:[],engine:null,stage:1};
+
+async function lookupReg(reg){
+  if(CONFIG.api){const r=await fetch(CONFIG.api+'/reg',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({reg})});
+    if(r.status===404)throw new Error('notfound');if(!r.ok)throw new Error('down');return r.json();}
+  await new Promise(r=>setTimeout(r,450));
+  if(DEMO_REGS[reg])return DEMO_REGS[reg];
+  const keys=Object.keys(DEMO_REGS);return DEMO_REGS[keys[Math.abs(hashStr(reg))%keys.length]];
+}
+async function findEngines(d){
+  if(CONFIG.api){const q=new URLSearchParams({make:d.make,fuel:d.fuelType||'',cc:d.engineCapacity||'',year:d.yearOfManufacture||''});const r=await fetch(CONFIG.api+'/engines?'+q);if(!r.ok)throw new Error('down');return r.json();}
+  const y=+d.yearOfManufacture||0,cc=+d.engineCapacity||0;
+  return SAMPLE_ENGINES.filter(e=>e.make===d.make&&(!d.fuelType||e.fuel===d.fuelType)&&(!cc||Math.abs(e.cc-cc)<=40)&&(!y||(y>=e.from-1&&y<=e.to+1)));
+}
+function checkerHTML(){
+  return `<div class="chk" id="chk">
+    ${CONFIG.api?'':`<div class="chk-test">Test mode: sample vehicles and figures. Try <button type="button" data-demo="WR19MAP">WR19 MAP</button> <button type="button" data-demo="BM20XFV">BM20 XFV</button> <button type="button" data-demo="VW17TDI">VW17 TDI</button></div>`}
+    <form class="plate-row" id="chkForm" autocomplete="off">
+      <label class="plate" for="chkReg"><span class="plate-band">UK</span><input id="chkReg" maxlength="9" placeholder="ENTER REG" aria-label="Vehicle registration" spellcheck="false" autocapitalize="characters"></label>
+      <button class="btn" type="submit" id="chkGo">Check my vehicle ${ICON.arrow}</button>
+    </form>
+    <div id="chkOut" aria-live="polite"></div>
+    <button type="button" class="chk-manual" id="chkManual">Don't know your reg? Choose your vehicle instead</button>
+  </div>`;
+}
+function chkMsg(t,warn){$('#chkOut').innerHTML=`<p class="chk-msg${warn?' warn':''}">${t}</p>`}
+function showEngines(d,list){
+  CHK.dvla=d;CHK.list=list;
+  const head=d?`<div class="chk-found"><span class="dot"></span><div><b>${title(d.make)}</b> · ${title(d.fuelType||'')} · ${d.engineCapacity?(+d.engineCapacity).toLocaleString('en-GB')+'cc':''} · ${d.yearOfManufacture||''}${d.colour?' · '+title(d.colour):''}</div></div>`:'';
+  if(!list.length){$('#chkOut').innerHTML=head+`<p class="chk-msg">We couldn't match the exact engine automatically. <button type="button" class="linkish" id="chkPick">Choose it from the list</button>, or <a href="#contact">send us your reg</a> and we'll check it for you.</p>`;fixLinks();$('#chkPick').onclick=manual;return}
+  if(list.length===1){CHK.engine=list[0];return showResult()}
+  $('#chkOut').innerHTML=head+`<p class="chk-q">Which engine is it?</p><div class="eng-list">${list.map((e,i)=>`<button type="button" class="eng" data-i="${i}"><b>${esc(e.model)}</b><span>${e.bhp[0]} bhp · ${e.from}–${e.to}</span></button>`).join('')}</div>`;
+  $$('.eng').forEach(b=>b.onclick=()=>{CHK.engine=CHK.list[+b.dataset.i];showResult()});
+}
+function showResult(){
+  const e=CHK.engine,has2=e.bhp[2]!=null;if(!has2)CHK.stage=1;const s=CHK.stage;
+  const row=(label,unit,a,b)=>{const max=Math.max(b,a)*1.08;return `<div class="bar-row"><div class="bar-top"><span>${label}<br><small>${a} → ${b} ${unit}</small></span><b>+${b-a} ${unit}</b></div><div class="bar"><i class="after" style="width:${b/max*100}%"></i><i class="before" style="width:${a/max*100}%"></i></div></div>`};
+  const veh=`${title(e.make)} ${e.model}`;
+  $('#chkOut').innerHTML=`<div class="chk-res">
+    <div class="chk-res-top"><div><span class="kicker">Your vehicle</span><h3>${esc(veh)}</h3></div>
+      ${has2?`<div class="pills" role="group" aria-label="Stage"><button type="button" data-s="1" class="${s===1?'on':''}">Stage 1</button><button type="button" data-s="2" class="${s===2?'on':''}">Stage 2</button></div>`:'<span class="fact-dark">Stage 1</span>'}</div>
+    <div class="bars">${row('Power','bhp',e.bhp[0],e.bhp[s])}${row('Torque','Nm',e.nm[0],e.nm[s])}</div>
+    <div class="bar-key"><span>Standard</span><span class="a">After remap</span></div>
+    <div class="chk-buy"><div><small>Stage ${s} remap</small><b>From £199</b></div><a class="btn" href="#contact" data-book="1">Book this remap ${ICON.arrow}</a></div>
+    <button type="button" class="chk-manual" id="chkAgain">Not your vehicle? Start again</button>
+    ${s===2?'<p class="small-note">Stage 2 needs supporting upgrades such as an intercooler or exhaust. We check your hardware first.</p>':''}
+    ${CONFIG.api?'':'<p class="small-note">Sample figures for testing. Your real figures appear once the vehicle database is connected.</p>'}
+  </div>`;
+  $$('.chk-res .pills button').forEach(b=>b.onclick=()=>{CHK.stage=+b.dataset.s;showResult()});
+  $('[data-book]').onclick=()=>{PENDING.reg=$('#chkReg').value?prettyReg($('#chkReg').value):'';PENDING.veh=veh;PENDING.svc=s===2?'Stage 2 & Custom Tuning':'Stage 1 Remap'};
+  $('#chkAgain').onclick=()=>{$('#chkOut').innerHTML='';$('#chkReg').value='';$('#chkReg').focus()};
+  fixLinks();
+  const bk=$('[data-book]');if(STATIC){const q=new URLSearchParams();if($('#chkReg').value)q.set('reg',prettyReg($('#chkReg').value));q.set('veh',veh);q.set('svc',s===2?'Stage 2 & Custom Tuning':'Stage 1 Remap');bk.setAttribute('href',ROOT+'contact/?'+q)}
+}
+function manual(){
+  const makes=[...new Set(SAMPLE_ENGINES.map(e=>e.make))].sort();
+  $('#chkOut').innerHTML=`<div class="chk-manual-box"><label class="f" for="mMake">Make<select id="mMake"><option value="">Choose make</option>${makes.map(m=>`<option>${m}</option>`).join('')}</select></label></div><div id="mList"></div>`;
+  $('#mMake').onchange=e=>{const list=SAMPLE_ENGINES.filter(x=>x.make===e.target.value);CHK.list=list;$('#mList').innerHTML=list.length?`<p class="chk-q">Which engine is it?</p><div class="eng-list">${list.map((x,i)=>`<button type="button" class="eng" data-i="${i}"><b>${esc(x.model)}</b><span>${x.bhp[0]} bhp · ${x.from}–${x.to}</span></button>`).join('')}</div>`:'';$$('#mList .eng').forEach(b=>b.onclick=()=>{CHK.engine=CHK.list[+b.dataset.i];showResult()})};
+}
+function mountChecker(){
+  const f=$('#chkForm');if(!f)return;
+  const go=async()=>{const reg=cleanReg($('#chkReg').value);
+    if(reg.length<2||reg.length>8){chkMsg('Please enter a valid UK registration, for example AB12 CDE.',1);return}
+    $('#chkReg').value=prettyReg(reg);chkMsg('Looking up your vehicle…');
+    try{const d=await lookupReg(reg);showEngines(d,await findEngines(d))}
+    catch(err){chkMsg(err.message==='notfound'?'We couldn\'t find that registration. Check it and try again, or choose your vehicle instead.':'The lookup isn\'t working right now. Please choose your vehicle instead, or call us.',1)}};
+  f.onsubmit=e=>{e.preventDefault();go()};
+  $$('[data-demo]').forEach(b=>b.onclick=()=>{$('#chkReg').value=prettyReg(b.dataset.demo);go()});
+  $('#chkManual').onclick=manual;
+}
+const PENDING={};
+
 /* ---------- shared blocks ---------- */
 const card=s=>`<a class="card" href="#service-${s.id}">${pic(SVC_PIC[s.id]||'obd-in-car')}<div class="card-body"><span class="tag">${s.tag}</span><h3>${s.name}</h3><p>${s.short}</p><span class="more">Find out more →</span></div></a>`;
 const STEPS=[
@@ -575,8 +717,8 @@ function home(){
   </div></section>
 
   <section class="sec dark"><div class="wrap calc">
-    <div class="stack"><span class="kicker">Try it</span><h2>See what your vehicle could gain</h2><p class="lead">Pick your vehicle to see typical power and torque before and after. Switch to Better MPG for a fuel-saving remap.</p></div>
-    ${calcHTML()}
+    <div class="stack"><span class="kicker">Check your vehicle</span><h2>What could your vehicle gain?</h2><p class="lead">Enter your registration to see your standard power and torque, and what you'd get after a remap.</p></div>
+    ${checkerHTML()}
   </div></section>
 
   <section class="sec"><div class="wrap">
@@ -614,7 +756,7 @@ function services(){
   return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / Services`)}
     <div class="sec-head" style="margin-bottom:0"><span class="kicker">Services</span><h1>Everything remapping, all mobile</h1><p class="lead">Every job starts with a health check, and we keep a copy of your original settings for good.</p></div></div></section>
   <section class="sec" style="padding-top:0"><div class="wrap"><div class="cards">${SERVICES.map(card).join('')}<a class="card plain" href="#contact"><div class="card-body"><span class="tag" style="color:var(--lime)">Not listed?</span><h3>Just ask</h3><p>If it has an engine computer, we can probably help. Send your reg and tell us what you're after.</p><span class="more" style="color:var(--lime)">Get in touch →</span></div></a></div></div></section>
-  <section class="sec dark"><div class="wrap calc"><div class="stack"><span class="kicker">Try it</span><h2>What could your vehicle gain?</h2></div>${calcHTML()}</div></section>${ctaHTML()}`;
+  <section class="sec dark"><div class="wrap calc"><div class="stack"><span class="kicker">Check your vehicle</span><h2>What could your vehicle gain?</h2><p class="lead">Enter your reg for your power and torque, before and after.</p></div>${checkerHTML()}</div></section>${ctaHTML()}`;
 }
 
 function service(id){
@@ -631,7 +773,7 @@ function service(id){
       ${s.law?`<div class="law"><b>The law</b><p>${s.law}</p></div>`:''}
       <h2>What's included</h2>
       <ul class="list">${s.inc.map(i=>`<li>${i}</li>`).join('')}</ul>
-      ${['stage-1-remap','economy-remap','commercial-and-agricultural','stage-2-tuning'].includes(id)?`<h2>Typical gains</h2><div class="dark" style="border-radius:28px">${calcHTML()}</div>`:''}
+      ${['stage-1-remap','economy-remap','commercial-and-agricultural','stage-2-tuning'].includes(id)?`<h2>Check your vehicle</h2><div class="dark" style="border-radius:28px;padding:clamp(18px,3vw,28px)">${checkerHTML()}</div>`:''}
       <h2>How it works</h2>${stepsHTML()}
       <h2>Questions</h2>${faqHTML(4)}
     </div>
@@ -729,6 +871,12 @@ function contact(){
     </form>
   </div></section>`;
 }
+function checkPage(){
+  return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / Check my vehicle`)}
+    <div class="sec-head" style="margin-bottom:0"><span class="kicker">Check my vehicle</span><h1>What will a remap give you?</h1><p class="lead">Enter your reg. We'll find your vehicle, ask which engine it has if needed, and show your power and torque before and after.</p></div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="dark" style="border-radius:32px;padding:clamp(20px,4vw,44px)">${checkerHTML()}</div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="sec-head"><span class="kicker">What happens next</span><h2>Three simple steps</h2></div>${stepsHTML()}</div></section>${ctaHTML()}`;
+}
 function notFound(){return `<section class="sec"><div class="wrap"><h1>Page not found</h1><p class="lead" style="margin-top:16px">Try our <a href="#services">services</a> or <a href="#areas">areas</a>.</p></div></section>`;}
 
 /* ---------- router ---------- */
@@ -740,6 +888,7 @@ function route(){
   else if(h==='services'){html=services();key='service'}
   else if(h==='areas'){html=areas();key='area'}
   else if(h==='insight')html=insight();
+  else if(h==='check')html=checkPage();
   else if(h==='contact')html=contact();
   else {html=home();key='home'}
   $('#app').innerHTML=html;
@@ -748,13 +897,14 @@ function route(){
   if(!STATIC)window.scrollTo(0,0);
   mount();fillContact();fixLinks();
 }
-function routePath(h){if(h==='home')return '';if(h==='services')return 'services/';if(h.startsWith('service-'))return 'services/'+h.slice(8)+'/';if(h==='areas')return 'areas/';if(h.startsWith('area-'))return 'areas/'+h.slice(5)+'/';if(h==='insight')return 'how-remapping-works/';if(h==='contact')return 'contact/';return '';}
+function routePath(h){if(h==='home')return '';if(h==='services')return 'services/';if(h.startsWith('service-'))return 'services/'+h.slice(8)+'/';if(h==='areas')return 'areas/';if(h.startsWith('area-'))return 'areas/'+h.slice(5)+'/';if(h==='insight')return 'how-remapping-works/';if(h==='check')return 'check-your-vehicle/';if(h==='contact')return 'contact/';return '';}
 function fixLinks(){if(!STATIC)return;$$('a[href^="#"]').forEach(a=>{const h=a.getAttribute('href').slice(1);if(!h)return;let u=ROOT+routePath(h);if(a.dataset.town)u+='?town='+encodeURIComponent(a.dataset.town);a.setAttribute('href',u||'./')})}
 function fillContact(){const ph=CONFIG.phone,em=CONFIG.email;
   $$('[data-c="phone"]').forEach(el=>{if(ph){el.innerHTML=(el.classList.contains('btn')?ICON.phone:'')+esc(ph)}else el.hidden=true});
   $$('[data-c="email"]').forEach(el=>{el.textContent=em||'Coming soon'});
   $$('[data-c="footcontact"]').forEach(el=>{el.innerHTML=[ph&&'Call '+esc(ph),em&&esc(em)].filter(Boolean).join('<br>')});}
 function mount(){
+  mountChecker();
   if($('#vehSel')){
     $$('#vehSel').forEach(s=>s.onchange=updCalc);
     $$('#modeSeg button').forEach(b=>b.onclick=()=>{calcMode=b.dataset.m;$$('#modeSeg button').forEach(x=>x.classList.toggle('on',x===b));updCalc()});
@@ -764,7 +914,8 @@ function mount(){
   if(f)f.oninput=()=>{const q=f.value.trim().toLowerCase();let n=0;$$('#groups li').forEach(li=>{const ok=!q||li.dataset.n.includes(q);li.hidden=!ok;if(ok)n++});$$('#groups .group').forEach(g=>g.hidden=!$$('li',g).some(li=>!li.hidden));$('#findMsg').textContent=q?(n?`${n} match${n>1?'es':''}`:`We couldn't find "${f.value}". If it's within about 20 miles of Blackburn, get in touch anyway.`):'Just outside the area? Ask anyway.'};
   const form=$('#quoteForm');
   if(form){
-    const qt=new URLSearchParams(location.search).get('town')||pendingTown;if(qt){$('#qTown').value=qt;pendingTown=''}
+    const sp=new URLSearchParams(location.search);const qt=sp.get('town')||pendingTown;if(qt){$('#qTown').value=qt;pendingTown=''}
+    const pr=sp.get('reg')||PENDING.reg,pv=sp.get('veh')||PENDING.veh,ps=sp.get('svc')||PENDING.svc;if(pr)$('#qReg').value=pr;if(pv)$('#qVeh').value=pv;if(ps)$('#qSvc').value=ps;delete PENDING.reg;delete PENDING.veh;delete PENDING.svc;
     form.onsubmit=e=>{e.preventDefault();const m=$('#formMsg'),v=id=>$('#'+id).value.trim();m.hidden=false;
       const miss=['qName','qPhone','qReg'].filter(id=>!v(id));
       if(miss.length){m.className='form-msg warn';m.textContent='Please add your name, phone number and registration so we can price the job.';$('#'+miss[0]).focus();return}

@@ -1,0 +1,8 @@
+{
+  // Deploy with: npx wrangler deploy   (from this worker folder)
+  // Then add the secrets:  npx wrangler secret put DVLA_KEY   and   npx wrangler secret put MYCHIP_TOKEN
+  "name": "weremapanycar-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-01",
+  "vars": { "ALLOWED_ORIGINS": "https://weremapanycar.com,https://www.weremapanycar.com,https://automotivekeys.github.io" }
+}
