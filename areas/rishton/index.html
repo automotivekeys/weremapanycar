@@ -11,287 +11,256 @@
 <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: dark solder-mask workshop. Copper is the one accent, like the traces on an ECU board. Bands run full width; content sits in a 1200px wrap. */
+/* Layout: light and airy, big rounded photo panels, one dark band for contrast. Lime matches the workshop photos. */
 :root{
-  --bg:#0B161B;          /* solder mask, deep */
-  --panel:#10212A;
-  --panel-2:#15303A;
-  --line:#22414C;
-  --text:#E3ECEE;
-  --mute:#92AAB1;
-  --copper:#E38A4A;      /* the accent */
-  --copper-hi:#F6B983;
-  --copper-dim:#7A4A2A;
-  --mask:#17544C;        /* PCB green, used only in illustrations */
-  --good:#7FD3A4;
-  --warn:#F2C55C;
-  --f-display:'Big Shoulders Display', Impact, 'Arial Narrow', sans-serif;
-  --f-body:'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --f-mono:'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
-  color-scheme:dark;
+  --bg:#F3F5F1;        /* page, faint green-grey */
+  --card:#FFFFFF;
+  --ink:#0E1511;
+  --mute:#5A665F;
+  --line:#DCE2DA;
+  --lime:#A8E03A;      /* accent fill */
+  --lime-ink:#3D6B00;  /* accent as text on light */
+  --night:#0F1713;     /* dark band */
+  --night-2:#18231D;
+  --f-head:'Archivo', 'Arial Narrow', Arial, sans-serif;
+  --f-body:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --r:20px;
+  color-scheme:light;
 }
 html{background:var(--bg)}
-body{background:var(--bg);color:var(--text);font:16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;margin:0}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
-a{color:var(--copper-hi)}
-:focus-visible{outline:2px solid var(--copper-hi);outline-offset:3px;border-radius:2px}
-.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3,h4{font-family:var(--f-display);text-transform:uppercase;letter-spacing:.01em;margin:0;text-wrap:balance;line-height:.95}
-h1{font-size:clamp(46px,7.4vw,96px);font-weight:900}
-h2{font-size:clamp(34px,4.6vw,58px);font-weight:800}
-h3{font-size:24px;font-weight:700;line-height:1.05}
+img{max-width:100%;display:block;height:auto}
+a{color:var(--lime-ink)}
+:focus-visible{outline:3px solid var(--lime);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-head);margin:0;text-wrap:balance;letter-spacing:-.02em}
+h1{font-size:clamp(42px,6.4vw,80px);font-weight:900;line-height:.98}
+h2{font-size:clamp(32px,4.2vw,52px);font-weight:800;line-height:1.02}
+h3{font-size:21px;font-weight:700;line-height:1.2;letter-spacing:-.01em}
 p{margin:0}
-.lead{font-size:clamp(17px,1.6vw,19px);color:var(--mute);max-width:60ch}
-.eyebrow{font:500 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--copper)}
-.mono{font-family:var(--f-mono)}
+.lead{font-size:clamp(18px,1.7vw,21px);color:var(--mute);max-width:56ch}
+.kicker{display:inline-flex;align-items:center;gap:8px;font:600 13px/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--lime-ink)}
+.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lime)}
 .mute{color:var(--mute)}
-.ph{border-bottom:1px dashed var(--warn);color:var(--warn)}
-
-/* test banner */
-.testbar{background:#2A2312;color:var(--warn);font:500 12px/1.4 var(--f-mono);text-align:center}
-.testbar .wrap{padding-block:7px}
 
 /* header */
-.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-.site-head .wrap{display:flex;align-items:center;gap:20px;padding-block:12px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);margin-right:auto}
-.brand svg{width:40px;height:40px;flex:none}
-.brand b{font:900 22px/0.9 var(--f-display);text-transform:uppercase;letter-spacing:.02em;display:block}
-.brand small{font:500 10px/1 var(--f-mono);letter-spacing:.16em;color:var(--mute);text-transform:uppercase}
-.nav{display:flex;gap:4px;align-items:center}
-.nav a{color:var(--text);text-decoration:none;font:600 14px/1 var(--f-body);padding:10px 12px;border-radius:4px}
-.nav a:hover{background:var(--panel)}
-.nav a.on{color:var(--copper-hi)}
-.phone{font:600 14px/1 var(--f-mono);color:var(--mute);white-space:nowrap}
-.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:4px;padding:8px 10px;font:600 13px var(--f-body);cursor:pointer}
+.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.site-head .wrap{display:flex;align-items:center;gap:18px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-right:auto}
+.brand-mark{width:38px;height:38px;border-radius:11px;background:var(--ink);display:grid;place-items:center;flex:none}
+.brand b{font:800 19px/1 var(--f-head);letter-spacing:-.02em}
+.nav{display:flex;gap:2px;align-items:center}
+.nav a{color:var(--ink);text-decoration:none;font:600 15px/1 var(--f-body);padding:11px 14px;border-radius:999px}
+.nav a:hover{background:var(--card)}
+.nav a.on{background:var(--card);box-shadow:0 0 0 1px var(--line)}
+.head-phone{font:700 15px/1 var(--f-body);color:var(--ink);text-decoration:none;white-space:nowrap}
+.menu-btn{display:none;background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:10px 16px;font:600 14px var(--f-body);cursor:pointer}
 
-.btn{display:inline-flex;align-items:center;gap:8px;background:var(--copper);color:#1A0E06;font:700 15px/1 var(--f-body);padding:14px 20px;border-radius:4px;text-decoration:none;border:0;cursor:pointer;transition:background .15s, transform .15s}
-.btn:hover{background:var(--copper-hi)}
-.btn:active{transform:translateY(1px)}
-.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
-.btn.ghost:hover{border-color:var(--copper);color:var(--copper-hi)}
-.btn.sm{padding:10px 14px;font-size:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--lime);color:var(--ink);font:700 16px/1 var(--f-body);padding:16px 24px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;transition:transform .15s, box-shadow .15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(80,120,0,.6)}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.ghost{background:var(--card);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.btn.sm{padding:11px 18px;font-size:15px}
+.btn svg{width:18px;height:18px}
 
 /* sections */
-.band{padding-block:clamp(56px,8vw,104px)}
-.band.alt{background:var(--panel)}
-.band.tight{padding-block:40px}
-.sec-head{display:grid;gap:14px;margin-bottom:36px;max-width:780px}
+.sec{padding-block:clamp(56px,8vw,110px)}
+.sec.tight{padding-block:clamp(40px,5vw,64px)}
+.sec-head{display:grid;gap:14px;margin-bottom:clamp(28px,4vw,48px);max-width:720px}
+.sec-head.center{margin-inline:auto;text-align:center;justify-items:center}
+.dark{background:var(--night);color:#EEF3EC}
+.dark .lead,.dark .mute{color:#A8B5AC}
+.dark .kicker{color:var(--lime)}
 
 /* hero */
-.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
-.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-block:clamp(40px,6vw,80px)}
-.hero h1 em{font-style:normal;color:var(--copper)}
-.hero-copy{display:grid;gap:22px;min-width:0}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(28px,5vw,64px);align-items:center;padding-block:clamp(24px,4vw,56px) clamp(48px,6vw,88px)}
+.hero-copy{display:grid;gap:24px;min-width:0}
+.hero h1 span{background:linear-gradient(transparent 62%,var(--lime) 62%,var(--lime) 92%,transparent 92%)}
 .cta-row{display:flex;gap:12px;flex-wrap:wrap}
-.proof{display:flex;flex-wrap:wrap;gap:8px 22px;font:500 13px/1.4 var(--f-mono);color:var(--mute)}
-.proof span::before{content:"▸ ";color:var(--copper)}
-.hero-bg{position:absolute;inset:0;opacity:.16;pointer-events:none}
-.hero-bg svg{width:100%;height:100%}
+.ticks-row{display:flex;flex-wrap:wrap;gap:10px 22px;font:600 15px/1.3 var(--f-body)}
+.ticks-row span{display:inline-flex;align-items:center;gap:8px}
+.ticks-row svg{width:20px;height:20px;flex:none}
+.hero-pic{position:relative;min-width:0}
+.hero-pic img{width:100%;aspect-ratio:4/3.4;object-fit:cover;border-radius:28px}
+.float{position:absolute;background:var(--card);border-radius:18px;padding:14px 18px;box-shadow:0 20px 40px -18px rgba(14,21,17,.35);display:grid;gap:2px}
+.float b{font:900 30px/1 var(--f-head);letter-spacing:-.02em}
+.float span{font:500 13px/1.3 var(--f-body);color:var(--mute)}
+.float.f1{left:-18px;bottom:28px}
+.float.f2{right:18px;top:18px;background:var(--lime)}
+.float.f2 span{color:var(--ink)}
 
-/* ECU map panel */
-.mapcard{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px;min-width:0;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
-.mapcard-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
-.mapcard-top .t{font:600 13px/1.3 var(--f-mono);color:var(--text)}
-.mapcard-top .t small{display:block;color:var(--mute);font-weight:400}
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden}
-.seg button{background:none;border:0;color:var(--mute);font:600 12px/1 var(--f-mono);padding:8px 12px;cursor:pointer;letter-spacing:.06em;text-transform:uppercase}
-.seg button.on{background:var(--copper);color:#1A0E06}
-.map-scroll{overflow-x:auto}
-table.ecumap{border-collapse:separate;border-spacing:2px;font:500 11px/1 var(--f-mono);font-variant-numeric:tabular-nums;width:100%;min-width:430px}
-.ecumap th{color:var(--mute);font-weight:500;padding:4px 2px;text-align:center}
-.ecumap td{text-align:center;padding:7px 1px;border-radius:2px;color:#F4F7F7;transition:background .6s ease;position:relative}
-.ecumap td.chg{box-shadow:inset 0 0 0 1px rgba(255,220,180,.35)}
-.map-foot{display:flex;justify-content:space-between;gap:10px;margin-top:10px;font:400 12px/1.4 var(--f-mono);color:var(--mute);flex-wrap:wrap}
-.map-foot b{color:var(--copper-hi);font-weight:600}
-
-/* brands strip */
-.brands{border-bottom:1px solid var(--line);overflow:hidden}
-.brands .wrap{display:flex;gap:10px 28px;flex-wrap:wrap;padding-block:18px;font:600 13px/1 var(--f-mono);color:var(--mute);letter-spacing:.08em;text-transform:uppercase}
+/* explainer */
+.explain{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ex{background:var(--card);border-radius:var(--r);padding:28px;display:grid;gap:12px;align-content:start}
+.ex .n{font:800 15px/1 var(--f-head);width:40px;height:40px;border-radius:12px;background:var(--bg);display:grid;place-items:center}
+.ex p{color:var(--mute);font-size:16px}
 
 /* calculator */
-.calc{display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:start}
-.calc-side{display:grid;gap:18px;min-width:0}
-label.f{display:grid;gap:6px;font:600 13px/1.2 var(--f-body);color:var(--mute)}
-select,input,textarea{background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:4px;padding:12px;font:15px/1.3 var(--f-body);width:100%;box-sizing:border-box}
-select:focus,input:focus,textarea:focus{border-color:var(--copper);outline:none}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat{background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:14px}
-.stat .k{font:500 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
-.stat .v{font:800 40px/1 var(--f-display);margin-top:8px;font-variant-numeric:tabular-nums}
-.stat .v small{font:500 14px var(--f-mono);color:var(--mute)}
-.stat .d{font:600 13px/1 var(--f-mono);color:var(--copper-hi);margin-top:6px}
-.stat .s{font:400 12px/1.3 var(--f-mono);color:var(--mute);margin-top:4px}
-.chart-card{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:16px;min-width:0}
-.legend{display:flex;gap:18px;flex-wrap:wrap;font:500 12px/1 var(--f-mono);color:var(--mute);margin-bottom:8px}
-.legend i{display:inline-block;width:22px;height:0;border-top:2px solid;vertical-align:middle;margin-right:6px}
-.chart-card svg{width:100%;height:auto;display:block}
-.note{font:400 12px/1.5 var(--f-mono);color:var(--mute)}
+.calc{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(24px,4vw,56px);align-items:center}
+.calc-box{background:var(--night-2);border-radius:28px;padding:clamp(22px,3vw,36px);display:grid;gap:22px;min-width:0}
+label.f{display:grid;gap:8px;font:600 14px/1.2 var(--f-body)}
+select,input,textarea{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font:16px/1.3 var(--f-body);width:100%;box-sizing:border-box}
+.dark select{background:#0B110E;color:#EEF3EC;border-color:#2C3A31}
+select:focus,input:focus,textarea:focus{border-color:var(--lime-ink);outline:none;box-shadow:0 0 0 3px rgba(168,224,58,.35)}
+.pills{display:inline-flex;background:#0B110E;border-radius:999px;padding:4px;gap:4px}
+.pills button{background:none;border:0;color:#A8B5AC;font:600 14px/1 var(--f-body);padding:10px 16px;border-radius:999px;cursor:pointer}
+.pills button.on{background:var(--lime);color:var(--ink)}
+.bars{display:grid;gap:18px}
+.bar-row{display:grid;gap:8px}
+.bar-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font:600 15px var(--f-body)}
+.bar-top b{font:900 28px/1 var(--f-head);color:var(--lime)}
+.bar-top small{color:#A8B5AC;font-weight:500}
+.bar{height:14px;border-radius:999px;background:#0B110E;position:relative;overflow:hidden}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;transition:width .7s cubic-bezier(.2,.8,.2,1)}
+.bar i.before{background:#4A5A50}
+.bar i.after{background:var(--lime)}
+.bar-key{display:flex;gap:18px;font:500 13px var(--f-body);color:#A8B5AC}
+.bar-key span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:#4A5A50}
+.bar-key span.a::before{background:var(--lime)}
+.small-note{font:400 13px/1.5 var(--f-body);color:#A8B5AC}
 
-/* services */
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
-.svc{background:var(--bg);padding:26px;display:grid;gap:12px;align-content:start;text-decoration:none;color:var(--text);transition:background .2s}
-.band.alt .svc{background:var(--panel)}
-.svc:hover{background:var(--panel-2)}
-.svc .tag{font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--copper)}
-.svc p{color:var(--mute);font-size:15px}
-.svc .spec{font:500 12px/1.4 var(--f-mono);color:var(--text);border-top:1px solid var(--line);padding-top:12px;margin-top:auto}
-.svc .go{font:600 13px var(--f-body);color:var(--copper-hi)}
+/* service cards */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border-radius:var(--r);overflow:hidden;text-decoration:none;color:var(--ink);display:grid;grid-template-rows:auto 1fr;transition:transform .2s, box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(14,21,17,.45)}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.card-body{padding:22px 24px 24px;display:grid;gap:10px;align-content:start}
+.card-body p{color:var(--mute);font-size:16px}
+.card .tag{font:600 12px/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--lime-ink)}
+.card .more{font:700 15px var(--f-body);margin-top:4px}
+.card.plain{background:var(--ink);color:#fff;align-content:center}
+.card.plain p{color:#A8B5AC}
 
-/* split feature */
-.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{background:var(--card);border-radius:var(--r);padding:28px;display:grid;gap:10px;align-content:start}
+.steps li::before{counter-increment:s;content:counter(s);font:900 44px/1 var(--f-head);color:var(--lime-ink)}
+.steps p{color:var(--mute);font-size:16px}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:240px 240px;gap:14px}
+.gallery figure{margin:0;position:relative;border-radius:var(--r);overflow:hidden;min-height:0}
+.gallery figure:first-child{grid-row:span 2}
+.gallery img{width:100%;height:100%;object-fit:cover}
+.gallery figcaption{position:absolute;left:12px;bottom:12px;background:rgba(15,23,19,.78);color:#fff;font:600 13px/1.3 var(--f-body);padding:8px 12px;border-radius:999px;backdrop-filter:blur(6px)}
+
+/* split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
 .split > *{min-width:0}
-.figure{margin:0;border-radius:6px;overflow:hidden;border:1px solid var(--line);background:var(--panel)}
-.figure svg.art{display:block;width:100%;height:auto;aspect-ratio:3/2}
-.figure figcaption{font:400 12px/1.4 var(--f-mono);color:var(--mute);padding:10px 14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}
-.ticks{list-style:none;padding:0;margin:0;display:grid;gap:10px}
-.ticks li{padding-left:24px;position:relative}
-.ticks li::before{content:"";position:absolute;left:0;top:.62em;width:12px;height:2px;background:var(--copper)}
+.split img.pic{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:28px}
+.list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.list li{display:flex;gap:12px;align-items:flex-start}
+.list li::before{content:"";flex:none;width:22px;height:22px;margin-top:2px;border-radius:50%;background:var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E1511' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E") center/14px no-repeat}
 .stack{display:grid;gap:20px}
 
-/* process */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 32px;counter-reset:s;list-style:none;padding:0;margin:0}
-.steps li{display:grid;gap:8px;border-top:2px solid var(--line);padding-top:16px}
-.steps li::before{counter-increment:s;content:counter(s,decimal-leading-zero);font:600 13px/1 var(--f-mono);color:var(--copper)}
-.steps h3{font-size:22px}
-.steps p{color:var(--mute);font-size:15px}
+/* areas */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:600 15px/1 var(--f-body);color:var(--ink);text-decoration:none;background:var(--card);border-radius:999px;padding:11px 16px;box-shadow:inset 0 0 0 1px var(--line);white-space:nowrap}
+.chip:hover{box-shadow:inset 0 0 0 2px var(--lime-ink)}
+.chip small{color:var(--mute);font-weight:500;margin-left:4px}
+.area-groups{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.group{background:var(--card);border-radius:var(--r);padding:22px 24px}
+.group h3{font-size:18px;margin-bottom:10px}
+.group ul{list-style:none;margin:0;padding:0}
+.group a{display:flex;justify-content:space-between;gap:10px;padding:9px 0;color:var(--ink);text-decoration:none;border-top:1px solid var(--line);font-size:16px}
+.group li:first-child a{border-top:0}
+.group a:hover{color:var(--lime-ink)}
+.group a span{color:var(--mute);font-size:14px;font-variant-numeric:tabular-nums}
+.find{max-width:520px}
 
-/* coverage */
-.cover{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:start}
-.radius{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px}
-.radius svg{width:100%;height:auto;display:block}
-.radius .dot{cursor:pointer}
-.radius .dot circle{transition:r .15s}
-.radius .dot:hover circle,.radius .dot:focus circle{r:7}
-.radius .dot:focus{outline:none}
-.radius-tip{font:500 12px/1.4 var(--f-mono);color:var(--mute);padding:8px 6px 4px;min-height:1.4em}
-.radius-tip b{color:var(--copper-hi)}
-.chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{font:500 13px/1 var(--f-body);color:var(--text);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:var(--bg);white-space:nowrap}
-.chip:hover{border-color:var(--copper);color:var(--copper-hi)}
-.chip small{font-family:var(--f-mono);color:var(--mute);margin-left:4px}
-
-/* areas index */
-.area-tools{display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin-bottom:24px}
-.area-tools label{flex:1 1 260px}
-.groups{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.group h3{font-size:20px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:baseline}
-.group h3 span{font:500 12px var(--f-mono);color:var(--mute);text-transform:none}
-.group ul{list-style:none;margin:0;padding:0;display:grid}
-.group a{display:flex;justify-content:space-between;gap:10px;padding:8px 0;color:var(--text);text-decoration:none;border-bottom:1px dashed var(--line)}
-.group a:hover{color:var(--copper-hi)}
-.group a span{font:500 12px var(--f-mono);color:var(--mute);font-variant-numeric:tabular-nums}
-
-/* page heads */
-.page-head{border-bottom:1px solid var(--line);position:relative;overflow:hidden}
-.page-head .wrap{padding-block:clamp(40px,6vw,72px);display:grid;gap:18px;position:relative}
-.crumbs{font:500 12px/1 var(--f-mono);color:var(--mute);display:flex;gap:8px;flex-wrap:wrap}
+/* page head */
+.page-head .wrap{padding-block:clamp(20px,3vw,40px) clamp(32px,4vw,56px)}
+.page-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,56px);align-items:center}
+.page-hero > *{min-width:0}
+.page-hero img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:28px}
+.crumbs{font:500 14px/1 var(--f-body);color:var(--mute);display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
 .crumbs a{color:var(--mute);text-decoration:none}
-.crumbs a:hover{color:var(--copper-hi)}
-.badges{display:flex;gap:8px;flex-wrap:wrap}
-.badge{font:600 12px/1 var(--f-mono);border:1px solid var(--line);color:var(--text);padding:8px 10px;border-radius:3px;background:var(--panel)}
-.badge b{color:var(--copper-hi);font-weight:600}
+.crumbs a:hover{color:var(--ink)}
+.facts{display:flex;flex-wrap:wrap;gap:8px}
+.fact{background:var(--card);border-radius:999px;padding:9px 14px;font:600 14px/1 var(--f-body);box-shadow:inset 0 0 0 1px var(--line)}
 
-/* article layout */
-.article{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:48px;align-items:start}
-.prose{display:grid;gap:18px;max-width:68ch}
-.prose p{color:#C9D6D9}
-.prose h2{font-size:clamp(30px,3.4vw,40px);margin-top:14px}
-.aside{display:grid;gap:16px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px)}
-.box{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:20px;display:grid;gap:12px}
-.box h3{font-size:20px}
-.law{border-left:3px solid var(--warn);background:#1F1D14;border-radius:0 6px 6px 0;padding:16px 18px;display:grid;gap:6px}
-.law b{font:600 12px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--warn)}
-.law p{color:#DCD5BE;font-size:15px}
-.price{font:800 44px/1 var(--f-display)}
-.price small{font:500 13px var(--f-mono);color:var(--mute);display:block;margin-bottom:6px;letter-spacing:.06em;text-transform:uppercase}
-dl.kv{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;margin:0;font-size:14px}
-dl.kv dt{font:500 12px/1.6 var(--f-mono);color:var(--mute);text-transform:uppercase;letter-spacing:.08em}
-dl.kv dd{margin:0}
-
-/* methods */
-.methods{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.method{display:grid;gap:14px;align-content:start}
-.method .figure svg.art{aspect-ratio:4/3}
-.method p{color:var(--mute);font-size:15px}
-.maps-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
-.maps-list div{background:var(--bg);padding:18px 20px;display:grid;gap:6px}
-.maps-list code{font:600 13px var(--f-mono);color:var(--copper-hi)}
-.maps-list p{color:var(--mute);font-size:15px}
+/* article */
+.article{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:clamp(28px,4vw,56px);align-items:start}
+.prose{display:grid;gap:18px;max-width:66ch}
+.prose h2{font-size:clamp(28px,3vw,36px);margin-top:18px}
+.prose p{color:#2E3832}
+.aside{display:grid;gap:16px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 90px)}
+.box{background:var(--card);border-radius:var(--r);padding:24px;display:grid;gap:12px}
+.box.lime{background:var(--lime)}
+.price small{display:block;font:600 13px/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.price b{font:900 48px/1 var(--f-head);letter-spacing:-.03em}
+.law{background:#FFF7DA;border-radius:16px;padding:18px 20px;display:grid;gap:6px}
+.law b{font:700 14px/1 var(--f-body);color:#7A5A00}
+.law p{color:#4F4415;font-size:16px}
 
 /* faq */
-.faq{display:grid;gap:0;border-top:1px solid var(--line);max-width:860px}
-.faq details{border-bottom:1px solid var(--line)}
-.faq summary{cursor:pointer;list-style:none;padding:18px 36px 18px 0;font:600 17px/1.35 var(--f-body);position:relative}
+.faq{display:grid;gap:10px;max-width:820px}
+.faq details{background:var(--card);border-radius:16px;padding:0 22px}
+.faq summary{cursor:pointer;list-style:none;padding:20px 32px 20px 0;font:600 17px/1.35 var(--f-body);position:relative}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";position:absolute;right:4px;top:14px;font:400 24px var(--f-mono);color:var(--copper)}
-.faq details[open] summary::after{content:"–"}
-.faq details p{color:var(--mute);padding-bottom:18px;max-width:70ch}
+.faq summary::after{content:"";position:absolute;right:0;top:22px;width:22px;height:22px;border-radius:50%;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E1511' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/14px no-repeat;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--mute);padding-bottom:20px;font-size:16px}
 
-/* quote */
-.quote{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
-.form{display:grid;grid-template-columns:1fr 1fr;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:24px}
+/* contact */
+.quote{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,4vw,56px);align-items:start}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:var(--card);border-radius:28px;padding:clamp(20px,3vw,32px)}
 .form .full{grid-column:1/-1}
-.form-ok{grid-column:1/-1;border:1px solid var(--good);color:var(--good);border-radius:4px;padding:12px;font:500 14px/1.5 var(--f-body)}
-.contact-lines{display:grid;gap:14px}
-.contact-lines div{display:grid;gap:4px}
-.contact-lines .k{font:500 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
-.contact-lines .v{font:800 30px/1.05 var(--f-display);user-select:all}
-.copy{background:none;border:1px solid var(--line);color:var(--mute);font:500 12px var(--f-mono);border-radius:3px;padding:4px 8px;cursor:pointer;justify-self:start}
+.form-msg{grid-column:1/-1;border-radius:14px;padding:14px 16px;font:500 15px/1.5 var(--f-body);background:#EEF8DA;color:#2C4A00}
+.form-msg.warn{background:#FFF3D6;color:#6B4D00}
+.contact-card{display:grid;gap:4px}
+.contact-card .k{font:600 13px/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.contact-card .v{font:800 30px/1.1 var(--f-head);letter-spacing:-.02em;word-break:break-word}
+.copy{background:var(--bg);border:0;color:var(--ink);font:600 13px var(--f-body);border-radius:999px;padding:7px 12px;cursor:pointer;justify-self:start;margin-top:6px}
 
 /* cta band */
-.cta-band{background:linear-gradient(100deg,var(--copper-dim),#3A2416 60%,var(--panel));border-block:1px solid var(--line)}
-.cta-band .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-block:36px}
-.cta-band h2{font-size:clamp(30px,4vw,46px)}
+.cta{background:var(--lime);border-radius:32px;padding:clamp(28px,5vw,56px);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.cta h2{font-size:clamp(30px,4vw,48px)}
+.cta p{font-size:18px;margin-top:8px;color:#2C3A12}
 
 /* footer */
-.site-foot{border-top:1px solid var(--line);background:#081014}
-.site-foot .wrap{padding-block:48px 28px;display:grid;gap:36px}
+.site-foot{background:var(--night);color:#C9D3CC;margin-top:clamp(56px,8vw,100px)}
+.site-foot .wrap{padding-block:56px 32px;display:grid;gap:36px}
 .foot-grid{display:grid;grid-template-columns:1.2fr 1fr 2fr;gap:36px}
-.foot-grid h4{font-size:18px;margin-bottom:12px}
-.foot-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.foot-grid a{color:var(--mute);text-decoration:none;font-size:14px}
-.foot-grid a:hover{color:var(--copper-hi)}
-.foot-grid ul.foot-towns{display:block;columns:3;column-gap:20px}
-.foot-towns li{margin-bottom:6px}
-.foot-towns li{break-inside:avoid}
-.small{font:400 12px/1.6 var(--f-mono);color:var(--mute)}
+.foot-grid .stack{align-content:start}
+.foot-grid h4{font:700 16px var(--f-head);color:#fff;margin:0 0 14px}
+.foot-grid ul{list-style:none;margin:0;padding:0}
+.foot-grid li{margin-bottom:7px}
+.foot-grid a{color:#A8B5AC;text-decoration:none;font-size:15px}
+.foot-grid a:hover{color:var(--lime)}
+.foot-grid .brand{color:#fff}
+.foot-grid .brand-mark{background:var(--lime)}
+.foot-grid .brand-mark svg path{stroke:var(--ink)}
+ul.foot-towns{columns:3;column-gap:18px}
+.fine{font:400 13px/1.6 var(--f-body);color:#8C9A90;border-top:1px solid #26332B;padding-top:22px}
 
-/* art bits */
-@keyframes rise{0%{opacity:0;transform:translateY(0)}20%{opacity:.55}100%{opacity:0;transform:translateY(-60px)}}
-.smoke{animation:rise 3.2s ease-out infinite;transform-box:fill-box}
-.smoke.s2{animation-delay:1.1s}.smoke.s3{animation-delay:2.2s}
-@keyframes glow{50%{opacity:.6}}
-.tipglow{animation:glow 1.6s ease-in-out infinite}
-@keyframes blink{50%{opacity:.2}}
-.blink{animation:blink 1.2s steps(1) infinite}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-
-/* responsive */
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media (max-width:980px){
-  .hero .wrap,.split,.cover,.quote,.article,.calc{grid-template-columns:1fr}
-  .svc-grid,.groups,.methods{grid-template-columns:1fr 1fr}
-  .steps{grid-template-columns:1fr 1fr}
+  .hero .wrap,.calc,.split,.page-hero,.quote,.article{grid-template-columns:1fr}
+  .cards,.area-groups{grid-template-columns:1fr 1fr}
+  .aside{position:static}
   .foot-grid{grid-template-columns:1fr 1fr}
   .foot-grid > :last-child{grid-column:1/-1}
-  .aside{position:static}
+  .float.f1{left:12px}
 }
 @media (max-width:820px){
   .menu-btn{display:block}
-  .phone{display:none}
-  .nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
+  .head-phone,.head-cta{display:none}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);flex-direction:column;align-items:stretch;padding:8px max(18px,env(safe-area-inset-right,0px)) 18px max(18px,env(safe-area-inset-left,0px));box-shadow:0 20px 30px -20px rgba(0,0,0,.3)}
   .nav.open{display:flex}
-  .nav a{padding:14px 8px;border-bottom:1px solid var(--line)}
-  .head-cta{display:none}
+  .nav a{padding:16px 12px;font-size:17px}
+  .explain,.steps{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:200px 160px 160px}
+  .gallery figure:first-child{grid-column:span 2;grid-row:auto}
 }
 @media (max-width:620px){
-  .svc-grid,.groups,.methods,.steps,.maps-list,.form{grid-template-columns:1fr}
+  .cards,.area-groups,.form{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr}
-  .foot-towns{columns:2}
-  .stats{grid-template-columns:1fr 1fr}
-  .stat .v{font-size:32px}
+  ul.foot-towns{columns:2}
+  .float{padding:10px 14px}.float b{font-size:22px}
 }
 </style>
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
@@ -299,76 +268,68 @@ dl.kv dd{margin:0}
 <body>
 
 
-
 <header class="site-head">
   <div class="wrap">
     <a class="brand" href="#home" aria-label="We Remap Any Car home">
-      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="none" stroke="var(--line)" stroke-width="3"/><path d="M8 30 A17 17 0 1 1 40 30" fill="none" stroke="var(--copper)" stroke-width="4" stroke-linecap="round"/><path d="M24 26 L35 14" stroke="var(--text)" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="26" r="3.5" fill="var(--text)"/><text x="24" y="42" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="6.5" fill="var(--mute)">ECU</text></svg>
-      <span><b>We Remap<br>Any Car</b><small>Mobile tuning · North West</small></span>
+      <span class="brand-mark"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><path d="M4 16a8 8 0 1 1 16 0" stroke="#A8E03A" stroke-width="2.6" stroke-linecap="round"/><path d="M12 16l5-6" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+      <b>We Remap Any Car</b>
     </a>
     <nav class="nav" id="nav" aria-label="Main">
-      <a href="#home" data-nav="home">Home</a>
       <a href="#services" data-nav="service">Services</a>
-      <a href="#areas" data-nav="area">Areas we cover</a>
-      <a href="#insight" data-nav="insight">Inside the ECU</a>
+      <a href="#insight" data-nav="insight">How it works</a>
+      <a href="#areas" data-nav="area">Areas</a>
       <a href="#contact" data-nav="contact">Contact</a>
     </nav>
-    <span class="phone" data-c="phone"></span>
-    <a class="btn sm head-cta" href="#contact">Get a quote</a>
+    <span class="head-phone" data-c="phone"></span>
+    <a class="btn sm head-cta" href="#contact">Get a price</a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
   </div>
 </header>
 
-<main id="app" data-route="area-rishton" data-root="../../"><section class="page-head"><div class="hero-bg"><svg class="art" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of an engine ECU circuit board">
-  <defs><radialGradient id="p1g" cx="45%" cy="40%" r="80%"><stop offset="0" stop-color="#1E6A5F"></stop><stop offset="1" stop-color="#082623"></stop></radialGradient>
-  <radialGradient id="p1t"><stop offset="0" stop-color="#FFF6D0"></stop><stop offset=".3" stop-color="#FFB64A"></stop><stop offset="1" stop-color="#FF6A00" stop-opacity="0"></stop></radialGradient>
-  <linearGradient id="p1m" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#E9EDEF"></stop><stop offset=".5" stop-color="#9AA3A8"></stop><stop offset="1" stop-color="#5D666B"></stop></linearGradient></defs>
-  <rect width="600" height="400" fill="url(#p1g)"></rect><g fill="none" stroke="#C9844C" stroke-width="2.4" stroke-linejoin="round" opacity=".62"><path d="M324 72 L400 -4 L508 -4 L542 -38 L602 -38 L653 -89"></path><path d="M300 48 L324 48 L349 73 L349 181"></path><path d="M264 252 L264 204 L205 145 L205 109 L137 41"></path><path d="M72 144 L12 144 L-13 119 L-73 119 L-115 161 L-175 161"></path><path d="M96 144 L96 252 L79 269 L19 269 L-49 201"></path><path d="M348 156 L348 264 L306 306 L246 306 L204 348"></path><path d="M444 372 L393 321 L321 321 L304 338"></path><path d="M360 180 L288 180 L254 214"></path><path d="M348 60 L300 60 L249 111 L249 147"></path><path d="M492 396 L458 362 L434 362 L383 413 L383 497 L459 573"></path><path d="M108 12 L150 -30 L150 -54 L209 -113 L209 -161"></path><path d="M396 132 L328 200 L328 284 L387 343 L387 391 L455 459"></path><path d="M552 288 L552 204 L577 179 L685 179 L744 120 L744 96"></path><path d="M144 168 L85 109 L85 61 L127 19 L127 -41 L85 -83"></path><path d="M516 120 L516 192 L558 234 L642 234"></path><path d="M204 240 L162 282 L162 318 L86 394 L86 502 L111 527"></path><path d="M84 120 L84 216 L67 233"></path><path d="M540 348 L540 312 L557 295 L605 295"></path><path d="M504 300 L521 317 L557 317 L608 368 L644 368 L712 300"></path><path d="M576 348 L576 408 L644 476 L680 476"></path><path d="M48 108 L31 91 L-53 91 L-112 32 L-208 32"></path><path d="M84 36 L84 60 L143 119 L143 215 L168 240"></path><path d="M216 288 L233 305 L317 305 L334 322"></path><path d="M108 0 L108 108 L49 167 L-59 167"></path><path d="M36 384 L2 418 L-22 418 L-81 477 L-177 477"></path><path d="M72 0 L72 -60 L-4 -136 L-4 -232"></path><path d="M204 360 L145 419 L145 479 L170 504"></path><path d="M24 132 L49 107 L49 47 L-27 -29 L-27 -53"></path><path d="M540 360 L515 385 L515 433 L481 467"></path><path d="M432 240 L457 215 L493 215 L552 156 L636 156"></path><path d="M516 396 L408 396 L391 379 L307 379 L265 337"></path><path d="M588 72 L648 72 L673 47 L673 11 L749 -65 L749 -161"></path><path d="M540 228 L574 262 L574 286"></path><path d="M420 384 L420 492 L352 560 L352 608"></path><path d="M492 96 L568 172 L628 172 L696 240 L792 240 L868 316"></path><path d="M360 228 L318 270 L318 318 L284 352 L224 352 L173 403"></path><path d="M384 288 L418 322 L478 322 L537 263 L537 203 L605 135"></path><path d="M192 228 L150 270 L150 342"></path><path d="M396 240 L472 316 L472 364 L447 389 L387 389"></path><path d="M264 72 L239 97 L239 133 L273 167 L273 203 L205 271"></path><path d="M288 228 L180 228 L104 304"></path><path d="M504 156 L546 198 L546 282 L622 358 L622 394"></path><path d="M72 348 L55 365 L-17 365 L-34 348 L-106 348"></path><path d="M144 120 L220 44 L220 -28 L254 -62"></path><path d="M600 108 L540 108 L498 66 L498 -18 L532 -52"></path><path d="M0 372 L-24 372 L-58 338 L-58 314 L-16 272 L-16 176"></path><path d="M192 300 L252 300 L269 283 L269 187 L337 119 L337 95"></path><path d="M576 336 L528 336 L460 268"></path><path d="M192 324 L116 400 L80 400 L63 417"></path><path d="M456 60 L456 132 L532 208"></path><path d="M540 276 L489 225 L381 225 L364 208"></path><path d="M324 168 L383 227 L407 227 L458 176 L458 140 L382 64"></path><path d="M420 48 L420 108 L395 133 L395 241 L454 300"></path><path d="M360 96 L309 45 L201 45 L167 11 L71 11 L29 53"></path><path d="M72 36 L38 70 L38 154 L80 196 L80 220 L12 288"></path><path d="M24 132 L0 132 L-68 200"></path><path d="M276 168 L324 168 L341 185 L341 281 L290 332"></path><path d="M156 12 L224 80 L260 80"></path><path d="M504 276 L445 217 L397 217 L372 242 L372 278"></path><path d="M456 240 L456 312 L532 388 L580 388"></path><path d="M276 228 L225 279 L225 363 L284 422 L284 482 L343 541"></path><path d="M300 168 L240 168 L223 185 L223 233 L189 267 L189 303"></path><path d="M480 60 L514 26 L514 -10 L548 -44 L548 -152"></path><path d="M300 156 L334 190 L358 190 L400 148 L484 148 L518 114"></path><path d="M336 288 L288 288 L246 246 L246 138"></path><path d="M492 216 L600 216 L676 292 L676 316"></path><path d="M600 312 L600 288 L524 212"></path><path d="M84 300 L192 300 L243 351 L243 375"></path><path d="M516 108 L516 192 L491 217"></path><path d="M480 12 L444 12 L393 -39 L393 -111"></path><path d="M492 108 L492 60 L551 1 L599 1 L658 -58 L658 -154"></path><path d="M372 276 L414 318 L474 318"></path><path d="M120 240 L120 288 L188 356"></path><path d="M36 168 L-60 168 L-77 185 L-185 185 L-253 253 L-337 253"></path><path d="M72 264 L106 230 L106 122 L157 71 L205 71 L239 105"></path><path d="M312 108 L264 108 L247 91 L247 55 L171 -21 L171 -57"></path><path d="M384 300 L468 300 L510 342 L534 342"></path><path d="M408 240 L516 240 L567 189 L627 189 L695 121"></path></g><g fill="#D9A066" stroke="#7A4A2A" stroke-width="1"><circle cx="324" cy="72" r="3.4"></circle><circle cx="653" cy="-89" r="3.4"></circle><circle cx="300" cy="48" r="3.4"></circle><circle cx="349" cy="181" r="3.4"></circle><circle cx="264" cy="252" r="3.4"></circle><circle cx="137" cy="41" r="3.4"></circle><circle cx="72" cy="144" r="3.4"></circle><circle cx="-175" cy="161" r="3.4"></circle><circle cx="96" cy="144" r="3.4"></circle><circle cx="-49" cy="201" r="3.4"></circle><circle cx="348" cy="156" r="3.4"></circle><circle cx="204" cy="348" r="3.4"></circle><circle cx="444" cy="372" r="3.4"></circle><circle cx="304" cy="338" r="3.4"></circle><circle cx="360" cy="180" r="3.4"></circle><circle cx="254" cy="214" r="3.4"></circle><circle cx="348" cy="60" r="3.4"></circle><circle cx="249" cy="147" r="3.4"></circle><circle cx="492" cy="396" r="3.4"></circle><circle cx="459" cy="573" r="3.4"></circle><circle cx="108" cy="12" r="3.4"></circle><circle cx="209" cy="-161" r="3.4"></circle><circle cx="396" cy="132" r="3.4"></circle><circle cx="455" cy="459" r="3.4"></circle><circle cx="552" cy="288" r="3.4"></circle><circle cx="744" cy="96" r="3.4"></circle><circle cx="144" cy="168" r="3.4"></circle><circle cx="85" cy="-83" r="3.4"></circle><circle cx="516" cy="120" r="3.4"></circle><circle cx="642" cy="234" r="3.4"></circle><circle cx="204" cy="240" r="3.4"></circle><circle cx="111" cy="527" r="3.4"></circle><circle cx="84" cy="120" r="3.4"></circle><circle cx="67" cy="233" r="3.4"></circle><circle cx="540" cy="348" r="3.4"></circle><circle cx="605" cy="295" r="3.4"></circle><circle cx="504" cy="300" r="3.4"></circle><circle cx="712" cy="300" r="3.4"></circle><circle cx="576" cy="348" r="3.4"></circle><circle cx="680" cy="476" r="3.4"></circle><circle cx="48" cy="108" r="3.4"></circle><circle cx="-208" cy="32" r="3.4"></circle><circle cx="84" cy="36" r="3.4"></circle><circle cx="168" cy="240" r="3.4"></circle><circle cx="216" cy="288" r="3.4"></circle><circle cx="334" cy="322" r="3.4"></circle><circle cx="108" cy="0" r="3.4"></circle><circle cx="-59" cy="167" r="3.4"></circle><circle cx="36" cy="384" r="3.4"></circle><circle cx="-177" cy="477" r="3.4"></circle><circle cx="72" cy="0" r="3.4"></circle><circle cx="-4" cy="-232" r="3.4"></circle><circle cx="204" cy="360" r="3.4"></circle><circle cx="170" cy="504" r="3.4"></circle><circle cx="24" cy="132" r="3.4"></circle><circle cx="-27" cy="-53" r="3.4"></circle><circle cx="540" cy="360" r="3.4"></circle><circle cx="481" cy="467" r="3.4"></circle><circle cx="432" cy="240" r="3.4"></circle><circle cx="636" cy="156" r="3.4"></circle><circle cx="516" cy="396" r="3.4"></circle><circle cx="265" cy="337" r="3.4"></circle><circle cx="588" cy="72" r="3.4"></circle><circle cx="749" cy="-161" r="3.4"></circle><circle cx="540" cy="228" r="3.4"></circle><circle cx="574" cy="286" r="3.4"></circle><circle cx="420" cy="384" r="3.4"></circle><circle cx="352" cy="608" r="3.4"></circle><circle cx="492" cy="96" r="3.4"></circle><circle cx="868" cy="316" r="3.4"></circle><circle cx="360" cy="228" r="3.4"></circle><circle cx="173" cy="403" r="3.4"></circle><circle cx="384" cy="288" r="3.4"></circle><circle cx="605" cy="135" r="3.4"></circle><circle cx="192" cy="228" r="3.4"></circle><circle cx="150" cy="342" r="3.4"></circle><circle cx="396" cy="240" r="3.4"></circle><circle cx="387" cy="389" r="3.4"></circle><circle cx="264" cy="72" r="3.4"></circle><circle cx="205" cy="271" r="3.4"></circle><circle cx="288" cy="228" r="3.4"></circle><circle cx="104" cy="304" r="3.4"></circle><circle cx="504" cy="156" r="3.4"></circle><circle cx="622" cy="394" r="3.4"></circle><circle cx="72" cy="348" r="3.4"></circle><circle cx="-106" cy="348" r="3.4"></circle><circle cx="144" cy="120" r="3.4"></circle><circle cx="254" cy="-62" r="3.4"></circle><circle cx="600" cy="108" r="3.4"></circle><circle cx="532" cy="-52" r="3.4"></circle><circle cx="0" cy="372" r="3.4"></circle><circle cx="-16" cy="176" r="3.4"></circle><circle cx="192" cy="300" r="3.4"></circle><circle cx="337" cy="95" r="3.4"></circle><circle cx="576" cy="336" r="3.4"></circle><circle cx="460" cy="268" r="3.4"></circle><circle cx="192" cy="324" r="3.4"></circle><circle cx="63" cy="417" r="3.4"></circle><circle cx="456" cy="60" r="3.4"></circle><circle cx="532" cy="208" r="3.4"></circle><circle cx="540" cy="276" r="3.4"></circle><circle cx="364" cy="208" r="3.4"></circle><circle cx="324" cy="168" r="3.4"></circle><circle cx="382" cy="64" r="3.4"></circle><circle cx="420" cy="48" r="3.4"></circle><circle cx="454" cy="300" r="3.4"></circle><circle cx="360" cy="96" r="3.4"></circle><circle cx="29" cy="53" r="3.4"></circle><circle cx="72" cy="36" r="3.4"></circle><circle cx="12" cy="288" r="3.4"></circle><circle cx="24" cy="132" r="3.4"></circle><circle cx="-68" cy="200" r="3.4"></circle><circle cx="276" cy="168" r="3.4"></circle><circle cx="290" cy="332" r="3.4"></circle><circle cx="156" cy="12" r="3.4"></circle><circle cx="260" cy="80" r="3.4"></circle><circle cx="504" cy="276" r="3.4"></circle><circle cx="372" cy="278" r="3.4"></circle><circle cx="456" cy="240" r="3.4"></circle><circle cx="580" cy="388" r="3.4"></circle><circle cx="276" cy="228" r="3.4"></circle><circle cx="343" cy="541" r="3.4"></circle><circle cx="300" cy="168" r="3.4"></circle><circle cx="189" cy="303" r="3.4"></circle><circle cx="480" cy="60" r="3.4"></circle><circle cx="548" cy="-152" r="3.4"></circle><circle cx="300" cy="156" r="3.4"></circle><circle cx="518" cy="114" r="3.4"></circle><circle cx="336" cy="288" r="3.4"></circle><circle cx="246" cy="138" r="3.4"></circle><circle cx="492" cy="216" r="3.4"></circle><circle cx="676" cy="316" r="3.4"></circle><circle cx="600" cy="312" r="3.4"></circle><circle cx="524" cy="212" r="3.4"></circle><circle cx="84" cy="300" r="3.4"></circle><circle cx="243" cy="375" r="3.4"></circle><circle cx="516" cy="108" r="3.4"></circle><circle cx="491" cy="217" r="3.4"></circle><circle cx="480" cy="12" r="3.4"></circle><circle cx="393" cy="-111" r="3.4"></circle><circle cx="492" cy="108" r="3.4"></circle><circle cx="658" cy="-154" r="3.4"></circle><circle cx="372" cy="276" r="3.4"></circle><circle cx="474" cy="318" r="3.4"></circle><circle cx="120" cy="240" r="3.4"></circle><circle cx="188" cy="356" r="3.4"></circle><circle cx="36" cy="168" r="3.4"></circle><circle cx="-337" cy="253" r="3.4"></circle><circle cx="72" cy="264" r="3.4"></circle><circle cx="239" cy="105" r="3.4"></circle><circle cx="312" cy="108" r="3.4"></circle><circle cx="171" cy="-57" r="3.4"></circle><circle cx="384" cy="300" r="3.4"></circle><circle cx="534" cy="342" r="3.4"></circle><circle cx="408" cy="240" r="3.4"></circle><circle cx="695" cy="121" r="3.4"></circle></g><g fill="#0A1F1C" stroke="#B8BEC0" stroke-width="1.2" opacity=".8"><circle cx="348" cy="270" r="2"></circle><circle cx="324" cy="58" r="2"></circle><circle cx="517" cy="369" r="2"></circle><circle cx="102" cy="188" r="2"></circle><circle cx="300" cy="376" r="2"></circle><circle cx="583" cy="329" r="2"></circle><circle cx="533" cy="352" r="2"></circle><circle cx="449" cy="365" r="2"></circle><circle cx="236" cy="357" r="2"></circle><circle cx="142" cy="157" r="2"></circle><circle cx="581" cy="220" r="2"></circle><circle cx="61" cy="169" r="2"></circle><circle cx="517" cy="258" r="2"></circle><circle cx="543" cy="53" r="2"></circle><circle cx="25" cy="10" r="2"></circle><circle cx="195" cy="340" r="2"></circle><circle cx="260" cy="17" r="2"></circle><circle cx="223" cy="149" r="2"></circle><circle cx="318" cy="377" r="2"></circle><circle cx="122" cy="378" r="2"></circle><circle cx="543" cy="193" r="2"></circle><circle cx="449" cy="71" r="2"></circle><circle cx="45" cy="250" r="2"></circle><circle cx="64" cy="338" r="2"></circle><circle cx="283" cy="242" r="2"></circle><circle cx="503" cy="113" r="2"></circle><circle cx="142" cy="368" r="2"></circle><circle cx="484" cy="59" r="2"></circle><circle cx="193" cy="59" r="2"></circle><circle cx="47" cy="58" r="2"></circle><circle cx="333" cy="207" r="2"></circle><circle cx="322" cy="307" r="2"></circle><circle cx="370" cy="272" r="2"></circle><circle cx="334" cy="159" r="2"></circle><circle cx="35" cy="30" r="2"></circle><circle cx="463" cy="55" r="2"></circle><circle cx="376" cy="311" r="2"></circle><circle cx="428" cy="227" r="2"></circle><circle cx="395" cy="234" r="2"></circle><circle cx="565" cy="185" r="2"></circle><circle cx="94" cy="171" r="2"></circle><circle cx="296" cy="237" r="2"></circle><circle cx="249" cy="216" r="2"></circle><circle cx="294" cy="247" r="2"></circle><circle cx="219" cy="342" r="2"></circle><circle cx="461" cy="158" r="2"></circle><circle cx="77" cy="64" r="2"></circle><circle cx="367" cy="397" r="2"></circle><circle cx="29" cy="73" r="2"></circle><circle cx="547" cy="208" r="2"></circle><circle cx="10" cy="315" r="2"></circle><circle cx="598" cy="215" r="2"></circle><circle cx="207" cy="80" r="2"></circle><circle cx="445" cy="74" r="2"></circle><circle cx="479" cy="340" r="2"></circle><circle cx="545" cy="134" r="2"></circle><circle cx="250" cy="313" r="2"></circle><circle cx="378" cy="179" r="2"></circle><circle cx="94" cy="342" r="2"></circle><circle cx="544" cy="298" r="2"></circle></g><g transform="translate(180 141) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(150 346) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(554 188) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(516 127) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(374 136) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(412 244) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(373 356) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(264 264) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(300 198) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(115 8) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(343 76) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(437 99) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(229 298) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(419 351) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(598 48) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(343 196) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(474 250) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(220 122) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(438 354) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(264 330) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(316 264) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(399 176) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(327 190) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(351 379) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(190 275) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(374 52) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(76 61) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(557 88) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(360 272) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(265 9) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(259 239) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(89 150) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(400 85) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(284 310) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(183 361) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(494 345) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(515 207) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(524 336) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(445 384) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(459 88) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(4 134) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(229 358) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(306 220) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(64 308) rotate(90)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(49 325) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#3B2E26"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><g transform="translate(481 245) rotate(0)"><rect x="-7" y="-3.5" width="14" height="7" fill="#C7B79A"></rect><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"></rect></g><rect x="224.8433075239882" y="40.22211267147213" width="3" height="5" fill="#C8CDD0"></rect><rect x="224.8433075239882" y="69.22211267147213" width="3" height="5" fill="#C8CDD0"></rect><rect x="231.8433075239882" y="40.22211267147213" width="3" height="5" fill="#C8CDD0"></rect><rect x="231.8433075239882" y="69.22211267147213" width="3" height="5" fill="#C8CDD0"></rect><rect x="238.8433075239882" y="40.22211267147213" width="3" height="5" fill="#C8CDD0"></rect><rect x="238.8433075239882" y="69.22211267147213" width="3" height="5" fill="#C8CDD0"></rect><rect x="245.8433075239882" y="40.22211267147213" width="3" height="5" fill="#C8CDD0"></rect><rect x="245.8433075239882" y="69.22211267147213" width="3" height="5" fill="#C8CDD0"></rect><rect x="252.8433075239882" y="40.22211267147213" width="3" height="5" fill="#C8CDD0"></rect><rect x="252.8433075239882" y="69.22211267147213" width="3" height="5" fill="#C8CDD0"></rect><rect x="259.8433075239882" y="40.22211267147213" width="3" height="5" fill="#C8CDD0"></rect><rect x="259.8433075239882" y="69.22211267147213" width="3" height="5" fill="#C8CDD0"></rect><rect x="266.8433075239882" y="40.22211267147213" width="3" height="5" fill="#C8CDD0"></rect><rect x="266.8433075239882" y="69.22211267147213" width="3" height="5" fill="#C8CDD0"></rect><rect x="219.8433075239882" y="45.22211267147213" width="56" height="24" rx="2" fill="#16191B"></rect><circle cx="224.8433075239882" cy="50.22211267147213" r="1.6" fill="#3A3F42"></circle><rect x="361.8033337686211" y="232.44969562627375" width="3" height="5" fill="#C8CDD0"></rect><rect x="361.8033337686211" y="261.44969562627375" width="3" height="5" fill="#C8CDD0"></rect><rect x="368.8033337686211" y="232.44969562627375" width="3" height="5" fill="#C8CDD0"></rect><rect x="368.8033337686211" y="261.44969562627375" width="3" height="5" fill="#C8CDD0"></rect><rect x="375.8033337686211" y="232.44969562627375" width="3" height="5" fill="#C8CDD0"></rect><rect x="375.8033337686211" y="261.44969562627375" width="3" height="5" fill="#C8CDD0"></rect><rect x="382.8033337686211" y="232.44969562627375" width="3" height="5" fill="#C8CDD0"></rect><rect x="382.8033337686211" y="261.44969562627375" width="3" height="5" fill="#C8CDD0"></rect><rect x="389.8033337686211" y="232.44969562627375" width="3" height="5" fill="#C8CDD0"></rect><rect x="389.8033337686211" y="261.44969562627375" width="3" height="5" fill="#C8CDD0"></rect><rect x="396.8033337686211" y="232.44969562627375" width="3" height="5" fill="#C8CDD0"></rect><rect x="396.8033337686211" y="261.44969562627375" width="3" height="5" fill="#C8CDD0"></rect><rect x="403.8033337686211" y="232.44969562627375" width="3" height="5" fill="#C8CDD0"></rect><rect x="403.8033337686211" y="261.44969562627375" width="3" height="5" fill="#C8CDD0"></rect><rect x="356.8033337686211" y="237.44969562627375" width="56" height="24" rx="2" fill="#16191B"></rect><circle cx="361.8033337686211" cy="242.44969562627375" r="1.6" fill="#3A3F42"></circle><rect x="380.1007039519027" y="240.14564749784768" width="3" height="5" fill="#C8CDD0"></rect><rect x="380.1007039519027" y="269.1456474978477" width="3" height="5" fill="#C8CDD0"></rect><rect x="387.1007039519027" y="240.14564749784768" width="3" height="5" fill="#C8CDD0"></rect><rect x="387.1007039519027" y="269.1456474978477" width="3" height="5" fill="#C8CDD0"></rect><rect x="394.1007039519027" y="240.14564749784768" width="3" height="5" fill="#C8CDD0"></rect><rect x="394.1007039519027" y="269.1456474978477" width="3" height="5" fill="#C8CDD0"></rect><rect x="401.1007039519027" y="240.14564749784768" width="3" height="5" fill="#C8CDD0"></rect><rect x="401.1007039519027" y="269.1456474978477" width="3" height="5" fill="#C8CDD0"></rect><rect x="408.1007039519027" y="240.14564749784768" width="3" height="5" fill="#C8CDD0"></rect><rect x="408.1007039519027" y="269.1456474978477" width="3" height="5" fill="#C8CDD0"></rect><rect x="415.1007039519027" y="240.14564749784768" width="3" height="5" fill="#C8CDD0"></rect><rect x="415.1007039519027" y="269.1456474978477" width="3" height="5" fill="#C8CDD0"></rect><rect x="422.1007039519027" y="240.14564749784768" width="3" height="5" fill="#C8CDD0"></rect><rect x="422.1007039519027" y="269.1456474978477" width="3" height="5" fill="#C8CDD0"></rect><rect x="375.1007039519027" y="245.14564749784768" width="56" height="24" rx="2" fill="#16191B"></rect><circle cx="380.1007039519027" cy="250.14564749784768" r="1.6" fill="#3A3F42"></circle><rect x="305.2035176753998" y="246.76784581737593" width="3" height="5" fill="#C8CDD0"></rect><rect x="305.2035176753998" y="275.7678458173759" width="3" height="5" fill="#C8CDD0"></rect><rect x="312.2035176753998" y="246.76784581737593" width="3" height="5" fill="#C8CDD0"></rect><rect x="312.2035176753998" y="275.7678458173759" width="3" height="5" fill="#C8CDD0"></rect><rect x="319.2035176753998" y="246.76784581737593" width="3" height="5" fill="#C8CDD0"></rect><rect x="319.2035176753998" y="275.7678458173759" width="3" height="5" fill="#C8CDD0"></rect><rect x="326.2035176753998" y="246.76784581737593" width="3" height="5" fill="#C8CDD0"></rect><rect x="326.2035176753998" y="275.7678458173759" width="3" height="5" fill="#C8CDD0"></rect><rect x="333.2035176753998" y="246.76784581737593" width="3" height="5" fill="#C8CDD0"></rect><rect x="333.2035176753998" y="275.7678458173759" width="3" height="5" fill="#C8CDD0"></rect><rect x="340.2035176753998" y="246.76784581737593" width="3" height="5" fill="#C8CDD0"></rect><rect x="340.2035176753998" y="275.7678458173759" width="3" height="5" fill="#C8CDD0"></rect><rect x="347.2035176753998" y="246.76784581737593" width="3" height="5" fill="#C8CDD0"></rect><rect x="347.2035176753998" y="275.7678458173759" width="3" height="5" fill="#C8CDD0"></rect><rect x="300.2035176753998" y="251.76784581737593" width="56" height="24" rx="2" fill="#16191B"></rect><circle cx="305.2035176753998" cy="256.7678458173759" r="1.6" fill="#3A3F42"></circle><g fill="#CDD2D5"><rect x="242.7" y="119" width="2.6" height="9"></rect><rect x="242.7" y="256" width="2.6" height="9"></rect><rect x="227" y="134.7" width="9" height="2.6"></rect><rect x="364" y="134.7" width="9" height="2.6"></rect><rect x="248.59473684210525" y="119" width="2.6" height="9"></rect><rect x="248.59473684210525" y="256" width="2.6" height="9"></rect><rect x="227" y="140.59473684210525" width="9" height="2.6"></rect><rect x="364" y="140.59473684210525" width="9" height="2.6"></rect><rect x="254.4894736842105" y="119" width="2.6" height="9"></rect><rect x="254.4894736842105" y="256" width="2.6" height="9"></rect><rect x="227" y="146.4894736842105" width="9" height="2.6"></rect><rect x="364" y="146.4894736842105" width="9" height="2.6"></rect><rect x="260.38421052631577" y="119" width="2.6" height="9"></rect><rect x="260.38421052631577" y="256" width="2.6" height="9"></rect><rect x="227" y="152.38421052631577" width="9" height="2.6"></rect><rect x="364" y="152.38421052631577" width="9" height="2.6"></rect><rect x="266.27894736842103" y="119" width="2.6" height="9"></rect><rect x="266.27894736842103" y="256" width="2.6" height="9"></rect><rect x="227" y="158.27894736842103" width="9" height="2.6"></rect><rect x="364" y="158.27894736842103" width="9" height="2.6"></rect><rect x="272.1736842105263" y="119" width="2.6" height="9"></rect><rect x="272.1736842105263" y="256" width="2.6" height="9"></rect><rect x="227" y="164.1736842105263" width="9" height="2.6"></rect><rect x="364" y="164.1736842105263" width="9" height="2.6"></rect><rect x="278.06842105263155" y="119" width="2.6" height="9"></rect><rect x="278.06842105263155" y="256" width="2.6" height="9"></rect><rect x="227" y="170.06842105263155" width="9" height="2.6"></rect><rect x="364" y="170.06842105263155" width="9" height="2.6"></rect><rect x="283.9631578947368" y="119" width="2.6" height="9"></rect><rect x="283.9631578947368" y="256" width="2.6" height="9"></rect><rect x="227" y="175.96315789473684" width="9" height="2.6"></rect><rect x="364" y="175.96315789473684" width="9" height="2.6"></rect><rect x="289.85789473684207" y="119" width="2.6" height="9"></rect><rect x="289.85789473684207" y="256" width="2.6" height="9"></rect><rect x="227" y="181.8578947368421" width="9" height="2.6"></rect><rect x="364" y="181.8578947368421" width="9" height="2.6"></rect><rect x="295.75263157894733" y="119" width="2.6" height="9"></rect><rect x="295.75263157894733" y="256" width="2.6" height="9"></rect><rect x="227" y="187.75263157894736" width="9" height="2.6"></rect><rect x="364" y="187.75263157894736" width="9" height="2.6"></rect><rect x="301.6473684210526" y="119" width="2.6" height="9"></rect><rect x="301.6473684210526" y="256" width="2.6" height="9"></rect><rect x="227" y="193.64736842105262" width="9" height="2.6"></rect><rect x="364" y="193.64736842105262" width="9" height="2.6"></rect><rect x="307.5421052631579" y="119" width="2.6" height="9"></rect><rect x="307.5421052631579" y="256" width="2.6" height="9"></rect><rect x="227" y="199.54210526315788" width="9" height="2.6"></rect><rect x="364" y="199.54210526315788" width="9" height="2.6"></rect><rect x="313.4368421052631" y="119" width="2.6" height="9"></rect><rect x="313.4368421052631" y="256" width="2.6" height="9"></rect><rect x="227" y="205.43684210526314" width="9" height="2.6"></rect><rect x="364" y="205.43684210526314" width="9" height="2.6"></rect><rect x="319.3315789473684" y="119" width="2.6" height="9"></rect><rect x="319.3315789473684" y="256" width="2.6" height="9"></rect><rect x="227" y="211.3315789473684" width="9" height="2.6"></rect><rect x="364" y="211.3315789473684" width="9" height="2.6"></rect><rect x="325.2263157894737" y="119" width="2.6" height="9"></rect><rect x="325.2263157894737" y="256" width="2.6" height="9"></rect><rect x="227" y="217.2263157894737" width="9" height="2.6"></rect><rect x="364" y="217.2263157894737" width="9" height="2.6"></rect><rect x="331.12105263157895" y="119" width="2.6" height="9"></rect><rect x="331.12105263157895" y="256" width="2.6" height="9"></rect><rect x="227" y="223.12105263157895" width="9" height="2.6"></rect><rect x="364" y="223.12105263157895" width="9" height="2.6"></rect><rect x="337.0157894736842" y="119" width="2.6" height="9"></rect><rect x="337.0157894736842" y="256" width="2.6" height="9"></rect><rect x="227" y="229.0157894736842" width="9" height="2.6"></rect><rect x="364" y="229.0157894736842" width="9" height="2.6"></rect><rect x="342.91052631578947" y="119" width="2.6" height="9"></rect><rect x="342.91052631578947" y="256" width="2.6" height="9"></rect><rect x="227" y="234.91052631578947" width="9" height="2.6"></rect><rect x="364" y="234.91052631578947" width="9" height="2.6"></rect><rect x="348.80526315789473" y="119" width="2.6" height="9"></rect><rect x="348.80526315789473" y="256" width="2.6" height="9"></rect><rect x="227" y="240.80526315789473" width="9" height="2.6"></rect><rect x="364" y="240.80526315789473" width="9" height="2.6"></rect><rect x="354.7" y="119" width="2.6" height="9"></rect><rect x="354.7" y="256" width="2.6" height="9"></rect><rect x="227" y="246.7" width="9" height="2.6"></rect><rect x="364" y="246.7" width="9" height="2.6"></rect></g><rect x="236" y="128" width="128" height="128" rx="3" fill="#141719" stroke="#2A2F33"></rect><circle cx="248" cy="140" r="4" fill="#25292C"></circle>
-  <text x="300" y="188" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="15" fill="#8C969C" font-weight="600">TC1797</text>
-  <text x="300" y="208" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5F696E">32-bit · 4MB FLASH</text><text x="22" y="380" font-family="IBM Plex Mono, monospace" font-size="13" fill="#E8EFE6" opacity=".55" letter-spacing="2">ECU · EDC17 · REV C</text></svg></div><div class="wrap"><div class="crumbs"><a href="../../">Home</a> / <a href="../../areas/">Areas</a> / <span>Rishton</span></div><span class="eyebrow">Hyndburn</span><h1>Remapping in Rishton</h1><p class="lead">Mobile ECU remapping, tuning, speed limiters and DPF diagnostics at your home or workplace in Rishton. We come to you.</p><div class="badges"><span class="badge"><b>3 miles</b> from Blackburn</span><span class="badge">Via M65 junction 6 and A678</span><span class="badge">No call-out charge</span></div></div></section><section class="band"><div class="wrap article">
+<main id="app" data-route="area-rishton" data-root="../../"><section class="page-head"><div class="wrap"><div class="crumbs"><a href="../../">Home</a> / <a href="../../areas/">Areas</a> / Rishton</div>
+    <div class="page-hero"><div class="stack"><span class="kicker">Hyndburn</span><h1>Remapping in Rishton</h1><p class="lead">Mobile remapping, speed limiters and DPF fault-finding at your home or work in Rishton.</p>
+      <div class="facts"><span class="fact">3 miles from Blackburn</span><span class="fact">No call-out charge</span><span class="fact">From £199</span></div>
+      <div class="cta-row"><a class="btn" href="../../contact/?town=Rishton" data-town="Rishton">Get a price in Rishton <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div></div>
+    <img class="" src="../../img/board-soldering.webp" alt="Soldering a circuit board on the bench" width="1400" height="788"></div></div></section>
+  <section class="sec" style="padding-top:clamp(20px,3vw,40px)"><div class="wrap article">
     <div class="prose">
       <h2 style="margin-top:0">About Rishton</h2>
       <p>A canal-side village between Blackburn and Accrington, right on M65 junction 6.</p>
-      <p>Rishton is about 3 miles from our Blackburn base. We usually get there via the M65 junction 6 and A678, so bookings in Rishton slot easily into our week. Everything is done at the roadside, on your drive or in the yard at work. You don't need to take time off or find a garage.</p>
+      <p>Rishton is about 3 miles from our Blackburn base, and we usually get there via the M65 junction 6 and A678. We do everything at the roadside, on your drive or in the car park at work, so you don't need to take time off or find a garage.</p>
       <h2>Popular in Rishton</h2>
-      <div class="svc-grid" style="grid-template-columns:1fr"><a class="svc" href="../../services/stage-1-remap/"><span class="tag">Power</span><h3>Stage 1 Remap</h3><p>More power and torque from the standard hardware. No parts changed, original file kept.</p><span class="spec">Diesel +25–35% power · +30–40% torque</span><span class="go">Find out more →</span></a><a class="svc" href="../../services/dpf-egr-adblue/"><span class="tag">Emissions</span><h3>DPF, EGR &amp; AdBlue Faults</h3><p>Most emissions faults can be fixed without removing anything. We find the cause first.</p><span class="spec">Diagnose · forced regen · clean · repair</span><span class="go">Find out more →</span></a><a class="svc" href="../../services/gearbox-tuning/"><span class="tag">Drivetrain</span><h3>Gearbox (TCU) Tuning</h3><p>Raised torque limits, quicker shifts and better launch to match your remap.</p><span class="spec">DSG, ZF 8HP, Aisin and more</span><span class="go">Find out more →</span></a></div>
-      <h2>How a visit works</h2>
-      <ol class="steps"><li><h3>Book and check</h3><p>Send your reg. We confirm the ECU type, what's possible and the price before we set off.</p></li><li><h3>Health check on arrival</h3><p>Battery support connected, all modules scanned, live data checked for boost, rail pressure and injector corrections.</p></li><li><h3>Read and back up</h3><p>We read your original file through the OBD port, or on the bench if needed, and save it for life.</p></li><li><h3>Calibrate</h3><p>Boost, fuelling, timing, torque limiters and smoke maps adjusted for your engine and what you use the vehicle for.</p></li><li><h3>Write and verify</h3><p>The new file is written back, checksums are corrected and the ECU is verified before anything else.</p></li><li><h3>Road test and log</h3><p>We drive it with you, log the key values and hand back the keys. Most jobs take one to two hours.</p></li></ol>
-      <h2>Questions from Rishton drivers</h2>
-      <div class="faq"><details open=""><summary>Will a remap damage my engine?</summary><p>A good remap stays inside the limits of the standard turbo, injectors and clutch, and we check the vehicle is healthy before we start. Problems usually come from tuning a vehicle that already has a fault, or from generic files pushed too far. We do neither.</p></details><details><summary>Do I need to tell my insurer?</summary><p>Yes. A remap is a modification, and most insurers will ask about it. Many will cover it for a small extra premium or none at all. Not declaring it can invalidate your cover.</p></details><details><summary>Can you put it back to standard?</summary><p>Yes. We keep your original file, and putting it back is free if you sell the vehicle or need it for a dealer visit.</p></details><details><summary>Will it affect my warranty?</summary><p>A manufacturer can refuse a claim on parts related to the change. Some ECUs record that they have been reprogrammed even after the original file goes back. If your vehicle is under warranty, we'll talk it through before you decide.</p></details></div>
+      <div class="cards" style="grid-template-columns:1fr"><a class="card" href="../../services/stage-1-remap/"><img class="" src="../../img/obd-in-car.webp" alt="Technician plugging a diagnostic tablet into a car" loading="lazy" width="1400" height="788"><div class="card-body"><span class="tag">Power</span><h3>Stage 1 Remap</h3><p>More power and torque from the standard hardware. No parts changed, original file kept.</p><span class="more">Find out more →</span></div></a><a class="card" href="../../services/dpf-egr-adblue/"><img class="" src="../../img/dpf-bench.webp" alt="Diesel particulate filter being inspected" loading="lazy" width="1400" height="788"><div class="card-body"><span class="tag">Emissions</span><h3>DPF, EGR &amp; AdBlue Faults</h3><p>Most emissions faults can be fixed without removing anything. We find the cause first.</p><span class="more">Find out more →</span></div></a><a class="card" href="../../services/gearbox-tuning/"><img class="" src="../../img/obd-in-car.webp" alt="Technician plugging a diagnostic tablet into a car" loading="lazy" width="1400" height="788"><div class="card-body"><span class="tag">Drivetrain</span><h3>Gearbox (TCU) Tuning</h3><p>Raised torque limits, quicker shifts and better launch to match your remap.</p><span class="more">Find out more →</span></div></a></div>
+      <h2>How it works</h2><ol class="steps"><li><h3>Send your reg</h3><p>Text, call or fill in the form. We tell you what your vehicle can gain and give you a fixed price.</p></li><li><h3>We come to you</h3><p>We arrive at your home or work with everything we need. A health check comes first, then your original settings are saved.</p></li><li><h3>Drive away</h3><p>The remap takes one to two hours. We test drive it with you, and you can go back to standard any time.</p></li></ol>
+      <h2>Questions</h2><div class="faq"><details open=""><summary>Is remapping safe for my engine?</summary><p>Yes, when it's done properly. We stay within the safe limits of your standard turbo, injectors and clutch, and we check the vehicle is healthy before we start.</p></details><details><summary>Do I need to tell my insurer?</summary><p>Yes. A remap is a modification, so let your insurer know. Many cover it for little or no extra cost.</p></details><details><summary>Can it be put back to standard?</summary><p>Yes. We keep a copy of your original settings, and putting them back is free if you sell the vehicle.</p></details><details><summary>Do I need to bring it to a garage?</summary><p>No. We're fully mobile. All we need is a safe place to park, like your drive or the car park at work.</p></details></div>
     </div>
     <aside class="aside">
-      <div class="radius"><svg viewBox="0 0 600 600" role="img" aria-label="Map of towns within 20 miles of Blackburn" font-family="IBM Plex Mono, monospace"><circle cx="300" cy="300" r="67" fill="none" stroke="var(--line)" stroke-dasharray="3 5"></circle><text x="304" y="228" font-size="11" fill="var(--mute)">5 mi</text><circle cx="300" cy="300" r="134" fill="none" stroke="var(--line)" stroke-dasharray="3 5"></circle><text x="304" y="161" font-size="11" fill="var(--mute)">10 mi</text><circle cx="300" cy="300" r="201" fill="none" stroke="var(--line)" stroke-dasharray="3 5"></circle><text x="304" y="94" font-size="11" fill="var(--mute)">15 mi</text><circle cx="300" cy="300" r="268" fill="none" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="0"></circle><text x="304" y="27" font-size="11" fill="var(--mute)">20 mi</text><polyline points="207.1128551520407,313.0544368700541 235.28296963863244,317.3408760218689 300,300 337.7756433555935,286.2507902383081 364.40453362786735,281.53229716026107 429.4340607227351,265.3182479562622 449.09116381433944,239.76325977872136 457.8788165017844,226.37989880477016 477.4724661646443,205.63621588003593" fill="none" stroke="var(--copper)" stroke-opacity=".35" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></polyline><text x="243.28296963863244" y="331.3408760218689" font-size="10" fill="var(--copper)" opacity=".8">M65</text><polyline points="207.1128551520407,313.0544368700541 212.1869008522201,361.48739397683215 205.24769132100263,394.7523086789974 245.00316095323248,451.1025734223741 231.25395119154058,488.8782167779676 317.51830429227937,500.23513431644085" fill="none" stroke="var(--copper)" stroke-opacity=".35" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></polyline><text x="213.24769132100263" y="408.7523086789974" font-size="10" fill="var(--copper)" opacity=".8">M61</text><polyline points="376.83646175430744,353.80146972972807 356.63084707325373,421.4452434629111 359.5799089673315,463.6944545409052 355.4908032699805,507.09449715637624" fill="none" stroke="var(--copper)" stroke-opacity=".35" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></polyline><text x="364.63084707325373" y="435.4452434629111" font-size="10" fill="var(--copper)" opacity=".8">M66</text><polyline points="166.5099104557061,311.6788695281862 181.2321849867277,279.0580297733682 174.08118881468826,254.16930079436048" fill="none" stroke="var(--copper)" stroke-opacity=".35" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></polyline><text x="174.5099104557061" y="325.6788695281862" font-size="10" fill="var(--copper)" opacity=".8"></text><a class="dot" href="../../areas/blackburn/" data-n="Blackburn" data-m="0" aria-label="Blackburn, 0 miles"><circle cx="300.0" cy="300.0" r="7" fill="var(--copper)" stroke="var(--panel)" stroke-width="1.5"></circle><text x="309.0" y="304.0" font-size="13" font-weight="600" fill="var(--text)">Blackburn</text></a><a class="dot" href="../../areas/wilpshire/" data-n="Wilpshire" data-m="3" aria-label="Wilpshire, 3 miles"><circle cx="296.5" cy="260.0" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/rishton/" data-n="Rishton" data-m="3" aria-label="Rishton, 3 miles"><circle cx="337.8" cy="286.3" r="7" fill="var(--copper)" stroke="var(--panel)" stroke-width="1.5"></circle><text x="346.8" y="290.3" font-size="13" font-weight="600" fill="var(--copper-hi)">Rishton</text></a><a class="dot" href="../../areas/darwen/" data-n="Darwen" data-m="4" aria-label="Darwen, 4 miles"><circle cx="300.0" cy="353.6" r="5" fill="var(--text)" stroke="var(--panel)" stroke-width="1.5"></circle><text x="309.0" y="357.6" font-size="11.5" font-weight="500" fill="var(--text)">Darwen</text></a><a class="dot" href="../../areas/mellor/" data-n="Mellor" data-m="4" aria-label="Mellor, 4 miles"><circle cx="253.6" cy="273.2" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/belthorn/" data-n="Belthorn" data-m="4" aria-label="Belthorn, 4 miles"><circle cx="337.9" cy="337.9" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/oswaldtwistle/" data-n="Oswaldtwistle" data-m="4" aria-label="Oswaldtwistle, 4 miles"><circle cx="352.8" cy="309.3" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/church/" data-n="Church" data-m="4" aria-label="Church, 4 miles"><circle cx="353.4" cy="304.7" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/accrington/" data-n="Accrington" data-m="5" aria-label="Accrington, 5 miles"><circle cx="367.0" cy="297.7" r="5" fill="var(--text)" stroke="var(--panel)" stroke-width="1.5"></circle><text x="376.0" y="301.7" font-size="11.5" font-weight="500" fill="var(--text)">Accrington</text></a><a class="dot" href="../../areas/clayton-le-moors/" data-n="Clayton-le-Moors" data-m="5" aria-label="Clayton-le-Moors, 5 miles"><circle cx="364.4" cy="281.5" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/great-harwood/" data-n="Great Harwood" data-m="5" aria-label="Great Harwood, 5 miles"><circle cx="354.9" cy="261.6" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/langho/" data-n="Langho" data-m="5" aria-label="Langho, 5 miles"><circle cx="328.3" cy="239.3" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/hoghton/" data-n="Hoghton" data-m="5" aria-label="Hoghton, 5 miles"><circle cx="235.3" cy="317.3" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/withnell-and-brinscall/" data-n="Withnell &amp; Brinscall" data-m="6" aria-label="Withnell &amp; Brinscall, 6 miles"><circle cx="248.3" cy="361.6" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/whalley/" data-n="Whalley" data-m="7" aria-label="Whalley, 7 miles"><circle cx="360.3" cy="228.1" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/ribchester/" data-n="Ribchester" data-m="7" aria-label="Ribchester, 7 miles"><circle cx="253.1" cy="218.8" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/haslingden/" data-n="Haslingden" data-m="7" aria-label="Haslingden, 7 miles"><circle cx="376.8" cy="353.8" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/edgworth-and-turton/" data-n="Edgworth &amp; Turton" data-m="7" aria-label="Edgworth &amp; Turton, 7 miles"><circle cx="316.3" cy="392.4" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/bamber-bridge/" data-n="Bamber Bridge" data-m="7" aria-label="Bamber Bridge, 7 miles"><circle cx="207.1" cy="313.1" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/whittle-le-woods/" data-n="Whittle-le-Woods" data-m="8" aria-label="Whittle-le-Woods, 8 miles"><circle cx="212.2" cy="361.5" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/padiham/" data-n="Padiham" data-m="8" aria-label="Padiham, 8 miles"><circle cx="397.2" cy="254.7" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/walton-le-dale/" data-n="Walton-le-Dale" data-m="8" aria-label="Walton-le-Dale, 8 miles"><circle cx="192.8" cy="300.0" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/lostock-hall/" data-n="Lostock Hall" data-m="8" aria-label="Lostock Hall, 8 miles"><circle cx="195.1" cy="322.3" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/clayton-le-woods/" data-n="Clayton-le-Woods" data-m="9" aria-label="Clayton-le-Woods, 9 miles"><circle cx="195.6" cy="360.3" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/rawtenstall/" data-n="Rawtenstall" data-m="9" aria-label="Rawtenstall, 9 miles"><circle cx="398.8" cy="369.2" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/preston/" data-n="Preston" data-m="9" aria-label="Preston, 9 miles"><circle cx="181.2" cy="279.1" r="5" fill="var(--text)" stroke="var(--panel)" stroke-width="1.5"></circle><text x="190.2" y="283.1" font-size="11.5" font-weight="500" fill="var(--text)">Preston</text></a><a class="dot" href="../../areas/longridge/" data-n="Longridge" data-m="9" aria-label="Longridge, 9 miles"><circle cx="222.5" cy="207.6" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/clitheroe/" data-n="Clitheroe" data-m="10" aria-label="Clitheroe, 10 miles"><circle cx="367.0" cy="184.0" r="5" fill="var(--text)" stroke="var(--panel)" stroke-width="1.5"></circle><text x="376.0" y="188.0" font-size="11.5" font-weight="500" fill="var(--text)">Clitheroe</text></a><a class="dot" href="../../areas/ramsbottom/" data-n="Ramsbottom" data-m="10" aria-label="Ramsbottom, 10 miles"><circle cx="356.6" cy="421.4" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/burnley/" data-n="Burnley" data-m="10" aria-label="Burnley, 10 miles"><circle cx="429.4" cy="265.3" r="5" fill="var(--text)" stroke="var(--panel)" stroke-width="1.5"></circle><text x="438.4" y="269.3" font-size="11.5" font-weight="500" fill="var(--text)">Burnley</text></a><a class="dot" href="../../areas/fulwood/" data-n="Fulwood" data-m="10" aria-label="Fulwood, 10 miles"><circle cx="174.1" cy="254.2" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/penwortham/" data-n="Penwortham" data-m="10" aria-label="Penwortham, 10 miles"><circle cx="166.5" cy="311.7" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/leyland/" data-n="Leyland" data-m="10" aria-label="Leyland, 10 miles"><circle cx="178.6" cy="356.6" r="5" fill="var(--text)" stroke="var(--panel)" stroke-width="1.5"></circle><text x="187.6" y="360.6" font-size="11.5" font-weight="500" fill="var(--text)">Leyland</text></a><a class="dot" href="../../areas/chorley/" data-n="Chorley" data-m="10" aria-label="Chorley, 10 miles"><circle cx="205.2" cy="394.8" r="5" fill="var(--text)" stroke="var(--panel)" stroke-width="1.5"></circle><text x="214.2" y="398.8" font-size="11.5" font-weight="500" fill="var(--text)">Chorley</text></a><a class="dot" href="../../areas/tottington/" data-n="Tottington" data-m="11" aria-label="Tottington, 11 miles"><circle cx="338.1" cy="442.4" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/euxton/" data-n="Euxton" data-m="11" aria-label="Euxton, 11 miles"><circle cx="176.4" cy="380.3" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/brierfield/" data-n="Brierfield" data-m="12" aria-label="Brierfield, 12 miles"><circle cx="449.1" cy="239.8" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/adlington/" data-n="Adlington" data-m="12" aria-label="Adlington, 12 miles"><circle cx="219.6" cy="439.3" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/horwich/" data-n="Horwich" data-m="12" aria-label="Horwich, 12 miles"><circle cx="245.0" cy="451.1" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/bolton/" data-n="Bolton" data-m="12" aria-label="Bolton, 12 miles"><circle cx="300.0" cy="460.8" r="5" fill="var(--text)" stroke="var(--panel)" stroke-width="1.5"></circle><text x="309.0" y="464.8" font-size="11.5" font-weight="500" fill="var(--text)">Bolton</text></a><a class="dot" href="../../areas/nelson/" data-n="Nelson" data-m="13" aria-label="Nelson, 13 miles"><circle cx="457.9" cy="226.4" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/bacup/" data-n="Bacup" data-m="13" aria-label="Bacup, 13 miles"><circle cx="457.9" cy="373.6" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/bury/" data-n="Bury" data-m="13" aria-label="Bury, 13 miles"><circle cx="359.6" cy="463.7" r="5" fill="var(--text)" stroke="var(--panel)" stroke-width="1.5"></circle><text x="368.6" y="467.7" font-size="11.5" font-weight="500" fill="var(--text)">Bury</text></a><a class="dot" href="../../areas/longton/" data-n="Longton" data-m="13" aria-label="Longton, 13 miles"><circle cx="128.4" cy="330.2" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/coppull/" data-n="Coppull" data-m="14" aria-label="Coppull, 14 miles"><circle cx="192.4" cy="453.7" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/croston/" data-n="Croston" data-m="14" aria-label="Croston, 14 miles"><circle cx="137.5" cy="393.8" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/whitworth/" data-n="Whitworth" data-m="14" aria-label="Whitworth, 14 miles"><circle cx="443.7" cy="420.6" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/colne/" data-n="Colne" data-m="15" aria-label="Colne, 15 miles"><circle cx="477.5" cy="205.6" r="5" fill="var(--text)" stroke="var(--panel)" stroke-width="1.5"></circle><text x="486.5" y="209.6" font-size="11.5" font-weight="500" fill="var(--text)">Colne</text></a><a class="dot" href="../../areas/radcliffe/" data-n="Radcliffe" data-m="15" aria-label="Radcliffe, 15 miles"><circle cx="341.8" cy="496.6" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/standish/" data-n="Standish" data-m="15" aria-label="Standish, 15 miles"><circle cx="184.7" cy="464.6" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/westhoughton/" data-n="Westhoughton" data-m="15" aria-label="Westhoughton, 15 miles"><circle cx="231.3" cy="488.9" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/farnworth/" data-n="Farnworth" data-m="15" aria-label="Farnworth, 15 miles"><circle cx="317.5" cy="500.2" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/todmorden/" data-n="Todmorden" data-m="15" aria-label="Todmorden, 15 miles"><circle cx="494.2" cy="352.0" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/heywood/" data-n="Heywood" data-m="16" aria-label="Heywood, 16 miles"><circle cx="407.2" cy="485.7" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/whitefield/" data-n="Whitefield" data-m="16" aria-label="Whitefield, 16 miles"><circle cx="355.5" cy="507.1" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/garstang/" data-n="Garstang" data-m="16" aria-label="Garstang, 16 miles"><circle cx="162.2" cy="135.8" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/tarleton/" data-n="Tarleton" data-m="16" aria-label="Tarleton, 16 miles"><circle cx="96.1" cy="366.3" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/kirkham/" data-n="Kirkham" data-m="17" aria-label="Kirkham, 17 miles"><circle cx="85.9" cy="222.1" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/rochdale/" data-n="Rochdale" data-m="17" aria-label="Rochdale, 17 miles"><circle cx="446.4" cy="474.5" r="5" fill="var(--text)" stroke="var(--panel)" stroke-width="1.5"></circle><text x="455.4" y="478.5" font-size="11.5" font-weight="500" fill="var(--text)">Rochdale</text></a><a class="dot" href="../../areas/prestwich/" data-n="Prestwich" data-m="18" aria-label="Prestwich, 18 miles"><circle cx="341.9" cy="537.5" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/barnoldswick/" data-n="Barnoldswick" data-m="18" aria-label="Barnoldswick, 18 miles"><circle cx="484.8" cy="145.0" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/wigan/" data-n="Wigan" data-m="18" aria-label="Wigan, 18 miles"><circle cx="179.4" cy="508.9" r="5" fill="var(--text)" stroke="var(--panel)" stroke-width="1.5"></circle><text x="188.4" y="512.9" font-size="11.5" font-weight="500" fill="var(--text)">Wigan</text></a><a class="dot" href="../../areas/earby/" data-n="Earby" data-m="19" aria-label="Earby, 19 miles"><circle cx="500.6" cy="143.3" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a><a class="dot" href="../../areas/skelmersdale/" data-n="Skelmersdale" data-m="19" aria-label="Skelmersdale, 19 miles"><circle cx="105.0" cy="463.7" r="3.6" fill="var(--mute)" stroke="var(--panel)" stroke-width="1.5"></circle></a>
-  <text x="586" y="24" text-anchor="end" font-size="11" fill="var(--mute)">N ↑</text></svg><div class="radius-tip" id="rtip">Tap or hover a dot to see the town. Positions are approximate.</div></div>
-      <div class="box"><h3>Nearby towns we cover</h3><div class="chips"><a class="chip" href="../../areas/church/">Church<small>4 mi</small></a><a class="chip" href="../../areas/clayton-le-moors/">Clayton-le-Moors<small>5 mi</small></a><a class="chip" href="../../areas/oswaldtwistle/">Oswaldtwistle<small>4 mi</small></a><a class="chip" href="../../areas/great-harwood/">Great Harwood<small>5 mi</small></a><a class="chip" href="../../areas/accrington/">Accrington<small>5 mi</small></a><a class="chip" href="../../areas/blackburn/">Blackburn<small>0 mi</small></a></div></div>
-      <div class="box"><h3>Book in Rishton</h3><p class="mute" style="font-size:14px">Send your reg and postcode and we'll confirm a price and a day.</p><a class="btn" href="../../contact/?town=Rishton" data-town="Rishton">Get a quote</a></div>
+      <div class="box"><h3>Nearby towns we cover</h3><div class="chips"><a class="chip" href="../../areas/church/">Church</a><a class="chip" href="../../areas/clayton-le-moors/">Clayton-le-Moors</a><a class="chip" href="../../areas/oswaldtwistle/">Oswaldtwistle</a><a class="chip" href="../../areas/great-harwood/">Great Harwood</a><a class="chip" href="../../areas/accrington/">Accrington</a><a class="chip" href="../../areas/blackburn/">Blackburn</a></div></div>
+      <div class="box lime"><h3>Book in Rishton</h3><p style="font-size:15px">Send your reg and postcode. We'll confirm a price and a day.</p><a class="btn dark" href="../../contact/?town=Rishton" data-town="Rishton">Get a price</a></div>
     </aside>
-  </div></section><section class="cta-band"><div class="wrap"><div class="stack" style="gap:8px"><h2>Book a remap in Rishton</h2><p class="mute">Send your reg and we'll confirm a day in Rishton. We'll come back with your price and what's possible.</p></div><div class="cta-row"><a class="btn" href="../../contact/">Get a quote</a><span class="btn ghost" data-c="phone">07540 173263</span></div></div></section></main>
+  </div></section><section class="sec tight"><div class="wrap"><div class="cta"><div><h2>Book a remap in Rishton</h2><p>Send your reg and postcode in Rishton and we'll come back with a fixed price.</p></div><div class="cta-row"><a class="btn dark" href="../../contact/?town=Rishton" data-town="Rishton">Get a price <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a><span class="btn ghost" data-c="phone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>07540 173263</span></div></div></div></section></main>
 
 <footer class="site-foot">
   <div class="wrap">
     <div class="foot-grid">
-      <div class="stack" style="gap:14px">
-        <a class="brand" href="../../"><span><b>We Remap<br>Any Car</b><small>weremapanycar.com</small></span></a>
-        <p class="mute" style="font-size:14px">Mobile ECU remapping, tuning and emissions diagnostics. We come to your home or workplace anywhere within 20 miles of Blackburn.</p>
-        <p class="small" data-c="footcontact">Call 07540 173263<br>Email sales@weremapanycar.com</p>
+      <div class="stack" style="gap:16px">
+        <a class="brand" href="../../"><span class="brand-mark"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><path d="M4 16a8 8 0 1 1 16 0" stroke-width="2.6" stroke-linecap="round"></path><path d="M12 16l5-6" stroke-width="2.6" stroke-linecap="round"></path></svg></span><b>We Remap Any Car</b></a>
+        <p style="font-size:15px">Mobile remapping and tuning. We come to your home or work anywhere within 20 miles of Blackburn.</p>
+        <p style="font-size:15px" data-c="footcontact">Call 07540 173263<br>sales@weremapanycar.com</p>
       </div>
       <div><h4>Services</h4><ul id="footSvc"><li><a href="../../services/stage-1-remap/">Stage 1 Remap</a></li><li><a href="../../services/economy-remap/">Economy Remap</a></li><li><a href="../../services/stage-2-tuning/">Stage 2 &amp; Custom Tuning</a></li><li><a href="../../services/speed-limiters/">Speed Limiters</a></li><li><a href="../../services/dpf-egr-adblue/">DPF, EGR &amp; AdBlue Faults</a></li><li><a href="../../services/gearbox-tuning/">Gearbox (TCU) Tuning</a></li><li><a href="../../services/ecu-repair-cloning/">ECU Repair &amp; Cloning</a></li><li><a href="../../services/commercial-and-agricultural/">Vans, Trucks &amp; Agricultural</a></li><li><a href="../../services/features-and-options/">Features &amp; Options</a></li><li><a href="../../services/diagnostics/">Diagnostics &amp; Health Checks</a></li></ul></div>
       <div><h4>Areas we cover</h4><ul class="foot-towns" id="footTowns"><li><a href="../../areas/accrington/">Accrington</a></li><li><a href="../../areas/adlington/">Adlington</a></li><li><a href="../../areas/bacup/">Bacup</a></li><li><a href="../../areas/bamber-bridge/">Bamber Bridge</a></li><li><a href="../../areas/barnoldswick/">Barnoldswick</a></li><li><a href="../../areas/belthorn/">Belthorn</a></li><li><a href="../../areas/blackburn/">Blackburn</a></li><li><a href="../../areas/bolton/">Bolton</a></li><li><a href="../../areas/brierfield/">Brierfield</a></li><li><a href="../../areas/burnley/">Burnley</a></li><li><a href="../../areas/bury/">Bury</a></li><li><a href="../../areas/chorley/">Chorley</a></li><li><a href="../../areas/church/">Church</a></li><li><a href="../../areas/clayton-le-moors/">Clayton-le-Moors</a></li><li><a href="../../areas/clayton-le-woods/">Clayton-le-Woods</a></li><li><a href="../../areas/clitheroe/">Clitheroe</a></li><li><a href="../../areas/colne/">Colne</a></li><li><a href="../../areas/coppull/">Coppull</a></li><li><a href="../../areas/croston/">Croston</a></li><li><a href="../../areas/darwen/">Darwen</a></li><li><a href="../../areas/earby/">Earby</a></li><li><a href="../../areas/edgworth-and-turton/">Edgworth &amp; Turton</a></li><li><a href="../../areas/euxton/">Euxton</a></li><li><a href="../../areas/farnworth/">Farnworth</a></li><li><a href="../../areas/fulwood/">Fulwood</a></li><li><a href="../../areas/garstang/">Garstang</a></li><li><a href="../../areas/great-harwood/">Great Harwood</a></li><li><a href="../../areas/haslingden/">Haslingden</a></li><li><a href="../../areas/heywood/">Heywood</a></li><li><a href="../../areas/hoghton/">Hoghton</a></li><li><a href="../../areas/horwich/">Horwich</a></li><li><a href="../../areas/kirkham/">Kirkham</a></li><li><a href="../../areas/langho/">Langho</a></li><li><a href="../../areas/leyland/">Leyland</a></li><li><a href="../../areas/longridge/">Longridge</a></li><li><a href="../../areas/longton/">Longton</a></li><li><a href="../../areas/lostock-hall/">Lostock Hall</a></li><li><a href="../../areas/mellor/">Mellor</a></li><li><a href="../../areas/nelson/">Nelson</a></li><li><a href="../../areas/oswaldtwistle/">Oswaldtwistle</a></li><li><a href="../../areas/padiham/">Padiham</a></li><li><a href="../../areas/penwortham/">Penwortham</a></li><li><a href="../../areas/preston/">Preston</a></li><li><a href="../../areas/prestwich/">Prestwich</a></li><li><a href="../../areas/radcliffe/">Radcliffe</a></li><li><a href="../../areas/ramsbottom/">Ramsbottom</a></li><li><a href="../../areas/rawtenstall/">Rawtenstall</a></li><li><a href="../../areas/ribchester/">Ribchester</a></li><li><a href="../../areas/rishton/">Rishton</a></li><li><a href="../../areas/rochdale/">Rochdale</a></li><li><a href="../../areas/skelmersdale/">Skelmersdale</a></li><li><a href="../../areas/standish/">Standish</a></li><li><a href="../../areas/tarleton/">Tarleton</a></li><li><a href="../../areas/todmorden/">Todmorden</a></li><li><a href="../../areas/tottington/">Tottington</a></li><li><a href="../../areas/walton-le-dale/">Walton-le-Dale</a></li><li><a href="../../areas/westhoughton/">Westhoughton</a></li><li><a href="../../areas/whalley/">Whalley</a></li><li><a href="../../areas/whitefield/">Whitefield</a></li><li><a href="../../areas/whittle-le-woods/">Whittle-le-Woods</a></li><li><a href="../../areas/whitworth/">Whitworth</a></li><li><a href="../../areas/wigan/">Wigan</a></li><li><a href="../../areas/wilpshire/">Wilpshire</a></li><li><a href="../../areas/withnell-and-brinscall/">Withnell &amp; Brinscall</a></li></ul></div>
     </div>
-    <p class="small">Emissions-related software (DPF, EGR, AdBlue/SCR) is supplied for off-road, motorsport and export vehicles only. Removing or disabling emissions equipment on a UK road vehicle is illegal and will fail an MOT. Always tell your insurer about a remap. © <span id="yr">2026</span> We Remap Any Car.</p>
+    <p class="fine">DPF, EGR and AdBlue software is for off-road, motorsport and export vehicles only. Removing emissions equipment from a UK road vehicle is illegal and fails the MOT. Please tell your insurer about any remap. © <span id="yr">2026</span> We Remap Any Car.</p>
   </div>
 </footer>
 
 <script>
-/* ---------- site settings: put the real phone and email here ---------- */
+/* ---------- site settings ---------- */
 const CONFIG={phone:'07540 173263',email:'sales@weremapanycar.com'};
 const STATIC=document.getElementById('app').dataset.route||'';
 const ROOT=document.getElementById('app').dataset.root||'';
-/* ---------- helpers ---------- */
+const IMG=n=>ROOT+'img/'+n+'.webp';
 const $=(s,el=document)=>el.querySelector(s), $$=(s,el=document)=>[...el.querySelectorAll(s)];
 const slug=s=>s.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
 const hashStr=s=>[...s].reduce((h,c)=>(h*31+c.charCodeAt(0))|0,7);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
@@ -523,305 +484,163 @@ const VEH=[
  {n:'Ford Focus 1.0 EcoBoost 125',g:'Cars & 4x4s',f:'p',ps:[125,150],nm:[170,230]}
 ];
 
-/* ---------- illustrations ---------- */
-let artN=0;
-function pcb(seed,opt={}){
-  const W=600,H=400,r=rng(seed),id='p'+(++artN);
-  let s=`<svg class="art" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(opt.label||'Illustration of an engine ECU circuit board')}">
-  <defs><radialGradient id="${id}g" cx="45%" cy="40%" r="80%"><stop offset="0" stop-color="#1E6A5F"/><stop offset="1" stop-color="#082623"/></radialGradient>
-  <radialGradient id="${id}t"><stop offset="0" stop-color="#FFF6D0"/><stop offset=".3" stop-color="#FFB64A"/><stop offset="1" stop-color="#FF6A00" stop-opacity="0"/></radialGradient>
-  <linearGradient id="${id}m" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#E9EDEF"/><stop offset=".5" stop-color="#9AA3A8"/><stop offset="1" stop-color="#5D666B"/></linearGradient></defs>
-  <rect width="${W}" height="${H}" fill="url(#${id}g)"/>`;
-  const st=12;let tr='',pads='';
-  for(let i=0;i<78;i++){
-    let x=Math.round(r()*W/st)*st,y=Math.round(r()*H/st)*st,d=`M${x} ${y}`;pads+=`<circle cx="${x}" cy="${y}" r="3.4"/>`;
-    let dir=Math.floor(r()*8);const n=2+Math.floor(r()*4);
-    for(let k=0;k<n;k++){const len=(2+Math.floor(r()*8))*st,a=dir*Math.PI/4;x+=Math.round(Math.cos(a)*len);y+=Math.round(Math.sin(a)*len);d+=` L${x} ${y}`;dir=(dir+(r()<.5?1:7))%8;}
-    tr+=`<path d="${d}"/>`;pads+=`<circle cx="${x}" cy="${y}" r="3.4"/>`;
-  }
-  s+=`<g fill="none" stroke="#C9844C" stroke-width="2.4" stroke-linejoin="round" opacity=".62">${tr}</g><g fill="#D9A066" stroke="#7A4A2A" stroke-width="1">${pads}</g>`;
-  // vias
-  let v='';for(let i=0;i<60;i++)v+=`<circle cx="${(r()*W).toFixed(0)}" cy="${(r()*H).toFixed(0)}" r="2"/>`;
-  s+=`<g fill="#0A1F1C" stroke="#B8BEC0" stroke-width="1.2" opacity=".8">${v}</g>`;
-  // SMD parts
-  let sm='';for(let i=0;i<46;i++){const x=r()*W,y=r()*H,rot=r()<.5?0:90;sm+=`<g transform="translate(${x.toFixed(0)} ${y.toFixed(0)}) rotate(${rot})"><rect x="-7" y="-3.5" width="14" height="7" fill="${r()<.5?'#3B2E26':'#C7B79A'}"/><rect x="-8" y="-3.5" width="3" height="7" fill="#D7DCDE"/><rect x="5" y="-3.5" width="3" height="7" fill="#D7DCDE"/></g>`;}
-  s+=sm;
-  // small chips
-  for(let i=0;i<4;i++){const x=40+r()*(W-140),y=30+r()*(H-90);let p='';for(let k=0;k<7;k++){p+=`<rect x="${x+5+k*7}" y="${y-5}" width="3" height="5" fill="#C8CDD0"/><rect x="${x+5+k*7}" y="${y+24}" width="3" height="5" fill="#C8CDD0"/>`;}
-    s+=`${p}<rect x="${x}" y="${y}" width="56" height="24" rx="2" fill="#16191B"/><circle cx="${x+5}" cy="${y+5}" r="1.6" fill="#3A3F42"/>`;}
-  // main MCU
-  const mx=opt.mx??W*.5,my=opt.my??H*.48,ms=128;let pins='';
-  for(let k=0;k<20;k++){const o=-ms/2+8+k*((ms-16)/19);pins+=`<rect x="${mx+o-1.3}" y="${my-ms/2-9}" width="2.6" height="9"/><rect x="${mx+o-1.3}" y="${my+ms/2}" width="2.6" height="9"/><rect x="${mx-ms/2-9}" y="${my+o-1.3}" width="9" height="2.6"/><rect x="${mx+ms/2}" y="${my+o-1.3}" width="9" height="2.6"/>`;}
-  s+=`<g fill="#CDD2D5">${pins}</g><rect x="${mx-ms/2}" y="${my-ms/2}" width="${ms}" height="${ms}" rx="3" fill="#141719" stroke="#2A2F33"/><circle cx="${mx-ms/2+12}" cy="${my-ms/2+12}" r="4" fill="#25292C"/>
-  <text x="${mx}" y="${my-4}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="15" fill="#8C969C" font-weight="600">TC1797</text>
-  <text x="${mx}" y="${my+16}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#5F696E">32-bit · 4MB FLASH</text>`;
-  s+=`<text x="22" y="${H-20}" font-family="IBM Plex Mono, monospace" font-size="13" fill="#E8EFE6" opacity=".55" letter-spacing="2">${esc(opt.silk||'ECU · EDC17 · REV C')}</text>`;
-  if(opt.probe){ // boot-mode probe wires
-    const px=mx-ms/2-9;[[-40,'#E38A4A'],[-26,'#F2C55C'],[-12,'#7FD3A4'],[2,'#E3ECEE']].forEach(([o,c],i)=>{s+=`<path d="M${px+3} ${my+o} C ${px-80} ${my+o-10}, ${px-120} ${my+o-120+i*20}, ${px-210} ${my-170+i*14}" fill="none" stroke="${c}" stroke-width="3"/><circle cx="${px+3}" cy="${my+o}" r="4" fill="#C0C6C9"/>`;});
-  }
-  if(opt.iron){ // soldering iron touching a pin
-    const tx=opt.tx??(mx+ms/2+6),ty=opt.ty??(my+ms/2-24),ang=opt.ang??32;
-    s+=`<circle cx="${tx}" cy="${ty}" r="34" fill="url(#${id}t)" class="tipglow"/>
-    <g transform="translate(${tx} ${ty}) rotate(${ang})">
-      <path d="M0 0 L44 -5 L44 5 Z" fill="#9AA0A3"/><path d="M0 0 L12 -2 L12 2Z" fill="#5A3A20"/>
-      <rect x="44" y="-6" width="110" height="12" fill="url(#${id}m)"/>
-      <rect x="150" y="-11" width="22" height="22" rx="3" fill="#2B3033"/>
-      <rect x="170" y="-18" width="230" height="36" rx="18" fill="#1B1F22"/>
-      <g fill="#E38A4A">${[0,1,2,3,4,5].map(i=>`<rect x="${190+i*22}" y="-18" width="8" height="36" rx="2" opacity=".85"/>`).join('')}</g>
-    </g>
-    <circle cx="${tx}" cy="${ty}" r="4.5" fill="#E6E9EA"/>
-    <g fill="none" stroke="#DDE6E8" stroke-width="2.4" stroke-linecap="round" opacity=".5">
-      <path class="smoke" d="M${tx} ${ty-8} c -8 -14, 10 -22, 0 -38"/>
-      <path class="smoke s2" d="M${tx+4} ${ty-8} c 10 -14, -8 -24, 4 -40"/>
-      <path class="smoke s3" d="M${tx-3} ${ty-8} c -10 -12, 6 -20, -4 -36"/>
-    </g>`;
-  }
-  return s+'</svg>';
-}
-function laptopArt(seed=4){
-  const r=rng(seed),hx='0123456789ABCDEF',b=()=>hx[Math.floor(r()*16)]+hx[Math.floor(r()*16)];
-  let lines='';for(let i=0;i<9;i++){let row=`0x${(0x1C4F00+i*16).toString(16).toUpperCase()}  `;for(let k=0;k<8;k++)row+=b()+' ';lines+=`<text x="148" y="${108+i*17}">${row}</text>`;}
-  return `<svg class="art" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of a laptop reading an ECU through the OBD port">
-  <defs><linearGradient id="lg${seed}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#15303A"/><stop offset="1" stop-color="#0B161B"/></linearGradient></defs>
-  <rect width="600" height="400" fill="url(#lg${seed})"/>
-  <g stroke="#22414C" stroke-width="1">${Array.from({length:14},(_,i)=>`<line x1="0" y1="${i*30}" x2="600" y2="${i*30}"/>`).join('')}</g>
-  <path d="M120 300 L480 300 L520 330 L80 330 Z" fill="#2A3439"/><rect x="80" y="330" width="440" height="8" rx="3" fill="#1A2125"/>
-  <rect x="130" y="70" width="340" height="230" rx="8" fill="#1A2125"/><rect x="140" y="80" width="320" height="210" fill="#081014"/>
-  <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#E38A4A" opacity=".9">${lines}</g>
-  <text x="148" y="96" font-family="IBM Plex Mono, monospace" font-size="11" fill="#92AAB1">READ FLASH · EDC17C64 · OBD</text>
-  <rect x="148" y="262" width="304" height="10" rx="2" fill="#15303A"/><rect x="148" y="262" width="204" height="10" rx="2" fill="#E38A4A"/>
-  <text x="452" y="256" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11" fill="#E3ECEE">67%<tspan class="blink">_</tspan></text>
-  <path d="M480 315 C 540 320, 560 250, 540 210 S 520 140, 560 120" fill="none" stroke="#2C3A40" stroke-width="7" stroke-linecap="round"/>
-  <g transform="translate(540 92)"><path d="M0 0 L54 0 L48 30 L6 30 Z" fill="#1B2226" stroke="#E38A4A" stroke-width="2"/>
-  <g fill="#D9A066">${Array.from({length:8},(_,i)=>`<circle cx="${8+i*5.4}" cy="10" r="1.6"/><circle cx="${10+i*4.8}" cy="21" r="1.6"/>`).join('')}</g></g>
-  <text x="567" y="140" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#92AAB1">OBD-II</text>
-  </svg>`;
-}
 
-/* ---------- ECU map (hero) ---------- */
-const RPM=[1000,1400,1800,2200,2600,3000,3400,3800,4200],LOAD=[100,90,80,70,60,50,40,30];
-function boost(r,l,tuned){
-  const sp=Math.pow(Math.min(1,Math.max(0,(r-900)/1500)),1.15), fall=r>3000?1-(r-3000)/1200*.18:1, L=l/100;
-  let v=1013+L*1250*sp*fall+L*60;
-  if(tuned)v+=Math.pow(L,1.6)*330*sp*(r>3400?.75:1);
-  return Math.round(v/10)*10;
-}
-function heat(v){const t=Math.min(1,Math.max(0,(v-1000)/1700));return `hsl(${195-178*t} ${42+t*36}% ${17+t*27}%)`;}
-function mapTable(){
-  let h='<table class="ecumap" aria-label="Boost target map, rpm against engine load"><thead><tr><th class="mono">LOAD%\\RPM</th>'+RPM.map(r=>`<th>${r}</th>`).join('')+'</tr></thead><tbody>';
-  LOAD.forEach(l=>{h+=`<tr><th>${l}</th>`+RPM.map(r=>{const v=boost(r,l,0);return `<td data-r="${r}" data-l="${l}" style="background:${heat(v)}">${v}</td>`}).join('')+'</tr>'});
-  return h+'</tbody></table>';
-}
-function setMap(tuned,animate=true){
-  const cells=$$('.ecumap td');let maxD=0;
-  cells.forEach(td=>{const r=+td.dataset.r,l=+td.dataset.l,a=boost(r,l,0),b=boost(r,l,1),to=tuned?b:a,from=+td.textContent;maxD=Math.max(maxD,b-a);
-    td.style.background=heat(to);td.classList.toggle('chg',tuned&&b-a>=60);
-    if(!animate||matchMedia('(prefers-reduced-motion:reduce)').matches){td.textContent=to;return}
-    const t0=performance.now();const step=t=>{const k=Math.min(1,(t-t0)/700);td.textContent=Math.round((from+(to-from)*(1-Math.pow(1-k,3)))/10)*10;if(k<1)requestAnimationFrame(step)};requestAnimationFrame(step);});
-  $$('#mapSeg button').forEach(b=>b.classList.toggle('on',(b.dataset.m==='t')===tuned));
-  const f=$('#mapDelta');if(f)f.innerHTML=tuned?`Peak change <b>+${maxD} mbar</b> at full load`:'Factory calibration';
-}
 
-/* ---------- dyno ---------- */
-function curves(v,mode){
-  const p=v.f==='p',r0=1000,r1=p?6800:4800,pl=p?[1700,4300]:[1750,2750];
-  const ps=mode==='s'?v.ps[0]:mode==='e'?Math.round(v.ps[0]+(v.ps[1]-v.ps[0])*.45):v.ps[1];
-  const nm=mode==='s'?v.nm[0]:mode==='e'?Math.round(v.nm[0]+(v.nm[1]-v.nm[0])*.65):v.nm[1];
-  const ext=mode==='s'?0:(p?200:180);
-  const tq=r=>r<pl[0]?.5+.5*Math.pow((r-r0)/(pl[0]-r0),.8):r<=pl[1]+ext?1:1-.38*Math.pow((r-pl[1]-ext)/(r1-pl[1]-ext),1.3);
-  const pts=[];for(let r=r0;r<=r1;r+=100)pts.push([r,tq(r),tq(r)*r]);
-  const mx=Math.max(...pts.map(q=>q[2]));
-  return {r0,r1,ps,nm,pts:pts.map(([r,t,pw])=>[r,t*nm,pw/mx*ps])};
-}
-function dyno(v,mode){
-  const S=curves(v,'s'),T=curves(v,mode),W=640,H=330,m={l:52,r:56,t:16,b:40};
-  const pMax=Math.ceil(Math.max(T.ps,S.ps)*1.15/50)*50,tMax=Math.ceil(Math.max(T.nm,S.nm)*1.15/100)*100;
-  const X=r=>m.l+(r-S.r0)/(S.r1-S.r0)*(W-m.l-m.r),YP=p=>H-m.b-p/pMax*(H-m.t-m.b),YT=t=>H-m.b-t/tMax*(H-m.t-m.b);
-  let g='';for(let i=0;i<=5;i++){const y=H-m.b-i/5*(H-m.t-m.b);g+=`<line x1="${m.l}" x2="${W-m.r}" y1="${y}" y2="${y}" stroke="var(--line)"/><text x="${m.l-8}" y="${y+4}" text-anchor="end">${Math.round(pMax*i/5)}</text><text x="${W-m.r+8}" y="${y+4}">${Math.round(tMax*i/5)}</text>`;}
-  const step=S.r1>5000?1000:500;for(let r=S.r0;r<=S.r1;r+=step)g+=`<line x1="${X(r)}" x2="${X(r)}" y1="${H-m.b}" y2="${H-m.b+5}" stroke="var(--mute)"/><text x="${X(r)}" y="${H-m.b+19}" text-anchor="middle">${r}</text>`;
-  const line=(c,i,Y)=>c.pts.map((q,k)=>(k?'L':'M')+X(q[0]).toFixed(1)+' '+Y(q[i]).toFixed(1)).join(' ');
-  const pk=T.pts.reduce((a,b)=>b[2]>a[2]?b:a);
-  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Dyno chart of power and torque, standard against tuned">
-  <g font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--mute)">${g}
-  <text x="${m.l}" y="${H-4}" >RPM</text><text x="${m.l-8}" y="${m.t-4}" text-anchor="end" opacity="0">.</text></g>
-  <text x="14" y="${H/2}" transform="rotate(-90 14 ${H/2})" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--mute)">POWER (PS)</text>
-  <text x="${W-10}" y="${H/2}" transform="rotate(90 ${W-10} ${H/2})" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--mute)">TORQUE (NM)</text>
-  <path d="${line(S,1,YT)}" fill="none" stroke="var(--mute)" stroke-width="1.6" stroke-dasharray="2 4"/>
-  <path d="${line(T,1,YT)}" fill="none" stroke="var(--copper-hi)" stroke-width="1.8" stroke-dasharray="7 4"/>
-  <path d="${line(S,2,YP)}" fill="none" stroke="var(--mute)" stroke-width="2.2"/>
-  <path d="${line(T,2,YP)} L${X(T.r1)} ${H-m.b} L${X(T.r0)} ${H-m.b} Z" fill="var(--copper)" opacity=".10"/>
-  <path d="${line(T,2,YP)}" fill="none" stroke="var(--copper)" stroke-width="3"/>
-  <circle cx="${X(pk[0])}" cy="${YP(pk[2])}" r="5" fill="var(--copper)" stroke="var(--bg)" stroke-width="2"/>
-  <text x="${X(pk[0])}" y="${YP(pk[2])-12}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="600" fill="var(--text)">${T.ps} PS</text>
-  </svg>`;
+/* photos */
+const PICS=['obd-in-car','board-soldering','dpf-bench','obd-tablet','soldering-close','dpf-close','dash-cluster'];
+const PIC_ALT={'obd-in-car':'Technician plugging a diagnostic tablet into a car','board-soldering':'Soldering a circuit board on the bench','dpf-bench':'Diesel particulate filter being inspected','obd-tablet':'Diagnostic lead plugged into the port under the dashboard','soldering-close':'Close-up of soldering an electronic board','dpf-close':'DPF on the workbench','dash-cluster':'Instrument cluster on the bench'};
+const SVC_PIC={'stage-1-remap':'obd-in-car','economy-remap':'obd-tablet','stage-2-tuning':'board-soldering','speed-limiters':'obd-tablet','dpf-egr-adblue':'dpf-bench','gearbox-tuning':'obd-in-car','ecu-repair-cloning':'soldering-close','commercial-and-agricultural':'dpf-close','features-and-options':'dash-cluster','diagnostics':'obd-tablet'};
+const pic=(n,cls='',lazy=true)=>`<img class="${cls}" src="${IMG(n)}" alt="${esc(PIC_ALT[n]||'')}" ${lazy?'loading="lazy"':''} width="1400" height="788">`;
+const ICON={
+ check:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#A8E03A"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#0E1511" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+ phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',
+ arrow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+};
+
+/* ---------- calculator ---------- */
+function vals(v,mode){
+  if(mode==='e')return {ps:Math.round(v.ps[0]+(v.ps[1]-v.ps[0])*.45),nm:Math.round(v.nm[0]+(v.nm[1]-v.nm[0])*.65)};
+  return {ps:v.ps[1],nm:v.nm[1]};
 }
 function calcHTML(){
   const groups=[...new Set(VEH.map(v=>v.g))];
-  return `<div class="calc">
-    <div class="calc-side">
-      <label class="f" for="vehSel">Vehicle
-        <select id="vehSel">${groups.map(g=>`<optgroup label="${g}">${VEH.map((v,i)=>v.g===g?`<option value="${i}">${esc(v.n)}</option>`:'').join('')}</optgroup>`).join('')}</select></label>
-      <div><div class="eyebrow" style="margin-bottom:8px">File type</div>
-        <div class="seg" id="modeSeg"><button data-m="t" class="on">Performance</button><button data-m="e">Economy</button></div></div>
-      <div class="stats" id="stats"></div>
-      <p class="note">Typical Stage 1 figures for a healthy, standard vehicle. Your exact gains are confirmed on the day after a health check. Don't see your vehicle? We remap almost everything with an ECU, so ask.</p>
-    </div>
-    <div class="chart-card"><div class="legend"><span><i style="border-color:var(--mute)"></i>Standard power</span><span><i style="border-color:var(--copper)"></i>Tuned power</span><span><i style="border-color:var(--copper-hi);border-top-style:dashed"></i>Tuned torque</span><span><i style="border-color:var(--mute);border-top-style:dotted"></i>Standard torque</span></div><div id="dyno"></div></div>
+  return `<div class="calc-box">
+    <label class="f" for="vehSel">Choose a vehicle
+      <select id="vehSel">${groups.map(g=>`<optgroup label="${g}">${VEH.map((v,i)=>v.g===g?`<option value="${i}">${esc(v.n)}</option>`:'').join('')}</optgroup>`).join('')}</select></label>
+    <div class="pills" id="modeSeg" role="group" aria-label="Type of remap"><button data-m="t" class="on">More power</button><button data-m="e">Better MPG</button></div>
+    <div class="bars" id="bars"></div>
+    <div class="bar-key"><span>Standard</span><span class="a">After remap</span></div>
+    <p class="small-note">Typical figures for a healthy, standard vehicle. We confirm yours on the day. Not listed? We remap almost anything with an engine computer.</p>
   </div>`;
 }
 let calcMode='t';
 function updCalc(){
-  const sel=$('#vehSel');if(!sel)return;const v=VEH[+sel.value],T=curves(v,calcMode);
-  const dp=T.ps-v.ps[0],dn=T.nm-v.nm[0];
-  $('#stats').innerHTML=`<div class="stat"><div class="k">Power</div><div class="v">${T.ps}<small> PS</small></div><div class="d">+${dp} PS (${Math.round(dp/v.ps[0]*100)}%)</div><div class="s">from ${v.ps[0]} PS</div></div>
-  <div class="stat"><div class="k">Torque</div><div class="v">${T.nm}<small> Nm</small></div><div class="d">+${dn} Nm (${Math.round(dn/v.nm[0]*100)}%)</div><div class="s">from ${v.nm[0]} Nm</div></div>
-  ${calcMode==='e'?`<div class="stat" style="grid-column:1/-1"><div class="k">Fuel economy</div><div class="v">5–12<small> % better mpg</small></div><div class="s">typical, depends on how and where you drive</div></div>`:''}`;
-  $('#dyno').innerHTML=dyno(v,calcMode);
+  const sel=$('#vehSel');if(!sel)return;const v=VEH[+sel.value],t=vals(v,calcMode);
+  const row=(label,unit,a,b)=>{const max=b*1.08;return `<div class="bar-row"><div class="bar-top"><span>${label}<br><small>${a} → ${b} ${unit}</small></span><b>+${Math.round((b-a)/a*100)}%</b></div><div class="bar"><i class="after" style="width:${b/max*100}%"></i><i class="before" style="width:${a/max*100}%"></i></div></div>`};
+  $('#bars').innerHTML=row('Power','bhp',v.ps[0],t.ps)+row('Torque (pulling power)','Nm',v.nm[0],t.nm)+(calcMode==='e'?`<div class="bar-row"><div class="bar-top"><span>Fuel economy<br><small>typical saving, depends on your driving</small></span><b>5–12%</b></div></div>`:'');
 }
 
 /* ---------- shared blocks ---------- */
-const svcCard=s=>`<a class="svc" href="#service-${s.id}"><span class="tag">${s.tag}</span><h3>${s.name}</h3><p>${s.short}</p><span class="spec">${s.spec}</span><span class="go">Find out more →</span></a>`;
+const card=s=>`<a class="card" href="#service-${s.id}">${pic(SVC_PIC[s.id]||'obd-in-car')}<div class="card-body"><span class="tag">${s.tag}</span><h3>${s.name}</h3><p>${s.short}</p><span class="more">Find out more →</span></div></a>`;
 const STEPS=[
- ['Book and check','Send your reg. We confirm the ECU type, what\'s possible and the price before we set off.'],
- ['Health check on arrival','Battery support connected, all modules scanned, live data checked for boost, rail pressure and injector corrections.'],
- ['Read and back up','We read your original file through the OBD port, or on the bench if needed, and save it for life.'],
- ['Calibrate','Boost, fuelling, timing, torque limiters and smoke maps adjusted for your engine and what you use the vehicle for.'],
- ['Write and verify','The new file is written back, checksums are corrected and the ECU is verified before anything else.'],
- ['Road test and log','We drive it with you, log the key values and hand back the keys. Most jobs take one to two hours.']
+ ['Send your reg','Text, call or fill in the form. We tell you what your vehicle can gain and give you a fixed price.'],
+ ['We come to you','We arrive at your home or work with everything we need. A health check comes first, then your original settings are saved.'],
+ ['Drive away','The remap takes one to two hours. We test drive it with you, and you can go back to standard any time.']
 ];
 const stepsHTML=()=>`<ol class="steps">${STEPS.map(([h,p])=>`<li><h3>${h}</h3><p>${p}</p></li>`).join('')}</ol>`;
 const FAQ=[
- ['Will a remap damage my engine?','A good remap stays inside the limits of the standard turbo, injectors and clutch, and we check the vehicle is healthy before we start. Problems usually come from tuning a vehicle that already has a fault, or from generic files pushed too far. We do neither.'],
- ['Do I need to tell my insurer?','Yes. A remap is a modification, and most insurers will ask about it. Many will cover it for a small extra premium or none at all. Not declaring it can invalidate your cover.'],
- ['Can you put it back to standard?','Yes. We keep your original file, and putting it back is free if you sell the vehicle or need it for a dealer visit.'],
- ['Will it affect my warranty?','A manufacturer can refuse a claim on parts related to the change. Some ECUs record that they have been reprogrammed even after the original file goes back. If your vehicle is under warranty, we\'ll talk it through before you decide.'],
- ['Do you need a workshop?','No. We\'re fully mobile. All we need is somewhere safe to park, such as your drive, a car park or the yard at work. We bring a battery support unit so the voltage stays steady while we write the file.'],
- ['Is DPF removal legal?','Not on a road vehicle. Removing or disabling a DPF, EGR or AdBlue system on a UK road vehicle is illegal and fails the MOT. We diagnose and repair these systems, and supply deletes for off-road, motorsport and export vehicles only.'],
- ['Will it pass the MOT?','A properly calibrated remap keeps smoke levels in check, and we don\'t touch emissions equipment on road vehicles, so it should pass just as it did before.']
+ ['Is remapping safe for my engine?','Yes, when it\'s done properly. We stay within the safe limits of your standard turbo, injectors and clutch, and we check the vehicle is healthy before we start.'],
+ ['Do I need to tell my insurer?','Yes. A remap is a modification, so let your insurer know. Many cover it for little or no extra cost.'],
+ ['Can it be put back to standard?','Yes. We keep a copy of your original settings, and putting them back is free if you sell the vehicle.'],
+ ['Do I need to bring it to a garage?','No. We\'re fully mobile. All we need is a safe place to park, like your drive or the car park at work.'],
+ ['Is DPF removal legal?','Not on a road vehicle. We diagnose and fix DPF, EGR and AdBlue problems. Removal software is only for off-road, motorsport and export vehicles.'],
+ ['Will it still pass the MOT?','Yes. A proper remap keeps smoke levels in check, and we don\'t touch emissions equipment on road vehicles.']
 ];
 const faqHTML=(n=FAQ.length)=>`<div class="faq">${FAQ.slice(0,n).map(([q,a],i)=>`<details${i===0?' open':''}><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>`;
-const ctaBand=(t='Ready for more power?',town='')=>`<section class="cta-band"><div class="wrap"><div class="stack" style="gap:8px"><h2>${t}</h2><p class="mute">Send your reg${town?` and we'll confirm a day in ${town}`:''}. We'll come back with your price and what's possible.</p></div><div class="cta-row"><a class="btn" href="#contact">Get a quote</a><span class="btn ghost" data-c="phone"></span></div></div></section>`;
-
-function radiusMap(hl){
-  const S=600,c=S/2,k=13.4;
-  let g='';[5,10,15,20].forEach(m=>{g+=`<circle cx="${c}" cy="${c}" r="${m*k}" fill="none" stroke="var(--line)" ${m===20?'stroke="var(--copper-dim)" stroke-width="1.5"':''} stroke-dasharray="${m===20?'0':'3 5'}"/><text x="${c+4}" y="${c-m*k-5}" font-size="11" fill="var(--mute)">${m} mi</text>`;});
-  const P=n=>{const t=TOWNS.find(t=>t.name===n);return [c+t.x*k,c+t.y*k]};
-  const road=(names,label,lp)=>{const pts=names.map(P);return `<polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="var(--copper)" stroke-opacity=".35" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="${pts[lp][0]+8}" y="${pts[lp][1]+14}" font-size="10" fill="var(--copper)" opacity=".8">${label}</text>`};
-  g+=road(['Bamber Bridge','Hoghton','Blackburn','Rishton','Clayton-le-Moors','Burnley','Brierfield','Nelson','Colne'],'M65',1);
-  g+=road(['Bamber Bridge','Whittle-le-Woods','Chorley','Horwich','Westhoughton','Farnworth'],'M61',2);
-  g+=road(['Haslingden','Ramsbottom','Bury','Whitefield'],'M66',1);
-  g+=road(['Penwortham','Preston','Fulwood'],'',0);
-  let d='';TOWNS.forEach(t=>{const x=c+t.x*k,y=c+t.y*k,isH=hl&&t.slug===hl,isBase=t.name==='Blackburn';
-    d+=`<a class="dot" href="#area-${t.slug}" data-n="${esc(t.name)}" data-m="${t.mi}" aria-label="${esc(t.name)}, ${t.mi} miles"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${isBase||isH?7:t.major?5:3.6}" fill="${isBase||isH?'var(--copper)':t.major?'var(--text)':'var(--mute)'}" stroke="var(--panel)" stroke-width="1.5"/>${(t.major||isH)?`<text x="${(x+9).toFixed(1)}" y="${(y+4).toFixed(1)}" font-size="${isBase||isH?13:11.5}" font-weight="${isBase||isH?600:500}" fill="${isH?'var(--copper-hi)':'var(--text)'}">${esc(t.name)}</text>`:''}</a>`;});
-  return `<div class="radius"><svg viewBox="0 0 ${S} ${S}" role="img" aria-label="Map of towns within 20 miles of Blackburn" font-family="IBM Plex Mono, monospace">${g}${d}
-  <text x="${S-14}" y="24" text-anchor="end" font-size="11" fill="var(--mute)">N ↑</text></svg><div class="radius-tip" id="rtip">Tap or hover a dot to see the town. Positions are approximate.</div></div>`;
-}
-const pageHead=(crumbs,inner,art)=>`<section class="page-head">${art?`<div class="hero-bg">${art}</div>`:''}<div class="wrap"><div class="crumbs">${crumbs}</div>${inner}</div></section>`;
+const ctaHTML=(t='Ready for more power?',town='')=>`<section class="sec tight"><div class="wrap"><div class="cta"><div><h2>${t}</h2><p>Send your reg${town?` and postcode in ${town}`:''} and we'll come back with a fixed price.</p></div><div class="cta-row"><a class="btn dark" href="#contact"${town?` data-town="${esc(town)}"`:''}>Get a price ${ICON.arrow}</a><span class="btn ghost" data-c="phone"></span></div></div></div></section>`;
+const crumbs=c=>`<div class="crumbs">${c}</div>`;
 
 /* ---------- pages ---------- */
 function home(){
   const majors=TOWNS.filter(t=>t.major);
   return `
-  <section class="hero"><div class="hero-bg">${pcb(11,{silk:''})}</div><div class="wrap">
+  <section class="hero"><div class="wrap">
     <div class="hero-copy">
-      <span class="eyebrow">Mobile ECU remapping · North West</span>
-      <h1>More power.<br>Less fuel.<br><em>Done on your drive.</em></h1>
-      <p class="lead">Remaps, speed limiters, gearbox tuning and emissions diagnostics for cars, vans, pickups and farm machinery. We come to you anywhere within 20 miles of Blackburn.</p>
-      <div class="cta-row"><a class="btn" href="#contact">Get a quote</a><a class="btn ghost" href="#services">See services</a></div>
-      <div class="proof"><span>Remaps from £199</span><span>Original file kept for life</span><span>Health check before every tune</span><span>${TOWNS.length} towns covered</span></div>
+      <span class="kicker">Mobile remapping · North West</span>
+      <h1>More power. Better MPG. <span>Done on your drive.</span></h1>
+      <p class="lead">We remap cars, vans, pickups and tractors at your home or work, anywhere within 20 miles of Blackburn.</p>
+      <div class="cta-row"><a class="btn" href="#contact">Get a price ${ICON.arrow}</a><a class="btn ghost" href="#insight">How it works</a></div>
+      <div class="ticks-row"><span>${ICON.check}Remaps from £199</span><span>${ICON.check}We come to you</span><span>${ICON.check}Back to standard any time</span></div>
     </div>
-    <div class="mapcard" aria-label="Example ECU boost map">
-      <div class="mapcard-top"><div class="t">Boost target map<small>Example turbo diesel · values in mbar</small></div>
-        <div class="seg" id="mapSeg"><button data-m="s" class="on">Stock</button><button data-m="t">Tuned</button></div></div>
-      <div class="map-scroll">${mapTable()}</div>
-      <div class="map-foot"><span id="mapDelta">Factory calibration</span><span>This is what a remap edits</span></div>
+    <div class="hero-pic">${pic('obd-in-car','',false)}
+      <div class="float f2"><b>1–2 hrs</b><span>for most remaps</span></div>
+      <div class="float f1"><b>+30%</b><span>typical diesel power gain</span></div>
     </div>
   </div></section>
-  <div class="brands"><div class="wrap"><span>Ford</span><span>VW</span><span>Audi</span><span>BMW</span><span>Mercedes-Benz</span><span>Vauxhall</span><span>Nissan</span><span>Toyota</span><span>Land Rover</span><span>Peugeot</span><span>Citroën</span><span>Renault</span><span>Fiat</span><span>Iveco</span><span>DAF</span><span>JCB</span><span>John Deere</span></div></div>
 
-  <section class="band"><div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Gains calculator</span><h2>See what your vehicle could make</h2><p class="lead">Pick a vehicle to see typical Stage 1 power and torque on the dyno curve. Switch to Economy for a fuel-saving file.</p></div>
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="sec-head"><span class="kicker">Remapping in plain English</span><h2>What actually is a remap?</h2></div>
+    <div class="explain">
+      <div class="ex"><span class="n">1</span><h3>Your engine has a computer</h3><p>It's called the ECU. It decides how much fuel and boost the engine gets. Factories set it cautiously so one engine suits every country.</p></div>
+      <div class="ex"><span class="n">2</span><h3>We fine-tune its settings</h3><p>We plug into the diagnostic port under your dashboard, save your original settings, then adjust them for your vehicle and UK fuel.</p></div>
+      <div class="ex"><span class="n">3</span><h3>You feel the difference</h3><p>Stronger pull, easier overtaking and towing, and often better fuel economy. Nothing is bolted on, and nothing looks different.</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec dark"><div class="wrap calc">
+    <div class="stack"><span class="kicker">Try it</span><h2>See what your vehicle could gain</h2><p class="lead">Pick your vehicle to see typical power and torque before and after. Switch to Better MPG for a fuel-saving remap.</p></div>
     ${calcHTML()}
   </div></section>
 
-  <section class="band alt"><div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Services</span><h2>Everything to do with tuning, all mobile</h2></div>
-    <div class="svc-grid">${SERVICES.slice(0,9).map(svcCard).join('')}</div>
+  <section class="sec"><div class="wrap">
+    <div class="sec-head"><span class="kicker">Services</span><h2>What we do</h2></div>
+    <div class="cards">${SERVICES.filter(s=>['stage-1-remap','economy-remap','speed-limiters','dpf-egr-adblue','commercial-and-agricultural','ecu-repair-cloning'].includes(s.id)).map(card).join('')}</div>
+    <div style="margin-top:24px"><a class="btn ghost" href="#services">All services ${ICON.arrow}</a></div>
   </div></section>
 
-  <section class="band"><div class="wrap split">
-    <figure class="figure">${pcb(23,{iron:true,label:'Illustration of a soldering iron repairing a joint on an ECU circuit board',silk:'EDC17C64 · BENCH'})}<figcaption><span>Board-level repair on the bench</span></figcaption></figure>
-    <div class="stack">
-      <span class="eyebrow">On the bench</span>
-      <h2>When the OBD port isn't enough</h2>
-      <p class="lead">Some ECUs are locked, damaged or bricked by a failed flash elsewhere. Those come out of the car and onto the bench, where we connect straight to the processor.</p>
-      <ul class="ticks"><li>Boot-mode and BDM reads of the full flash and EEPROM</li><li>Microscope soldering of cracked joints and failed driver chips</li><li>Cloning to a replacement ECU with immobiliser data intact</li></ul>
-      <div class="cta-row"><a class="btn ghost" href="#insight">Inside the ECU</a><a class="btn ghost" href="#service-ecu-repair-cloning">ECU repair</a></div>
-    </div>
-  </div></section>
-
-  <section class="band alt"><div class="wrap">
-    <div class="sec-head"><span class="eyebrow">How it works</span><h2>What happens on the day</h2></div>
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="sec-head"><span class="kicker">How it works</span><h2>Three simple steps</h2></div>
     ${stepsHTML()}
   </div></section>
 
-  <section class="band"><div class="wrap cover">
-    ${radiusMap()}
-    <div class="stack">
-      <span class="eyebrow">Areas we cover</span>
-      <h2>Mobile across the North West</h2>
-      <p class="lead">We're based in Blackburn and cover every town within 20 miles. That takes in East Lancashire, Preston, Chorley, the Ribble Valley, Rossendale and the north of Greater Manchester.</p>
-      <div class="chips">${majors.map(t=>`<a class="chip" href="#area-${t.slug}">${t.name}<small>${t.mi} mi</small></a>`).join('')}</div>
-      <a class="btn ghost" href="#areas" style="justify-self:start">All ${TOWNS.length} towns →</a>
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="sec-head"><span class="kicker">Behind the scenes</span><h2>Proper kit, proper work</h2><p class="lead">From a quick plug-in remap to board-level repairs under the microscope.</p></div>
+    <div class="gallery">
+      <figure>${pic('board-soldering')}<figcaption>Repairing an ECU board</figcaption></figure>
+      <figure>${pic('obd-tablet')}<figcaption>Reading through the OBD port</figcaption></figure>
+      <figure>${pic('dpf-close')}<figcaption>DPF diagnosis</figcaption></figure>
+      <figure>${pic('dash-cluster')}<figcaption>Dash and cluster work</figcaption></figure>
+      <figure>${pic('soldering-close')}<figcaption>Microscope soldering</figcaption></figure>
     </div>
   </div></section>
 
-  <section class="band alt"><div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Questions</span><h2>Before you book</h2></div>
-    ${faqHTML(5)}
+  <section class="sec" style="padding-top:0"><div class="wrap split">
+    <div class="stack"><span class="kicker">Where we work</span><h2>We come to you</h2><p class="lead">Based in Blackburn, covering ${TOWNS.length} towns within 20 miles, from Preston and Chorley to Burnley, Bolton and Bury.</p>
+      <div class="chips">${majors.map(t=>`<a class="chip" href="#area-${t.slug}">${t.name}</a>`).join('')}</div>
+      <a class="btn ghost" href="#areas" style="justify-self:start">Find your town ${ICON.arrow}</a></div>
+    <div class="stack"><span class="kicker">Questions</span>${faqHTML(4)}</div>
   </div></section>
-  ${ctaBand()}`;
+  ${ctaHTML()}`;
 }
 
 function services(){
-  return pageHead(`<a href="#home">Home</a> / <span>Services</span>`,`<span class="eyebrow">Services</span><h1>Tuning & remapping services</h1><p class="lead">From a straightforward Stage 1 remap on your drive to board-level ECU repair on the bench. Every job starts with a health check, and your original file is kept for life.</p>`,pcb(31,{silk:''}))+
-  `<section class="band"><div class="wrap"><div class="svc-grid">${SERVICES.map(svcCard).join('')}<a class="svc" href="#contact"><span class="tag">Not listed?</span><h3>Ask us</h3><p>If it has an ECU, we can probably help. Send the reg and what you're after.</p><span class="spec">Cars · vans · trucks · tractors · plant</span><span class="go">Get in touch →</span></a></div></div></section>
-  <section class="band alt"><div class="wrap">${calcHTML()}</div></section>${ctaBand()}`;
+  return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / Services`)}
+    <div class="sec-head" style="margin-bottom:0"><span class="kicker">Services</span><h1>Everything remapping, all mobile</h1><p class="lead">Every job starts with a health check, and we keep a copy of your original settings for good.</p></div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="cards">${SERVICES.map(card).join('')}<a class="card plain" href="#contact"><div class="card-body"><span class="tag" style="color:var(--lime)">Not listed?</span><h3>Just ask</h3><p>If it has an engine computer, we can probably help. Send your reg and tell us what you're after.</p><span class="more" style="color:var(--lime)">Get in touch →</span></div></a></div></div></section>
+  <section class="sec dark"><div class="wrap calc"><div class="stack"><span class="kicker">Try it</span><h2>What could your vehicle gain?</h2></div>${calcHTML()}</div></section>${ctaHTML()}`;
 }
 
 function service(id){
   const s=SERVICES.find(x=>x.id===id);if(!s)return notFound();
-  const art=id==='ecu-repair-cloning'?pcb(41,{iron:true,silk:'EDC17 · REPAIR'}):id==='speed-limiters'||id==='diagnostics'?laptopArt(7):pcb(hashStr(id)&0xffff,{silk:'ECU · '+s.tag.toUpperCase()});
-  const rel=SERVICES.filter(x=>x!==s).slice(0,9).filter((_,i)=>i%3===hashStr(id)%3||i<1).slice(0,3);
-  return pageHead(`<a href="#home">Home</a> / <a href="#services">Services</a> / <span>${s.name}</span>`,`<span class="eyebrow">${s.tag}</span><h1>${s.name}</h1><p class="lead">${s.short}</p><div class="badges"><span class="badge">Time <b>${s.time}</b></span><span class="badge">${s.spec}</span><span class="badge">Mobile · we come to you</span></div>`)+
-  `<section class="band"><div class="wrap article">
+  const rel=SERVICES.filter(x=>x!==s&&(x.tag!==s.tag)).slice(hashStr(id)&3).slice(0,3);
+  return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / <a href="#services">Services</a> / ${s.name}`)}
+    <div class="page-hero"><div class="stack"><span class="kicker">${s.tag}</span><h1>${s.name}</h1><p class="lead">${s.short}</p>
+      <div class="facts"><span class="fact">⏱ ${s.time}</span><span class="fact">📍 We come to you</span><span class="fact">From £199</span></div>
+      <div class="cta-row"><a class="btn" href="#contact">Get a price ${ICON.arrow}</a></div></div>
+    ${pic(SVC_PIC[s.id]||'obd-in-car','',false)}</div></div></section>
+  <section class="sec" style="padding-top:clamp(20px,3vw,40px)"><div class="wrap article">
     <div class="prose">
-      <figure class="figure">${art}<figcaption><span>${s.name}</span></figcaption></figure>
       ${s.body.map(p=>`<p>${p}</p>`).join('')}
       ${s.law?`<div class="law"><b>The law</b><p>${s.law}</p></div>`:''}
       <h2>What's included</h2>
-      <ul class="ticks">${s.inc.map(i=>`<li>${i}</li>`).join('')}</ul>
-      ${['stage-1-remap','economy-remap','commercial-and-agricultural'].includes(id)?`<h2>Typical gains</h2>${calcHTML()}`:''}
+      <ul class="list">${s.inc.map(i=>`<li>${i}</li>`).join('')}</ul>
+      ${['stage-1-remap','economy-remap','commercial-and-agricultural','stage-2-tuning'].includes(id)?`<h2>Typical gains</h2><div class="dark" style="border-radius:28px">${calcHTML()}</div>`:''}
+      <h2>How it works</h2>${stepsHTML()}
       <h2>Questions</h2>${faqHTML(4)}
     </div>
     <aside class="aside">
-      <div class="box"><div class="price"><small>Starting from</small>£199</div><p class="mute" style="font-size:14px">Fixed price confirmed from your reg before we travel. No call-out charge within our area.</p><a class="btn" href="#contact">Get a quote</a></div>
-      <div class="box"><h3>Related</h3>${rel.map(r=>`<a href="#service-${r.id}" style="text-decoration:none">${r.name} →</a>`).join('')}</div>
-      <div class="box"><h3>Where we work</h3><p class="mute" style="font-size:14px">Every town within 20 miles of Blackburn.</p><a href="#areas">See all ${TOWNS.length} towns →</a></div>
+      <div class="box lime"><div class="price"><small>Starting from</small><b>£199</b></div><p style="font-size:15px">Fixed price from your reg, before we set off. No call-out charge in our area.</p><a class="btn dark" href="#contact">Get a price</a></div>
+      <div class="box"><h3>Related</h3>${rel.map(r=>`<a href="#service-${r.id}" style="text-decoration:none;font-weight:600">${r.name} →</a>`).join('')}</div>
     </aside>
-  </div></section>${ctaBand()}`;
+  </div></section>${ctaHTML()}`;
 }
 
 function areas(){
-  return pageHead(`<a href="#home">Home</a> / <span>Areas we cover</span>`,`<span class="eyebrow">Coverage</span><h1>Areas we cover</h1><p class="lead">We're based in Blackburn and come to you anywhere within a 20-mile radius: ${TOWNS.length} towns and villages across Lancashire, Greater Manchester and the Calder Valley. Pick yours for local details.</p>`)+
-  `<section class="band"><div class="wrap cover">
-    ${radiusMap()}
-    <div class="stack">
-      <div class="area-tools"><label class="f" for="townFind">Find your town<input id="townFind" type="search" placeholder="e.g. Clitheroe" autocomplete="off"></label></div>
-      <p class="mute" id="findMsg" style="font-size:14px">Distances are approximate, measured in a straight line from Blackburn town centre. Just outside the circle? Ask anyway.</p>
-    </div>
-  </div></section>
-  <section class="band alt" style="padding-top:48px"><div class="wrap"><div class="groups" id="groups">${DISTRICTS.map(d=>{const ts=TOWNS.filter(t=>t.district===d).sort((a,b)=>a.mi-b.mi);return ts.length?`<div class="group" data-d="${esc(d)}"><h3>${d}<span>${ts.length} ${ts.length>1?'towns':'town'}</span></h3><ul>${ts.map(t=>`<li data-n="${esc(t.name.toLowerCase())}"><a href="#area-${t.slug}">${t.name}<span>${t.mi===0?'base':t.mi+' mi'}</span></a></li>`).join('')}</ul></div>`:''}).join('')}</div></div></section>${ctaBand('Not sure if we cover you?')}`;
+  return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / Areas`)}
+    <div class="page-hero"><div class="stack"><span class="kicker">Areas we cover</span><h1>We come to you</h1><p class="lead">Based in Blackburn and covering ${TOWNS.length} towns and villages within 20 miles. Find yours below.</p>
+      <label class="f find" for="townFind">Search your town<input id="townFind" type="search" placeholder="e.g. Clitheroe" autocomplete="off"></label><p class="mute" id="findMsg" style="font-size:15px">Just outside the area? Ask anyway.</p></div>
+    ${pic('obd-tablet','',false)}</div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="area-groups" id="groups">${DISTRICTS.map(d=>{const ts=TOWNS.filter(t=>t.district===d).sort((a,b)=>a.mi-b.mi);return ts.length?`<div class="group"><h3>${d}</h3><ul>${ts.map(t=>`<li data-n="${esc(t.name.toLowerCase())}"><a href="#area-${t.slug}">${t.name}<span>${t.mi===0?'base':t.mi+' miles'}</span></a></li>`).join('')}</ul></div>`:''}).join('')}</div></div></section>${ctaHTML('Not sure if we cover you?')}`;
 }
 
 function town(sl){
@@ -829,92 +648,86 @@ function town(sl){
   const rural=['Ribble Valley','Fylde & Wyre','West Lancashire'].includes(t.district)||/farm|tractor|pickup/i.test(t.note);
   const fleet=/van|fleet|truck|distribution|industrial|business|trade/i.test(t.note);
   const pick=rural?['commercial-and-agricultural','stage-1-remap','dpf-egr-adblue']:fleet?['economy-remap','speed-limiters','dpf-egr-adblue']:['stage-1-remap','dpf-egr-adblue','gearbox-tuning'];
-  const near=nearby(t,6);
-  const dist=t.mi===0?'our home base':`about ${t.mi} miles from our Blackburn base`;
-  return pageHead(`<a href="#home">Home</a> / <a href="#areas">Areas</a> / <span>${t.name}</span>`,`<span class="eyebrow">${t.district}</span><h1>Remapping in ${t.name}</h1><p class="lead">Mobile ECU remapping, tuning, speed limiters and DPF diagnostics at your home or workplace in ${t.name}. We come to you.</p><div class="badges"><span class="badge">${t.mi===0?'<b>Home base</b>':`<b>${t.mi} miles</b> from Blackburn`}</span><span class="badge">Via ${t.roads}</span><span class="badge">No call-out charge</span></div>`,pcb(hashStr(t.slug)&0xffff,{silk:''}))+
-  `<section class="band"><div class="wrap article">
+  const near=nearby(t,6),img=PICS[Math.abs(hashStr(t.slug))%PICS.length];
+  return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / <a href="#areas">Areas</a> / ${t.name}`)}
+    <div class="page-hero"><div class="stack"><span class="kicker">${t.district}</span><h1>Remapping in ${t.name}</h1><p class="lead">Mobile remapping, speed limiters and DPF fault-finding at your home or work in ${t.name}.</p>
+      <div class="facts"><span class="fact">${t.mi===0?'Our home base':`${t.mi} miles from Blackburn`}</span><span class="fact">No call-out charge</span><span class="fact">From £199</span></div>
+      <div class="cta-row"><a class="btn" href="#contact" data-town="${esc(t.name)}">Get a price in ${esc(t.name)} ${ICON.arrow}</a></div></div>
+    ${pic(img,'',false)}</div></div></section>
+  <section class="sec" style="padding-top:clamp(20px,3vw,40px)"><div class="wrap article">
     <div class="prose">
       <h2 style="margin-top:0">About ${t.name}</h2>
       <p>${t.note}</p>
-      <p>${t.name} is ${dist}. We usually get there via the ${t.roads}, so bookings in ${t.name} slot easily into our week. Everything is done at the roadside, on your drive or in the yard at work. You don't need to take time off or find a garage.</p>
+      <p>${t.name} is ${t.mi===0?'where we are based':`about ${t.mi} miles from our Blackburn base`}, and we usually get there via the ${t.roads}. We do everything at the roadside, on your drive or in the car park at work, so you don't need to take time off or find a garage.</p>
       <h2>Popular in ${t.name}</h2>
-      <div class="svc-grid" style="grid-template-columns:1fr">${pick.map(id=>svcCard(SERVICES.find(s=>s.id===id))).join('')}</div>
-      <h2>How a visit works</h2>
-      ${stepsHTML()}
-      <h2>Questions from ${t.name} drivers</h2>
-      ${faqHTML(4)}
+      <div class="cards" style="grid-template-columns:1fr">${pick.map(id=>card(SERVICES.find(s=>s.id===id))).join('')}</div>
+      <h2>How it works</h2>${stepsHTML()}
+      <h2>Questions</h2>${faqHTML(4)}
     </div>
     <aside class="aside">
-      ${radiusMap(t.slug)}
-      <div class="box"><h3>Nearby towns we cover</h3><div class="chips">${near.map(n=>`<a class="chip" href="#area-${n.slug}">${n.name}<small>${n.mi} mi</small></a>`).join('')}</div></div>
-      <div class="box"><h3>Book in ${t.name}</h3><p class="mute" style="font-size:14px">Send your reg and postcode and we'll confirm a price and a day.</p><a class="btn" href="#contact" data-town="${esc(t.name)}">Get a quote</a></div>
+      <div class="box"><h3>Nearby towns we cover</h3><div class="chips">${near.map(n=>`<a class="chip" href="#area-${n.slug}">${n.name}</a>`).join('')}</div></div>
+      <div class="box lime"><h3>Book in ${t.name}</h3><p style="font-size:15px">Send your reg and postcode. We'll confirm a price and a day.</p><a class="btn dark" href="#contact" data-town="${esc(t.name)}">Get a price</a></div>
     </aside>
-  </div></section>${ctaBand('Book a remap in '+t.name,t.name)}`;
+  </div></section>${ctaHTML('Book a remap in '+t.name,t.name)}`;
 }
 
 function insight(){
-  return pageHead(`<a href="#home">Home</a> / <span>Inside the ECU</span>`,`<span class="eyebrow">Customer insight</span><h1>Inside the ECU</h1><p class="lead">What a remap actually changes, how we get into your engine's computer, and the kit we carry in the van. No jargon you don't need.</p>`,pcb(77,{silk:''}))+
-  `<section class="band"><div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Three ways in</span><h2>How we read your ECU</h2><p class="lead">Most vehicles are done through the diagnostic port in the footwell. Newer or locked ECUs need more work, and that's where the bench and the soldering iron come in.</p></div>
-    <div class="methods">
-      <div class="method"><figure class="figure">${laptopArt(3)}</figure><h3>Through the OBD port</h3><p>A cable into the diagnostic socket under the dash. Nothing comes apart. This covers most cars and vans and takes under an hour to read and write.</p></div>
-      <div class="method"><figure class="figure">${pcb(52,{silk:'BENCH · CONNECTOR'})}</figure><h3>On the bench</h3><p>The ECU is unplugged and connected to our tools through its own connector. Used when the port is locked or the manufacturer has blocked OBD writing.</p></div>
-      <div class="method"><figure class="figure">${pcb(63,{probe:true,silk:'BOOT MODE'})}</figure><h3>Boot mode and BDM</h3><p>The case is opened and we connect straight to the processor with probes or soldered wires. It's the deepest level of access and how bricked or damaged units are recovered.</p></div>
+  return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / How it works`)}
+    <div class="page-hero"><div class="stack"><span class="kicker">How it works</span><h1>Remapping, explained simply</h1><p class="lead">What a remap changes, what happens on the day, and the kit we bring. No jargon.</p></div>${pic('obd-tablet','',false)}</div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="explain">
+      <div class="ex"><span class="n">1</span><h3>Your engine has a computer</h3><p>The ECU controls fuel, boost and timing. Factories set it cautiously so the same engine works in every country, on every fuel.</p></div>
+      <div class="ex"><span class="n">2</span><h3>We adjust its settings</h3><p>We save your original settings first, then tune them for your vehicle, UK fuel and the way you drive or tow.</p></div>
+      <div class="ex"><span class="n">3</span><h3>You get the benefit</h3><p>More pulling power, smoother overtaking and often better mpg. Nothing is bolted on, and nothing looks different.</p></div>
     </div>
   </div></section>
-  <section class="band alt"><div class="wrap">
-    <div class="sec-head"><span class="eyebrow">What a remap edits</span><h2>Inside a calibration</h2><p class="lead">An engine ECU holds thousands of tables. These are the ones a remap changes. Each is a grid like the boost map on our home page.</p></div>
-    <div class="maps-list">
-      <div><code>Driver's wish</code><p>Converts pedal position into a torque request. Changing it sharpens throttle response.</p></div>
-      <div><code>Torque limiters</code><p>The factory ceilings on torque, by gear and engine speed. Often the biggest restriction on a diesel.</p></div>
-      <div><code>Boost target</code><p>How much pressure the turbo is asked to make at each rpm and load.</p></div>
-      <div><code>Smoke limiter</code><p>Caps fuel against measured air so the engine never runs rich enough to smoke.</p></div>
-      <div><code>Rail pressure</code><p>The fuel pressure at the injectors, which affects how finely the fuel is atomised.</p></div>
-      <div><code>Injection timing</code><p>When fuel is injected. Small changes here affect efficiency, noise and exhaust temperature.</p></div>
-    </div>
+  <section class="sec" style="padding-top:0"><div class="wrap split">
+    ${pic('obd-in-car','pic')}
+    <div class="stack"><span class="kicker">Most vehicles</span><h2>Through the diagnostic port</h2><p class="lead">A lead goes into the socket under your dashboard. Nothing comes apart, and most remaps are done in one to two hours.</p></div>
   </div></section>
-  <section class="band"><div class="wrap split">
-    <div class="stack"><span class="eyebrow">In the van</span><h2>Our kit</h2><p class="lead">A mobile workshop with the same equipment you'd find on a tuning bench.</p>
-      <ul class="ticks"><li>Professional master tools for OBD, bench and boot-mode reads</li><li>Battery support unit to hold voltage steady while we write</li><li>Diagnostic tablet covering all major manufacturers</li><li>Oscilloscope and multimeter for sensor and wiring faults</li><li>Temperature-controlled soldering and hot-air station</li><li>Stereo microscope for board-level ECU repair</li><li>Smoke machine for finding boost and vacuum leaks</li></ul></div>
-    <figure class="figure">${pcb(88,{iron:true,silk:'TCU · DQ250 · REPAIR',mx:220,my:200,tx:310,ty:150,ang:-20})}<figcaption><span>Soldering under the microscope</span></figcaption></figure>
+  <section class="sec" style="padding-top:0"><div class="wrap split">
+    <div class="stack"><span class="kicker">Locked or damaged ECUs</span><h2>On the bench</h2><p class="lead">Some engine computers are locked or damaged. We take them out, open them up and connect directly to the chip. We can also repair faults on the board itself under a microscope.</p>
+      <ul class="list"><li>Full backup of the original data</li><li>Soldering repairs to cracked joints and failed parts</li><li>Cloning to a replacement unit</li></ul></div>
+    ${pic('board-soldering','pic')}
   </div></section>
-  <section class="band alt"><div class="wrap"><div class="sec-head"><span class="eyebrow">Step by step</span><h2>What happens on the day</h2></div>${stepsHTML()}</div></section>
-  <section class="band"><div class="wrap"><div class="sec-head"><span class="eyebrow">Questions</span><h2>Frequently asked</h2></div>${faqHTML()}</div></section>${ctaBand()}`;
+  <section class="sec" style="padding-top:0"><div class="wrap split">
+    ${pic('dpf-bench','pic')}
+    <div class="stack"><span class="kicker">In the van</span><h2>The kit we bring</h2>
+      <ul class="list"><li>Professional tuning tools for every type of read</li><li>Battery support to keep the voltage steady</li><li>Diagnostic tablet for all major makes</li><li>Smoke machine for finding boost leaks</li><li>Soldering station and microscope</li></ul></div>
+  </div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="sec-head"><span class="kicker">On the day</span><h2>Three simple steps</h2></div>${stepsHTML()}</div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="sec-head"><span class="kicker">Questions</span><h2>Frequently asked</h2></div>${faqHTML()}</div></section>${ctaHTML()}`;
 }
 
 function contact(){
   const sorted=[...TOWNS].sort((a,b)=>a.name.localeCompare(b.name));
-  return pageHead(`<a href="#home">Home</a> / <span>Contact</span>`,`<span class="eyebrow">Get a quote</span><h1>Book a remap</h1><p class="lead">Send your reg and where you are. We'll confirm the ECU, what's possible and a fixed price before we travel.</p>`)+
-  `<section class="band"><div class="wrap quote">
-    <div class="stack">
-      <div class="contact-lines">
-        <div><span class="k">Call or WhatsApp</span><span class="v" id="phoneTxt" data-c="phone"></span><button class="copy" data-copy="phoneTxt">Copy number</button></div>
-        <div><span class="k">Email</span><span class="v" style="font-size:22px" id="mailTxt" data-c="email"></span><button class="copy" data-copy="mailTxt">Copy email</button></div>
-        <div><span class="k">Hours</span><span class="mute">Mon to Sat, 8am to 7pm. Evenings by arrangement.</span></div>
-        <div><span class="k">Base</span><span class="mute">Blackburn, Lancashire. Mobile within 20 miles.</span></div>
-      </div>
-      <figure class="figure">${laptopArt(9)}<figcaption><span>Reading through the OBD port</span></figcaption></figure>
+  return `<section class="page-head"><div class="wrap">${crumbs(`<a href="#home">Home</a> / Contact`)}
+    <div class="sec-head" style="margin-bottom:0"><span class="kicker">Get a price</span><h1>Book a remap</h1><p class="lead">Send your reg and where you are. We'll tell you what's possible and give you a fixed price before we travel.</p></div></div></section>
+  <section class="sec" style="padding-top:0"><div class="wrap quote">
+    <div class="stack" style="gap:24px">
+      <div class="box contact-card"><span class="k">Call or WhatsApp</span><span class="v" id="phoneTxt" data-c="phone"></span><button class="copy" data-copy="phoneTxt">Copy number</button></div>
+      <div class="box contact-card"><span class="k">Email</span><span class="v" style="font-size:22px" id="mailTxt" data-c="email"></span><button class="copy" data-copy="mailTxt">Copy email</button></div>
+      <div class="box contact-card"><span class="k">Hours</span><span>Monday to Saturday, 8am to 7pm. Evenings by arrangement.</span></div>
     </div>
     <form class="form" id="quoteForm" novalidate>
       <label class="f" for="qName">Your name<input id="qName" required autocomplete="name"></label>
       <label class="f" for="qPhone">Phone<input id="qPhone" type="tel" required autocomplete="tel"></label>
-      <label class="f" for="qReg">Registration<input id="qReg" required placeholder="e.g. PN19 ABC" style="text-transform:uppercase;font-family:var(--f-mono)"></label>
+      <label class="f" for="qReg">Registration<input id="qReg" required placeholder="e.g. PN19 ABC" style="text-transform:uppercase"></label>
       <label class="f" for="qVeh">Make and model<input id="qVeh" placeholder="e.g. Ford Transit Custom"></label>
       <label class="f" for="qTown">Town<select id="qTown"><option value="">Choose your town</option>${sorted.map(t=>`<option>${esc(t.name)}</option>`).join('')}<option>Somewhere else</option></select></label>
-      <label class="f" for="qSvc">Service<select id="qSvc">${SERVICES.map(s=>`<option>${s.name}</option>`).join('')}<option>Not sure</option></select></label>
-      <label class="f full" for="qMsg">Anything else?<textarea id="qMsg" rows="4" placeholder="Modifications, warning lights, what you use the vehicle for"></textarea></label>
-      <div class="full" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn" type="submit">Send enquiry</button><span class="note">We reply the same day.</span></div>
+      <label class="f" for="qSvc">What do you need?<select id="qSvc">${SERVICES.map(s=>`<option>${s.name}</option>`).join('')}<option>Not sure</option></select></label>
+      <label class="f full" for="qMsg">Anything else?<textarea id="qMsg" rows="4" placeholder="Warning lights, modifications, towing, what you use it for"></textarea></label>
+      <div class="full"><button class="btn" type="submit">Send enquiry ${ICON.arrow}</button></div>
       <div id="formMsg" hidden></div>
     </form>
   </div></section>`;
 }
-function notFound(){return pageHead(`<a href="#home">Home</a>`,`<h1>Page not found</h1><p class="lead">That page doesn't exist. Try the <a href="#services">services</a> or <a href="#areas">areas</a>.</p>`);}
+function notFound(){return `<section class="sec"><div class="wrap"><h1>Page not found</h1><p class="lead" style="margin-top:16px">Try our <a href="#services">services</a> or <a href="#areas">areas</a>.</p></div></section>`;}
 
 /* ---------- router ---------- */
 let pendingTown='';
 function route(){
-  const h=STATIC||(location.hash||'#home').slice(1);
-  let html,key=h;
+  const h=STATIC||(location.hash||'#home').slice(1);let html,key=h;
   if(h.startsWith('service-')){html=service(h.slice(8));key='service'}
   else if(h.startsWith('area-')){html=town(h.slice(5));key='area'}
   else if(h==='services'){html=services();key='service'}
@@ -928,45 +741,38 @@ function route(){
   if(!STATIC)window.scrollTo(0,0);
   mount();fillContact();fixLinks();
 }
+function routePath(h){if(h==='home')return '';if(h==='services')return 'services/';if(h.startsWith('service-'))return 'services/'+h.slice(8)+'/';if(h==='areas')return 'areas/';if(h.startsWith('area-'))return 'areas/'+h.slice(5)+'/';if(h==='insight')return 'how-remapping-works/';if(h==='contact')return 'contact/';return '';}
+function fixLinks(){if(!STATIC)return;$$('a[href^="#"]').forEach(a=>{const h=a.getAttribute('href').slice(1);if(!h)return;let u=ROOT+routePath(h);if(a.dataset.town)u+='?town='+encodeURIComponent(a.dataset.town);a.setAttribute('href',u||'./')})}
+function fillContact(){const ph=CONFIG.phone,em=CONFIG.email;
+  $$('[data-c="phone"]').forEach(el=>{if(ph){el.innerHTML=(el.classList.contains('btn')?ICON.phone:'')+esc(ph)}else el.hidden=true});
+  $$('[data-c="email"]').forEach(el=>{el.textContent=em||'Coming soon'});
+  $$('[data-c="footcontact"]').forEach(el=>{el.innerHTML=[ph&&'Call '+esc(ph),em&&esc(em)].filter(Boolean).join('<br>')});}
 function mount(){
-  if($('#mapSeg')){
-    $$('#mapSeg button').forEach(b=>b.onclick=()=>setMap(b.dataset.m==='t'));
-    if(!matchMedia('(prefers-reduced-motion:reduce)').matches)setTimeout(()=>{if($('#mapSeg'))setMap(true)},1400);
-  }
   if($('#vehSel')){
-    $('#vehSel').onchange=updCalc;
+    $$('#vehSel').forEach(s=>s.onchange=updCalc);
     $$('#modeSeg button').forEach(b=>b.onclick=()=>{calcMode=b.dataset.m;$$('#modeSeg button').forEach(x=>x.classList.toggle('on',x===b));updCalc()});
     calcMode='t';updCalc();
   }
-  $$('.radius').forEach(R=>{const tip=$('.radius-tip',R);$$('.dot',R).forEach(d=>{const show=()=>{tip.innerHTML=`<b>${d.dataset.n}</b> · ${d.dataset.m==='0'?'our base':d.dataset.m+' miles from Blackburn'} · tap to open`};d.addEventListener('mouseenter',show);d.addEventListener('focus',show)})});
   const f=$('#townFind');
-  if(f)f.oninput=()=>{const q=f.value.trim().toLowerCase();let n=0;$$('#groups li').forEach(li=>{const ok=!q||li.dataset.n.includes(q);li.hidden=!ok;if(ok)n++});$$('#groups .group').forEach(g=>g.hidden=!$$('li',g).some(li=>!li.hidden));$('#findMsg').textContent=q?(n?`${n} match${n>1?'es':''}.`:`We couldn't find "${f.value}". If it's within about 20 miles of Blackburn, get in touch and we'll still come out.`):'Distances are approximate, measured in a straight line from Blackburn town centre. Just outside the circle? Ask anyway.'};
+  if(f)f.oninput=()=>{const q=f.value.trim().toLowerCase();let n=0;$$('#groups li').forEach(li=>{const ok=!q||li.dataset.n.includes(q);li.hidden=!ok;if(ok)n++});$$('#groups .group').forEach(g=>g.hidden=!$$('li',g).some(li=>!li.hidden));$('#findMsg').textContent=q?(n?`${n} match${n>1?'es':''}`:`We couldn't find "${f.value}". If it's within about 20 miles of Blackburn, get in touch anyway.`):'Just outside the area? Ask anyway.'};
   const form=$('#quoteForm');
   if(form){
     const qt=new URLSearchParams(location.search).get('town')||pendingTown;if(qt){$('#qTown').value=qt;pendingTown=''}
-    form.onsubmit=e=>{e.preventDefault();const m=$('#formMsg');const miss=['qName','qPhone','qReg'].filter(id=>!$('#'+id).value.trim());
-      m.hidden=false;
-      if(miss.length){m.className='form-ok';m.style.borderColor='var(--warn)';m.style.color='var(--warn)';m.textContent='Please add your name, phone number and registration so we can price the job.';$('#'+miss[0]).focus();return}
-      m.className='form-ok';m.style.cssText='';const v=id=>$('#'+id).value.trim();
+    form.onsubmit=e=>{e.preventDefault();const m=$('#formMsg'),v=id=>$('#'+id).value.trim();m.hidden=false;
+      const miss=['qName','qPhone','qReg'].filter(id=>!v(id));
+      if(miss.length){m.className='form-msg warn';m.textContent='Please add your name, phone number and registration so we can price the job.';$('#'+miss[0]).focus();return}
+      m.className='form-msg';
       const body=`Name: ${v('qName')}\nPhone: ${v('qPhone')}\nReg: ${v('qReg').toUpperCase()}\nVehicle: ${v('qVeh')}\nTown: ${v('qTown')}\nService: ${v('qSvc')}\n\n${v('qMsg')}`;
-      if(CONFIG.email){location.href=`mailto:${CONFIG.email}?subject=${encodeURIComponent('Quote request: '+v('qReg').toUpperCase())}&body=${encodeURIComponent(body)}`;m.textContent=`Thanks ${v('qName').split(' ')[0]}. Your email app should open with the enquiry filled in, ready to send. If it doesn't, email ${CONFIG.email}${CONFIG.phone?' or call '+CONFIG.phone:''}.`}
-      else{m.textContent=CONFIG.phone?`Thanks ${v('qName').split(' ')[0]}. Online enquiries are being set up. Please call or WhatsApp ${CONFIG.phone} with your reg.`:`Thanks ${v('qName').split(' ')[0]}. Online enquiries are being set up. Please check back soon.`}};
-    $$('.copy').forEach(b=>b.onclick=()=>{const t=$('#'+b.dataset.copy).textContent;const done=()=>{b.textContent='Copied'};try{navigator.clipboard.writeText(t).then(done,()=>sel(b))}catch(e){sel(b)}});
+      location.href=`mailto:${CONFIG.email}?subject=${encodeURIComponent('Quote request: '+v('qReg').toUpperCase())}&body=${encodeURIComponent(body)}`;
+      m.textContent=`Thanks ${v('qName').split(' ')[0]}. Your email app should open with the enquiry filled in, ready to send. If it doesn't, email ${CONFIG.email} or call ${CONFIG.phone}.`};
+    $$('.copy').forEach(b=>b.onclick=()=>{const t=$('#'+b.dataset.copy).textContent;const sel=()=>{const r=document.createRange();r.selectNodeContents($('#'+b.dataset.copy));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'};try{navigator.clipboard.writeText(t).then(()=>{b.textContent='Copied'},sel)}catch(e){sel()}});
   }
 }
-function sel(b){const r=document.createRange();r.selectNodeContents($('#'+b.dataset.copy));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected, press copy'}
-function routePath(h){if(h==='home')return '';if(h==='services')return 'services/';if(h.startsWith('service-'))return 'services/'+h.slice(8)+'/';if(h==='areas')return 'areas/';if(h.startsWith('area-'))return 'areas/'+h.slice(5)+'/';if(h==='insight')return 'inside-the-ecu/';if(h==='contact')return 'contact/';return '';}
-function fixLinks(){if(!STATIC)return;$$('a[href^="#"]').forEach(a=>{const h=a.getAttribute('href').slice(1);if(!h)return;let u=ROOT+routePath(h);if(a.dataset.town)u+='?town='+encodeURIComponent(a.dataset.town);a.setAttribute('href',u||'./')})}
-function fillContact(){const ph=CONFIG.phone,em=CONFIG.email;
-  $$('[data-c="phone"]').forEach(el=>{if(ph)el.textContent=ph;else if(el.id)el.textContent='Coming soon';else el.hidden=true});
-  $$('[data-c="email"]').forEach(el=>{el.textContent=em||'Coming soon'});
-  $$('.copy').forEach(b=>{const t=$('#'+b.dataset.copy);b.hidden=!(t&&t.textContent&&t.textContent!=='Coming soon')});
-  $$('[data-c="footcontact"]').forEach(el=>{el.innerHTML=[ph&&'Call '+esc(ph),em&&'Email '+esc(em)].filter(Boolean).join('<br>')});}
 document.addEventListener('click',e=>{const a=e.target.closest('[data-town]');if(a)pendingTown=a.dataset.town});
 $('#menuBtn').onclick=()=>{const o=$('#nav').classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',o)};
 $('#footSvc').innerHTML=SERVICES.map(s=>`<li><a href="#service-${s.id}">${s.name}</a></li>`).join('');
 $('#footTowns').innerHTML=[...TOWNS].sort((a,b)=>a.name.localeCompare(b.name)).map(t=>`<li><a href="#area-${t.slug}">${t.name}</a></li>`).join('');
-$('#yr').textContent=new Date().getFullYear();fillContact();
+$('#yr').textContent=new Date().getFullYear();
 if(!STATIC)addEventListener('hashchange',route);
 route();
 </script>
